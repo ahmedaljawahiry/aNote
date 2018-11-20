@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".noteSelection.NoteSelectionActivity">
+
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/notes_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="90dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="20dp"
+        android:horizontalSpacing="20dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/other_note_fab_layout"
+            android:layout_width="@dimen/standard_110"
+            android:layout_height="@dimen/standard_55"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/other_note_fab_text"
+                android:layout_width="@dimen/standard_55"
+                android:layout_height="@dimen/standard_55"
+                android:layout_weight="0"
+                android:text="@string/other_note_fab_text"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/other_note_fab"
+                android:layout_width="@dimen/standard_55"
+                android:layout_height="@dimen/standard_55"
+                android:src="@drawable/ic_note_black_56dp"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pin_fab_layout"
+            android:layout_width="@dimen/standard_110"
+            android:layout_height="@dimen/standard_55"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/pin_fab_text"
+                android:layout_width="@dimen/standard_55"
+                android:layout_height="@dimen/standard_55"
+                android:layout_weight="0"
+                android:text="@string/pin_fab_text"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/pin_fab"
+                android:layout_width="@dimen/standard_55"
+                android:layout_height="@dimen/standard_55"
+                android:src="@drawable/ic_credit_card_black_56dp"
+                app:elevation="0dp"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_fab"
+            android:layout_width="@dimen/standard_55"
+            android:layout_height="@dimen/standard_55"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_add_circle_black_56dp"
+            app:backgroundTint="@color/colorAccent"
+            app:elevation="0dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

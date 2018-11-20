@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">aNote</string>
+    <string name="prompt_password">Password…</string>
+    <string name="action_enter">Enter</string>
+    <string name="error_incorrect_password">This password is incorrect.</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="pin_fab_text">PIN</string>
+    <string name="other_note_fab_text">OTHER</string>
+    <string name="key">Key:</string>
+    <string name="hint">Hint:</string>
+    <string name="pin">Pin:</string>
+    <string name="new_pin">New Pin</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+</resources>
