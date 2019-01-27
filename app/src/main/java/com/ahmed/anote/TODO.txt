@@ -1,0 +1,6 @@
+Fix last test in NoteSelectionActivity.
+Add delete/edit buttons to PinDisplayActivity.
+Tests for ClickableTiles.
+Make keys unique?
+Make background blur on FAB click.
+Finger print stuff...

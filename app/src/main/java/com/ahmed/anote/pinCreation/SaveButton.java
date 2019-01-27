@@ -12,42 +12,38 @@ import android.widget.Toast;
 import com.ahmed.anote.R;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
+import com.ahmed.anote.db.Sql;
 import com.ahmed.anote.noteSelection.NoteSelectionActivity;
 import com.ahmed.anote.util.ToastPrinter;
 
 public class SaveButton implements View.OnClickListener {
 
-    private Activity activity;
+    public static final String TOAST_MESSAGE = "Saved";
+
     private Button button;
     private EnteredValues enteredValues;
+    private DbHelper dbHelper;
+    private ToastPrinter toastPrinter;
 
-    public SaveButton(Activity activity) {
-        this.activity = activity;
-
+    public SaveButton(Activity activity, EnteredValues enteredValues,
+                      DbHelper dbHelper, ToastPrinter toastPrinter) {
+        this.enteredValues = enteredValues;
+        this.dbHelper = dbHelper;
+        this.toastPrinter = toastPrinter;
         this.button = activity.findViewById(R.id.save_pin_button);
         button.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        this.enteredValues = new EnteredValues(activity);
+        enteredValues.find();
         Context context = view.getContext();
-        saveToDb(context);
+        Sql.INSERT_PIN(dbHelper.getWritableDatabase(), enteredValues);
 
-        new ToastPrinter().print(context, "Saved.", Toast.LENGTH_LONG);
+        toastPrinter.print(context, TOAST_MESSAGE, Toast.LENGTH_LONG);
         Intent intent = new Intent(context, NoteSelectionActivity.class);
         context.startActivity(intent);
     }
 
-    private void saveToDb(Context context) {
-        DbHelper dbHelper = new DbHelper(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(Contract.Pins.COLUMN_KEY, enteredValues.getEnteredKey());
-        values.put(Contract.Pins.COLUMN_PIN, enteredValues.getEnteredPin());
-        values.put(Contract.Pins.COLUMN_HINT, enteredValues.getEnteredHint());
-
-        db.insert(Contract.Pins.TABLE_NAME, null, values);
-    }
 }

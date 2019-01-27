@@ -1,0 +1,74 @@
+package com.ahmed.anote.noteSelection;
+
+import android.os.Handler;
+import android.widget.Toast;
+
+import com.ahmed.anote.noteSelection.fabMenu.FabMenu;
+import com.ahmed.anote.util.ToastPrinter;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+public class NoteSelectionActivityTest {
+
+    private static FabMenu fabMenuMock;
+    private static NoteSelectionActivity noteSelectionActivity;
+    private static ToastPrinter toastPrinterMock;
+
+    @BeforeClass
+    public static void setUp() {
+        fabMenuMock = mock(FabMenu.class);
+        toastPrinterMock = mock(ToastPrinter.class);
+        noteSelectionActivity = new NoteSelectionActivity();
+        noteSelectionActivity.setFabMenu(fabMenuMock);
+        noteSelectionActivity.setToastPrinter(toastPrinterMock);
+    }
+
+    @Test
+    public void fabMenuIsClosedOnBackPress() {
+        doReturn(true).when(fabMenuMock).isOpen();
+        noteSelectionActivity.onBackPressed();
+        verify(fabMenuMock, times(1)).close();
+    }
+
+    @Test
+    public void activityFinishedOnDoubleBackPress() {
+        doReturn(false).when(fabMenuMock).isOpen();
+        noteSelectionActivity.onBackPressed();
+        noteSelectionActivity.onBackPressed();
+
+        assertThat(noteSelectionActivity.isFinished()).isTrue();
+    }
+
+    @Test
+    public void toastDisplayedOnSingleBackPress() {
+        doReturn(false).when(fabMenuMock).isOpen();
+        noteSelectionActivity.onBackPressed();
+
+        verify(toastPrinterMock, times(1))
+                .print(eq(noteSelectionActivity),
+                        eq(NoteSelectionActivity.EXIT_TOAST_MESSAGE), eq(Toast.LENGTH_SHORT));
+    }
+
+    @Test
+    public void activityNotFinishedOnDelayedDoubleBackPress() {
+        doReturn(false).when(fabMenuMock).isOpen();
+        NoteSelectionActivity noteSelectionActivity = new NoteSelectionActivity();
+        noteSelectionActivity.setFabMenu(fabMenuMock);
+        noteSelectionActivity.setToastPrinter(toastPrinterMock);
+
+        noteSelectionActivity.onBackPressed();
+        new Handler().postDelayed(noteSelectionActivity::onBackPressed, 1000);
+        assertThat(noteSelectionActivity.isFinished()).isFalse();
+        //TODO: The above assertion should fail. This test currently passes for any time (redundant)
+    }
+}
+
+

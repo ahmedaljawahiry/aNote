@@ -12,14 +12,16 @@ import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.noteSelection.fabMenu.FabMenu;
 import com.ahmed.anote.noteSelection.fabMenu.FabMenuItemFactory;
-import com.ahmed.anote.noteSelection.fabMenu.OtherNoteFab;
-import com.ahmed.anote.noteSelection.fabMenu.PinFab;
 import com.ahmed.anote.util.ToastPrinter;
 
 public class NoteSelectionActivity extends AppCompatActivity {
 
-    boolean doubleBackToExitPressedOnce = false;
+    final public static String EXIT_TOAST_MESSAGE = "Click back again to exit";
+
+    private boolean doubleBackToExitPressedOnce = false;
     private FabMenu fabMenu;
+    private ToastPrinter toastPrinter;
+    private boolean finished;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +49,34 @@ public class NoteSelectionActivity extends AppCompatActivity {
             }
             else {
                 this.doubleBackToExitPressedOnce = true;
-                new ToastPrinter().print(this, "Click back again to exit", Toast.LENGTH_SHORT);
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        doubleBackToExitPressedOnce = false;
-                    }
-                }, 2000);
+                makeToastPrinter();
+                toastPrinter.print(this, EXIT_TOAST_MESSAGE, Toast.LENGTH_SHORT);
+                new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
             }
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        finished = true;
+    }
+
+    private void makeToastPrinter() {
+        if (toastPrinter == null) {
+            toastPrinter = new ToastPrinter();
+        }
+    }
+
+    public void setFabMenu(FabMenu fabMenu) {
+        this.fabMenu = fabMenu;
+    }
+
+    public void setToastPrinter(ToastPrinter toastPrinter) {
+        this.toastPrinter = toastPrinter;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
 }

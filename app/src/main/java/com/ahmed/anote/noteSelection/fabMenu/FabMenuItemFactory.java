@@ -8,6 +8,10 @@ public class FabMenuItemFactory {
     public FabMenuItemFactory() {}
 
     public FabMenuItem getFab(@NonNull String fabType, Activity activity) {
+        if (fabType == null) {
+            throw new IllegalArgumentException("Null fabType entered.");
+        }
+
         if (fabType.equals(FabMenuItem.PIN)) {
             return new PinFab(activity);
         }

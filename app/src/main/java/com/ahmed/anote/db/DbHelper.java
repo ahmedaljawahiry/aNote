@@ -30,7 +30,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        throw new IllegalStateException("Unanticipated onDowngrade() call from version "
-                                            + newVersion + " to " + oldVersion);
+        if (newVersion == 2) {
+            db.execSQL(Sql.DELETE_PINS_TABLE);
+            db.execSQL(Sql.CREATE_PINS_TABLE);
+        }
     }
 }

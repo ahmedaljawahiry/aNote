@@ -9,28 +9,28 @@ import com.ahmed.anote.R;
 
 public class EnteredValues {
 
+    private Activity activity;
     private String enteredKey;
     private String enteredHint;
     private String enteredPin;
 
     public EnteredValues(Activity activity) {
-        EditText keyEditText = activity.findViewById(R.id.key);
-        this.enteredKey = convertEditTextToString(keyEditText);
-
-        EditText hintEditText = activity.findViewById(R.id.hint);
-        this.enteredHint = convertEditTextToString(hintEditText);
-
-        EditText pinEditText = activity.findViewById(R.id.pin);
-        this.enteredPin = convertEditTextToString(pinEditText);
+        this.activity = activity;
+        find();
     }
 
-    private String convertEditTextToString(EditText refEditText) {
-        Editable text = refEditText.getText();
-        if (text == null) {
+    public void find() {
+        this.enteredKey = convertEditTextToString(activity.findViewById(R.id.key));
+        this.enteredHint = convertEditTextToString(activity.findViewById(R.id.hint));
+        this.enteredPin = convertEditTextToString(activity.findViewById(R.id.pin));
+    }
+
+    private String convertEditTextToString(EditText editText) {
+        if (editText == null || editText.getText() == null) {
             return "";
         }
         else {
-            return text.toString();
+            return editText.getText().toString();
         }
     }
 
