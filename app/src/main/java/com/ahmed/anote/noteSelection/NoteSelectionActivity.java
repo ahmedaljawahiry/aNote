@@ -1,6 +1,5 @@
 package com.ahmed.anote.noteSelection;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +7,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
+import com.ahmed.anote.db.SQL;
 import com.ahmed.anote.noteSelection.fabMenu.FabMenu;
 import com.ahmed.anote.noteSelection.fabMenu.FabMenuItemFactory;
 import com.ahmed.anote.util.ToastPrinter;
@@ -21,7 +20,7 @@ public class NoteSelectionActivity extends AppCompatActivity {
     private boolean doubleBackToExitPressedOnce = false;
     private FabMenu fabMenu;
     private ToastPrinter toastPrinter;
-    private boolean finished;
+    private boolean appClosed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +28,10 @@ public class NoteSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note_selection);
 
         this.fabMenu = new FabMenu(this, new FabMenuItemFactory());
-        new NotesGrid(this, generateCursor());
-    }
 
-    private Cursor generateCursor() {
         DbHelper dbHelper = new DbHelper(getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        return db.query(Contract.Pins.TABLE_NAME, null, null, null, null, null, null);
+        new NotesGrid(this, new SQL(db).GET_PINS_TABLE());
     }
 
     @Override
@@ -45,7 +41,7 @@ public class NoteSelectionActivity extends AppCompatActivity {
         }
         else {
             if (doubleBackToExitPressedOnce) {
-                this.finish(); // TODO: Exit application.
+                closeApp();
             }
             else {
                 this.doubleBackToExitPressedOnce = true;
@@ -56,10 +52,9 @@ public class NoteSelectionActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        finished = true;
+    public void closeApp() {
+        this.finishAffinity();
+        appClosed = true;
     }
 
     private void makeToastPrinter() {
@@ -76,7 +71,7 @@ public class NoteSelectionActivity extends AppCompatActivity {
         this.toastPrinter = toastPrinter;
     }
 
-    public boolean isFinished() {
-        return finished;
+    public boolean appClosed() {
+        return appClosed;
     }
 }

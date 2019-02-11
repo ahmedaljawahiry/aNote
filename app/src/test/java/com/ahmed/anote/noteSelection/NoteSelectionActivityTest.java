@@ -39,12 +39,12 @@ public class NoteSelectionActivityTest {
     }
 
     @Test
-    public void activityFinishedOnDoubleBackPress() {
+    public void appShutOnDoubleBackPress() {
         doReturn(false).when(fabMenuMock).isOpen();
         noteSelectionActivity.onBackPressed();
         noteSelectionActivity.onBackPressed();
 
-        assertThat(noteSelectionActivity.isFinished()).isTrue();
+        assertThat(noteSelectionActivity.appClosed()).isTrue();
     }
 
     @Test
@@ -66,8 +66,12 @@ public class NoteSelectionActivityTest {
 
         noteSelectionActivity.onBackPressed();
         new Handler().postDelayed(noteSelectionActivity::onBackPressed, 1000);
-        assertThat(noteSelectionActivity.isFinished()).isFalse();
-        //TODO: The above assertion should fail. This test currently passes for any time (redundant)
+        assertThat(noteSelectionActivity.appClosed()).isFalse();
+        /* TODO: The above assertion should fail. This test currently passes for any time (redundant)
+
+            Cant use thread.sleep() since all threads are paused.
+            Handler().postDelayed() doesn't work - onBackPressed is not called.
+         */
     }
 }
 

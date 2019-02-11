@@ -1,4 +1,4 @@
-package com.ahmed.anote.pinCreation;
+package com.ahmed.anote.pinForm;
 
 import android.app.Activity;
 import android.widget.EditText;
@@ -21,9 +21,9 @@ public class EnteredValuesTest {
         EditText editTextMock = mock(EditText.class);
 
         doReturn(null).when(editTextMock).getText();
-        doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.key));
-        doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.pin));
-        doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.hint));
+        doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_key));
+        doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_pin));
+        doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_hint));
 
         assertAllEmpty(new EnteredValues(activityMock));
     }
@@ -32,9 +32,9 @@ public class EnteredValuesTest {
     public void valuesSetToEmptyStringsIfViewNotFound() {
         Activity activityMock = mock(Activity.class);
 
-        doReturn(null).when(activityMock).findViewById(eq(R.id.key));
-        doReturn(null).when(activityMock).findViewById(eq(R.id.pin));
-        doReturn(null).when(activityMock).findViewById(eq(R.id.hint));
+        doReturn(null).when(activityMock).findViewById(eq(R.id.entered_key));
+        doReturn(null).when(activityMock).findViewById(eq(R.id.entered_pin));
+        doReturn(null).when(activityMock).findViewById(eq(R.id.entered_hint));
 
         assertAllEmpty(new EnteredValues(activityMock));
     }

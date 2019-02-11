@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".noteSelection.NoteSelectionActivity" />
-        <activity android:name=".pinCreation.CreatePinNoteActivity" />
+        <activity android:name=".pinForm.PinFormActivity" />
         <activity android:name=".pinDisplay.PinDisplayActivity"></activity>
     </application>
 

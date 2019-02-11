@@ -37,8 +37,8 @@ public class EnterButton implements View.OnClickListener {
             context.startActivity(intent);
         }
         else {
-Intent intent = new Intent(context, NoteSelectionActivity.class);
-context.startActivity(intent);
+            Intent intent = new Intent(context, NoteSelectionActivity.class);
+            context.startActivity(intent);
             toastPrinter.print(context, "Incorrect Password.", Toast.LENGTH_LONG);
         }
     }

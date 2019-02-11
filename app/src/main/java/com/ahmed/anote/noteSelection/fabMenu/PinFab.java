@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.pinCreation.CreatePinNoteActivity;
+import com.ahmed.anote.pinForm.PinFormActivity;
 
 public class PinFab implements FabMenuItem, View.OnClickListener {
 
@@ -38,7 +38,7 @@ public class PinFab implements FabMenuItem, View.OnClickListener {
     @Override
     public void onClick(View view) {
         Context context = view.getContext();
-        Intent intent = new Intent(context, CreatePinNoteActivity.class);
+        Intent intent = new Intent(context, PinFormActivity.class);
         context.startActivity(intent);
     }
 

@@ -11,6 +11,7 @@
     android:useDefaultMargins="true">
 
     <TextView
+        android:id="@+id/key_text"
         android:layout_column="0"
         android:layout_gravity="right"
         android:layout_marginLeft="30dp"
@@ -20,7 +21,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/key"
+        android:id="@+id/entered_key"
         android:layout_column="1"
         android:ems="6"
         android:inputType="text"
@@ -28,6 +29,7 @@
         android:maxLength="2"/>
 
     <TextView
+        android:id="@+id/hint_text"
         android:layout_column="0"
         android:layout_gravity="right"
         android:layout_marginLeft="30dp"
@@ -37,13 +39,14 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/hint"
+        android:id="@+id/entered_hint"
         android:layout_column="1"
         android:ems="6"
         android:inputType="text"
         android:textSize="32sp" />
 
     <TextView
+        android:id="@+id/pin_text"
         android:layout_column="0"
         android:layout_gravity="right"
         android:layout_marginTop="40dp"
@@ -52,7 +55,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/pin"
+        android:id="@+id/entered_pin"
         android:layout_column="1"
         android:ems="6"
         android:inputType="number"

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "aNote.db";
 
     public DbHelper(Context context) {
@@ -16,23 +16,22 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(Sql.CREATE_PINS_TABLE);
+        db.execSQL(SQL.CREATE_PINS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Added new column (pin hint).
-        if (oldVersion < 2) {
-            db.execSQL(Sql.DELETE_PINS_TABLE);
-            db.execSQL(Sql.CREATE_PINS_TABLE);
+        if (oldVersion < 3) {
+            db.execSQL(SQL.DELETE_PINS_TABLE);
+            db.execSQL(SQL.CREATE_PINS_TABLE);
         }
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (newVersion == 2) {
-            db.execSQL(Sql.DELETE_PINS_TABLE);
-            db.execSQL(Sql.CREATE_PINS_TABLE);
+            db.execSQL(SQL.DELETE_PINS_TABLE);
+            db.execSQL(SQL.CREATE_PINS_TABLE);
         }
     }
 }

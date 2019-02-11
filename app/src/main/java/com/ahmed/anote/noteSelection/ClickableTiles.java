@@ -1,17 +1,16 @@
 package com.ahmed.anote.noteSelection;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.ahmed.anote.R;
 import com.ahmed.anote.pinDisplay.PinDisplayActivity;
+import com.ahmed.anote.util.PinAttributes;
 
 public class ClickableTiles implements AdapterView.OnItemClickListener {
 
@@ -29,7 +28,11 @@ public class ClickableTiles implements AdapterView.OnItemClickListener {
         Intent intent = new Intent(activity, PinDisplayActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putString("pin", "0000");
+        TextView key = view.findViewById(R.id.note_tile_key);
+        TextView hint = view.findViewById(R.id.note_tile_hint);
+
+        bundle.putString(PinAttributes.KEY.name(), key.getText().toString());
+        bundle.putString(PinAttributes.HINT.name(), hint.getText().toString());
         intent.putExtras(bundle);
 
         activity.startActivity(intent);

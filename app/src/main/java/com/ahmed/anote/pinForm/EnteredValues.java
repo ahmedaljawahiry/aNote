@@ -1,7 +1,6 @@
-package com.ahmed.anote.pinCreation;
+package com.ahmed.anote.pinForm;
 
 import android.app.Activity;
-import android.text.Editable;
 import android.widget.EditText;
 
 import com.ahmed.anote.R;
@@ -20,9 +19,18 @@ public class EnteredValues {
     }
 
     public void find() {
-        this.enteredKey = convertEditTextToString(activity.findViewById(R.id.key));
-        this.enteredHint = convertEditTextToString(activity.findViewById(R.id.hint));
-        this.enteredPin = convertEditTextToString(activity.findViewById(R.id.pin));
+        this.enteredKey = convertEditTextToString(activity.findViewById(R.id.entered_key));
+        this.enteredHint = convertEditTextToString(activity.findViewById(R.id.entered_hint));
+        this.enteredPin = convertEditTextToString(activity.findViewById(R.id.entered_pin));
+    }
+
+    public boolean areValid() {
+        if (enteredKey.isEmpty() || enteredKey == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     private String convertEditTextToString(EditText editText) {

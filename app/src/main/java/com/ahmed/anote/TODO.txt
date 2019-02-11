@@ -1,6 +1,5 @@
+Finger print.
 Fix last test in NoteSelectionActivity.
-Add delete/edit buttons to PinDisplayActivity.
-Tests for ClickableTiles.
-Make keys unique?
+Close app on android home click.
+Encrypt pins.
 Make background blur on FAB click.
-Finger print stuff...
