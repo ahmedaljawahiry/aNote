@@ -38,7 +38,8 @@ public class PinDisplayActivity extends AppCompatActivity {
         createTextOnPage(R.id.pin_display_text, values.getPin());
 
         new DeleteButton(this,
-                new DeleteAlertDialog(this, new SQL(dbHelper.getWritableDatabase())));
+                new DeleteAlertDialog(this, new SQL(dbHelper.getWritableDatabase()))
+        );
         new EditButton(this, values);
     }
 

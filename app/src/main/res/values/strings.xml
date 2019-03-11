@@ -15,4 +15,5 @@
     <string name="pin_placeholder">1234</string>
     <string name="key_placeholder">A</string>
     <string name="hint_placeholder">Hint...</string>
+    <string name="fingerprint_intructions">Unlock...</string>
 </resources>
