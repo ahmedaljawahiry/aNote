@@ -1,5 +1,9 @@
 package com.ahmed.anote.pinDisplay;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
+import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +19,10 @@ import com.ahmed.anote.pinDisplay.deletePin.DeleteButton;
 import com.ahmed.anote.pinDisplay.editPin.EditButton;
 import com.ahmed.anote.util.PinAttributes;
 
-public class PinDisplayActivity extends AppCompatActivity {
+public class PinDisplayActivity extends AppCompatActivity implements LifecycleObserver {
 
     private PinValues values;
+    private DbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,7 @@ public class PinDisplayActivity extends AppCompatActivity {
         values.setKey(bundle.getString(PinAttributes.KEY.name()));
         values.setHint(bundle.getString(PinAttributes.HINT.name()));
 
-        DbHelper dbHelper = new DbHelper(getApplicationContext());
+        dbHelper = new DbHelper(getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         values.setPin(new SQL(db).GET_PIN_FROM_KEY(values.getKey()));
 
@@ -41,6 +46,14 @@ public class PinDisplayActivity extends AppCompatActivity {
                 new DeleteAlertDialog(this, new SQL(dbHelper.getWritableDatabase()))
         );
         new EditButton(this, values);
+
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onMoveToBackground() {
+        dbHelper.close();
+        this.finishAffinity();
     }
 
     private void createTextOnPage(int viewId, String displayText) {

@@ -12,6 +12,13 @@ import com.ahmed.anote.util.ToastPrinter;
 
 public class BiometricAuth {
 
+    public static final String TITLE = "aNote";
+    public static final String SUBTITLE = "Authentication is required to continue.";
+    public static final String NEGATIVE_BUTTON_TEXT = "Cancel";
+    public static final String CANCELLATION_PROMPT = "Cancelled";
+    public static final String AUTH_ERROR = "Authentication Error";
+
+
     private Activity activity;
 
     public BiometricAuth(Activity activity) {
@@ -20,13 +27,13 @@ public class BiometricAuth {
 
     public void authenticateUser(View view) {
         BiometricPrompt biometricPrompt = new BiometricPrompt.Builder(activity)
-                .setTitle("aNote")
-                .setSubtitle("Authentication is required to continue.")
+                .setTitle(TITLE)
+                .setSubtitle(SUBTITLE)
                 .setNegativeButton(
-                        "Cancel",
+                        NEGATIVE_BUTTON_TEXT,
                         activity.getMainExecutor(),
                         (dialog, which) -> new ToastPrinter().print(
-                                view.getContext(), "Cancelled.", Toast.LENGTH_SHORT))
+                                view.getContext(), CANCELLATION_PROMPT, Toast.LENGTH_SHORT))
                 .build();
 
         biometricPrompt.authenticate(
@@ -40,7 +47,7 @@ public class BiometricAuth {
         return new BiometricPrompt.AuthenticationCallback() {
             @Override
             public void onAuthenticationError(int errorCode, CharSequence errString) {
-                new ToastPrinter().print(activity, "Authentication Error.", Toast.LENGTH_SHORT);
+                new ToastPrinter().print(activity, AUTH_ERROR, Toast.LENGTH_SHORT);
                 super.onAuthenticationError(errorCode, errString);
             }
 
@@ -67,7 +74,7 @@ public class BiometricAuth {
     private CancellationSignal getCancellationSignal() {
         CancellationSignal cancellationSignal = new CancellationSignal();
         cancellationSignal.setOnCancelListener(
-                () -> new ToastPrinter().print(activity, "Cancelled.", Toast.LENGTH_SHORT)
+                () -> new ToastPrinter().print(activity, CANCELLATION_PROMPT, Toast.LENGTH_SHORT)
         );
         return cancellationSignal;
     }

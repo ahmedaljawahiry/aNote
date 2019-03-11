@@ -12,31 +12,29 @@ public class CompatibilityChecker {
 
     private Activity activity;
     private KeyguardManager keyguardManager;
+    private PackageManager packageManager;
 
     public CompatibilityChecker(Activity activity) {
         this.activity = activity;
         this.keyguardManager = (KeyguardManager) activity.getSystemService(KEYGUARD_SERVICE);
+        this.packageManager = activity.getPackageManager();
     }
 
     public Boolean isCompatible() {
 
-        PackageManager packageManager = activity.getPackageManager();
-
-        if (!keyguardManager.isKeyguardSecure()) {
+        if (!keyguardManager.isKeyguardSecure()
+                || !packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
+                || !permissionGranted()
+                ) {
             return false;
-        }
-
-        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.USE_BIOMETRIC) !=
-                PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-
-        if (packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-            return true;
         }
 
         return true;
     }
 
+    private boolean permissionGranted() {
+        return ActivityCompat.checkSelfPermission(activity, Manifest.permission.USE_BIOMETRIC)
+                == PackageManager.PERMISSION_GRANTED;
+    }
 
 }
