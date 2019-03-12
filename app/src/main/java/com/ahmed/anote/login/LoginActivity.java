@@ -7,6 +7,7 @@ import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.ahmed.anote.R;
@@ -20,7 +21,7 @@ public class LoginActivity extends AppCompatActivity implements LifecycleObserve
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setUp();
 
         CompatibilityChecker compatibilityChecker = new CompatibilityChecker(this);
         BiometricAuth biometricAuth = new BiometricAuth(this);
@@ -33,8 +34,15 @@ public class LoginActivity extends AppCompatActivity implements LifecycleObserve
         else {
             new ToastPrinter().print(this, UNSUPPORTED_PROMPT, Toast.LENGTH_SHORT);
         }
+    }
 
+    private void setUp() {
+        setContentView(R.layout.activity_login);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+        this.getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE
+        );
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

@@ -5,7 +5,7 @@
     <string name="error_incorrect_password">This password is incorrect.</string>
     <string name="error_field_required">This field is required</string>
     <string name="pin_fab_text">PIN</string>
-    <string name="other_note_fab_text">OTHER</string>
+    <string name="note_fab_text">NOTE</string>
     <string name="key">Key:</string>
     <string name="hint">Hint:</string>
     <string name="pin">Pin:</string>
@@ -15,5 +15,6 @@
     <string name="pin_placeholder">1234</string>
     <string name="key_placeholder">A</string>
     <string name="hint_placeholder">Hint...</string>
-    <string name="fingerprint_intructions">Unlock...</string>
+    <string name="fingerprint_intructions">Tap fingerprint to unlock...</string>
+    <string name="note_title_placeholder">Title</string>
 </resources>

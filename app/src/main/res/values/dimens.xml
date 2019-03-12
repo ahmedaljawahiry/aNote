@@ -5,6 +5,8 @@
     <dimen name="design_fab_image_size" tools:override="true">48dp</dimen>
     <dimen name="standard_55">55dp</dimen>
     <dimen name="standard_110">110dp</dimen>
-    <dimen name="standard_105">105dp</dimen>
+    <dimen name="standard_125">125dp</dimen>
     <dimen name="standard_155">155dp</dimen>
+    <dimen name="first_fab_up">80dp</dimen>
+    <dimen name="second_fab_up">160dp</dimen>
 </resources>

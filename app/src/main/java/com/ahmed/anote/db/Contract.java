@@ -12,4 +12,10 @@ public class Contract {
         public static final String COLUMN_KEY = "Key";
         public static final String COLUMN_HINT = "Hint";
     }
+
+    public static final class Notes implements BaseColumns {
+        public static final String TABLE_NAME = "Notes";
+        public static final String COLUMN_TITLE = "Title";
+        public static final String COLUMN_TEXT = "Text";
+    }
 }

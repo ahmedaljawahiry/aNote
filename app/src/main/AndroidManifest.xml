@@ -3,7 +3,9 @@
     package="com.ahmed.anote">
 
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-    <uses-feature android:name="android.hardware.fingerprint"
+
+    <uses-feature
+        android:name="android.hardware.fingerprint"
         android:required="true" />
 
     <application
@@ -22,9 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".noteSelection.NoteSelectionActivity" />
-        <activity android:name=".pinForm.PinFormActivity" />
-        <activity android:name=".pinDisplay.PinDisplayActivity"></activity>
+        <activity android:name=".displays.selectionPage.NoteSelectionActivity" />
+        <activity android:name=".forms.pin.PinFormActivity" />
+        <activity android:name=".displays.pinDisplay.PinDisplayActivity" />
+        <activity android:name=".forms.note.NoteFormActivity"></activity>
     </application>
 
 </manifest>

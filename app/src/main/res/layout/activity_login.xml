@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".login.LoginActivity">
 
-
     <ImageView
         android:id="@+id/fingerprint_logo"
         android:layout_width="match_parent"
@@ -23,4 +22,21 @@
         android:contentDescription="Authenticate"
         android:focusable="true"
         app:srcCompat="@drawable/ic_fingerprint_black_56dp" />
+
+    <TextView
+        android:id="@+id/fingerprint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fingerprint_logo"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="123dp"
+        android:text="@string/fingerprint_intructions"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fingerprint_logo" />
 </android.support.constraint.ConstraintLayout>

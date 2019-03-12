@@ -7,7 +7,7 @@ import android.os.CancellationSignal;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ahmed.anote.noteSelection.NoteSelectionActivity;
+import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
 import com.ahmed.anote.util.ToastPrinter;
 
 public class BiometricAuth {

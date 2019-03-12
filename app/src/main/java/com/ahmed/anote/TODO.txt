@@ -1,5 +1,11 @@
-Finger print.
+What happens if user editing note then minimizes? Note is lost...
+
+Close fab menu on click anywhere on screen - no nice way of doing this...
+
 Fix last test in NoteSelectionActivity.
-Close app on android home click.
+
 Encrypt pins.
-Make background blur on FAB click.
+
+CLEAN UP:
+- Create SQL interface, then DeleteAlertDialog can be made generic.
+- Create EnteredValues interface.

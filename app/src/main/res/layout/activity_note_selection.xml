@@ -4,54 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".noteSelection.NoteSelectionActivity">
+    tools:context=".displays.selectionPage.NoteSelectionActivity">
 
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/notes_grid"
-        android:layout_width="match_parent"
+        android:id="@+id/pins_grid"
+        android:layout_width="206dp"
         android:layout_height="match_parent"
         android:columnWidth="90dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="20dp"
+        android:gravity="left"
         android:horizontalSpacing="20dp"
+        android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
-        android:gravity="center"
-        />
+        android:verticalSpacing="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/notes_grid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/notes_grid"
+        android:layout_width="206dp"
+        android:layout_height="match_parent"
+        android:columnWidth="206dp"
+        android:gravity="right"
+        android:horizontalSpacing="20dp"
+        android:numColumns="1"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pins_grid"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/other_note_fab_layout"
+            android:id="@+id/note_fab_layout"
             android:layout_width="@dimen/standard_110"
             android:layout_height="@dimen/standard_55"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp">
 
             <TextView
-                android:id="@+id/other_note_fab_text"
+                android:id="@+id/note_fab_text"
                 android:layout_width="@dimen/standard_55"
                 android:layout_height="@dimen/standard_55"
                 android:layout_weight="0"
-                android:text="@string/other_note_fab_text"
-                android:textAlignment="center"
                 android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:visibility="invisible"/>
+                android:text="@string/note_fab_text"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/other_note_fab"
+                android:id="@+id/note_fab"
                 android:layout_width="@dimen/standard_55"
                 android:layout_height="@dimen/standard_55"
                 android:src="@drawable/ic_note_black_56dp"
-                app:backgroundTint="@android:color/white"
+                app:backgroundTint="@color/white"
                 app:elevation="0dp"
                 app:fabSize="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -65,25 +88,29 @@
             android:layout_height="@dimen/standard_55"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp">
 
             <TextView
                 android:id="@+id/pin_fab_text"
                 android:layout_width="@dimen/standard_55"
                 android:layout_height="@dimen/standard_55"
                 android:layout_weight="0"
+                android:gravity="center"
                 android:text="@string/pin_fab_text"
                 android:textAlignment="center"
-                android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:visibility="invisible"/>
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/pin_fab"
                 android:layout_width="@dimen/standard_55"
                 android:layout_height="@dimen/standard_55"
                 android:src="@drawable/ic_credit_card_black_56dp"
-                app:backgroundTint="@android:color/white"
+                app:backgroundTint="@color/white"
                 app:elevation="0dp"
                 app:fabSize="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -98,8 +125,11 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"
             android:src="@drawable/ic_add_circle_black_56dp"
-            app:backgroundTint="@android:color/white"
+            app:backgroundTint="@color/white"
             app:elevation="0dp"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"

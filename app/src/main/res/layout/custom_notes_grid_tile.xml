@@ -6,24 +6,25 @@
     >
 
     <TextView
-        android:id="@+id/note_tile_key"
+        android:id="@+id/note_tile_main_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:paddingLeft="8dp"
         android:paddingTop="4dp"
         android:paddingRight="8dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="60sp"
         android:textStyle="bold"
         tools:text="Ref" />
 
     <TextView
-        android:id="@+id/note_tile_hint"
+        android:id="@+id/note_tile_sub_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorAccent"
         android:textSize="20sp"
-        tools:text="Hint..."
-        android:gravity="center_horizontal"/>
+        tools:text="Hint..." />
 
 </LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".forms.note.NoteFormActivity">
+
+    <EditText
+        android:id="@+id/entered_title"
+        android:layout_width="406dp"
+        android:layout_height="88dp"
+        android:ems="10"
+        android:fontFamily="monospace"
+        android:inputType="textPersonName"
+        android:singleLine="true"
+        android:hint="@string/note_title_placeholder"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:typeface="monospace" />
+
+    <EditText
+        android:id="@+id/entered_note"
+        android:layout_width="353dp"
+        android:layout_height="319dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/note_edittext_background"
+        android:fontFamily="monospace"
+        android:gravity="top|left"
+        android:inputType="textMultiLine"
+        android:maxLines="30"
+        android:padding="20dp"
+        android:scrollbars="vertical"
+        android:textSize="18sp"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toTopOf="@+id/save_pin_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entered_title" />
+
+    <Button
+        android:id="@+id/save_note_button"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="105dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/save"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entered_note" />
+
+    <ImageView
+        android:id="@+id/delete_note_button"
+        android:layout_width="75dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="88dp"
+        android:clickable="true"
+        android:contentDescription="Delete pin"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/save_note_button"
+        app:layout_constraintTop_toBottomOf="@+id/entered_note"
+        app:srcCompat="@drawable/ic_delete_forever_red_56dp" />
+</android.support.constraint.ConstraintLayout>
