@@ -1,9 +1,5 @@
 package com.ahmed.anote.forms.pin;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -14,15 +10,17 @@ import com.ahmed.anote.db.sql.PinSQL;
 import com.ahmed.anote.util.TextEditor;
 import com.ahmed.anote.util.PinAttributes;
 import com.ahmed.anote.util.ToastPrinter;
+import com.ahmed.anote.util.Util;
 
-public class PinFormActivity extends AppCompatActivity implements LifecycleObserver {
+public class PinFormActivity extends AppCompatActivity {
 
     private DbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUp();
+        setContentView(R.layout.activity_pin_form);
+        Util.setSecureFlags(this);
 
         dbHelper = new DbHelper(this);
         SaveButton saveButton = new SaveButton(this,
@@ -42,20 +40,5 @@ public class PinFormActivity extends AppCompatActivity implements LifecycleObser
             TextEditor.enter(this, R.id.entered_hint, hint);
             TextEditor.enter(this, R.id.entered_pin, pin);
         }
-    }
-
-    private void setUp() {
-        setContentView(R.layout.activity_pin_form);
-        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
-        this.getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
-        );
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void onMoveToBackground() {
-        dbHelper.close();
-        this.finishAffinity();
     }
 }

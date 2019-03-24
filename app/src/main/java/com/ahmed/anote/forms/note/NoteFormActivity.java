@@ -1,9 +1,5 @@
 package com.ahmed.anote.forms.note;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,8 +13,9 @@ import com.ahmed.anote.forms.note.deleteNote.DeleteButton;
 import com.ahmed.anote.util.NoteAttributes;
 import com.ahmed.anote.util.TextEditor;
 import com.ahmed.anote.util.ToastPrinter;
+import com.ahmed.anote.util.Util;
 
-public class NoteFormActivity extends AppCompatActivity implements LifecycleObserver {
+public class NoteFormActivity extends AppCompatActivity {
 
     private DbHelper dbHelper;
     private DiscardAlertDialog discardAlertDialog;
@@ -31,7 +28,8 @@ public class NoteFormActivity extends AppCompatActivity implements LifecycleObse
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUp();
+        setContentView(R.layout.activity_note_form);
+        Util.setSecureFlags(this);
 
         enteredValues = new EnteredValues(this);
         discardAlertDialog = new DiscardAlertDialog(this);
@@ -82,22 +80,7 @@ public class NoteFormActivity extends AppCompatActivity implements LifecycleObse
         }
     }
 
-    private void setUp() {
-        setContentView(R.layout.activity_note_form);
-        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
-        this.getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
-        );
-    }
-
     public String getNoteTitle() {
         return noteTitle;
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void onMoveToBackground() {
-        dbHelper.close();
-        this.finishAffinity();
     }
 }

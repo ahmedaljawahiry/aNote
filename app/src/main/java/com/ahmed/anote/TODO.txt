@@ -7,3 +7,5 @@ Encrypt pins.
 CLEAN UP:
 - Create SQL interface, then DeleteAlertDialog can be made generic.
 - Create EnteredValues interface.
+
+Write androidTests

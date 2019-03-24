@@ -1,13 +1,8 @@
 package com.ahmed.anote.displays.pinDisplay;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.ahmed.anote.R;
@@ -17,8 +12,9 @@ import com.ahmed.anote.displays.pinDisplay.deletePin.DeleteAlertDialog;
 import com.ahmed.anote.displays.pinDisplay.deletePin.DeleteButton;
 import com.ahmed.anote.displays.pinDisplay.editPin.EditButton;
 import com.ahmed.anote.util.PinAttributes;
+import com.ahmed.anote.util.Util;
 
-public class PinDisplayActivity extends AppCompatActivity implements LifecycleObserver {
+public class PinDisplayActivity extends AppCompatActivity {
 
     private PinValues values;
     private DbHelper dbHelper;
@@ -26,7 +22,8 @@ public class PinDisplayActivity extends AppCompatActivity implements LifecycleOb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUp();
+        setContentView(R.layout.activity_pin_display);
+        Util.setSecureFlags(this);
 
         Bundle bundle = this.getIntent().getExtras();
         values = new PinValues();
@@ -45,21 +42,6 @@ public class PinDisplayActivity extends AppCompatActivity implements LifecycleOb
                 new DeleteAlertDialog(this, new PinSQL(dbHelper.getWritableDatabase()))
         );
         new EditButton(this, values);
-    }
-
-    private void setUp() {
-        setContentView(R.layout.activity_pin_display);
-        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
-        this.getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
-        );
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void onMoveToBackground() {
-        dbHelper.close();
-        this.finishAffinity();
     }
 
     private void createTextOnPage(int viewId, String displayText) {

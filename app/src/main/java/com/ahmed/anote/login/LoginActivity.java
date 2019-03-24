@@ -1,27 +1,24 @@
 package com.ahmed.anote.login;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.ahmed.anote.R;
 import com.ahmed.anote.util.ToastPrinter;
+import com.ahmed.anote.util.Util;
 
 
-public class LoginActivity extends AppCompatActivity implements LifecycleObserver {
+public class LoginActivity extends AppCompatActivity {
 
     public static final String UNSUPPORTED_PROMPT = "Unsupported phone.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUp();
+        setContentView(R.layout.activity_login);
+        Util.setSecureFlags(this);
 
         CompatibilityChecker compatibilityChecker = new CompatibilityChecker(this);
         BiometricAuth biometricAuth = new BiometricAuth(this);
@@ -34,20 +31,6 @@ public class LoginActivity extends AppCompatActivity implements LifecycleObserve
         else {
             new ToastPrinter().print(this, UNSUPPORTED_PROMPT, Toast.LENGTH_SHORT);
         }
-    }
-
-    private void setUp() {
-        setContentView(R.layout.activity_login);
-        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
-        this.getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
-        );
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void onMoveToBackground() {
-        this.finishAffinity();
     }
 }
 

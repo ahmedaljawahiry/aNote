@@ -1,17 +1,9 @@
 package com.ahmed.anote.displays.selectionPage;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ahmed.anote.R;
@@ -23,8 +15,9 @@ import com.ahmed.anote.displays.selectionPage.fabMenu.FabMenuItemFactory;
 import com.ahmed.anote.displays.selectionPage.notesGrid.NotesGrid;
 import com.ahmed.anote.displays.selectionPage.pinsGrid.PinsGrid;
 import com.ahmed.anote.util.ToastPrinter;
+import com.ahmed.anote.util.Util;
 
-public class NoteSelectionActivity extends AppCompatActivity implements LifecycleObserver {
+public class NoteSelectionActivity extends AppCompatActivity {
 
     final public static String EXIT_TOAST_MESSAGE = "Click back again to exit";
 
@@ -37,7 +30,8 @@ public class NoteSelectionActivity extends AppCompatActivity implements Lifecycl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUp();
+        setContentView(R.layout.activity_note_selection);
+        Util.setSecureFlags(this);
 
         this.fabMenu = new FabMenu(this, new FabMenuItemFactory());
 
@@ -76,20 +70,6 @@ public class NoteSelectionActivity extends AppCompatActivity implements Lifecycl
         if (toastPrinter == null) {
             toastPrinter = new ToastPrinter();
         }
-    }
-
-    private void setUp() {
-        setContentView(R.layout.activity_note_selection);
-        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
-        this.getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
-        );
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void onMoveToBackground() {
-        closeApp();
     }
 
     public void setFabMenu(FabMenu fabMenu) {
