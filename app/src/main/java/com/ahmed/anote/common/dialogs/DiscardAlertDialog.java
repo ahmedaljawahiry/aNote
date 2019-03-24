@@ -1,5 +1,6 @@
-package com.ahmed.anote.forms.note;
+package com.ahmed.anote.common.dialogs;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,13 +15,14 @@ public class DiscardAlertDialog {
     public static final String ALERT_NEGATIVE = "NO";
 
     private AlertDialog alertDialog;
+    private Activity activity;
 
-
-    public DiscardAlertDialog(NoteFormActivity activity) {
-        alertDialog = new AlertDialog.Builder(activity).setTitle(ALERT_TITLE)
+    public DiscardAlertDialog(Activity activity) {
+        this.activity = activity;
+        this.alertDialog = new AlertDialog.Builder(activity).setTitle(ALERT_TITLE)
                 .setMessage(ALERT_MESSAGE)
                 .setPositiveButton(ALERT_POSITIVE,
-                        (dialog, which) -> positiveAction(activity, dialog))
+                        (dialog, which) -> positiveAction(dialog))
                 .setNegativeButton(ALERT_NEGATIVE,
                         (dialog, which) -> dialog.dismiss())
                 .create();
@@ -30,7 +32,7 @@ public class DiscardAlertDialog {
         alertDialog.show();
     }
 
-    private void positiveAction(NoteFormActivity activity, DialogInterface dialog) {
+    private void positiveAction(DialogInterface dialog) {
         dialog.dismiss();
         Intent intent = new Intent(activity, NoteSelectionActivity.class);
         activity.startActivity(intent);

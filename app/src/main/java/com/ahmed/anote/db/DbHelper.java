@@ -19,8 +19,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(PinSQL.CREATE_TABLE);
-        db.execSQL(NoteSQL.CREATE_TABLE);
+        new PinSQL(db).CREATE_TABLE();
+        new NoteSQL(db).CREATE_TABLE();
     }
 
     @Override

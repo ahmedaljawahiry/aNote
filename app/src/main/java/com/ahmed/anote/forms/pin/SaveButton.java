@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.ahmed.anote.R;
 import com.ahmed.anote.db.sql.PinSQL;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
-import com.ahmed.anote.util.ToastPrinter;
+import com.ahmed.anote.common.ToastPrinter;
 
 public class SaveButton implements View.OnClickListener {
 
@@ -21,7 +21,7 @@ public class SaveButton implements View.OnClickListener {
     public static final String EMPTY_KEY = "Enter a key!";
 
     private Button button;
-    private EnteredValues enteredValues;
+    private UserInput userInput;
     private Activity activity;
     private PinSQL pinSql;
     private ToastPrinter toastPrinter;
@@ -29,9 +29,9 @@ public class SaveButton implements View.OnClickListener {
     private boolean editingPin;
     private String keyToBeEdited;
 
-    public SaveButton(Activity activity, EnteredValues enteredValues,
+    public SaveButton(Activity activity, UserInput userInput,
                       PinSQL pinSql, ToastPrinter toastPrinter) {
-        this.enteredValues = enteredValues;
+        this.userInput = userInput;
         this.pinSql = pinSql;
         this.activity = activity;
         this.toastPrinter = toastPrinter;
@@ -41,10 +41,10 @@ public class SaveButton implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        enteredValues.find();
+        userInput.find();
         Context context = view.getContext();
 
-        if (!enteredValues.areValid()) {
+        if (!userInput.areValid()) {
             keyErrorNotification(context, EMPTY_KEY);
             return;
         }
@@ -63,22 +63,22 @@ public class SaveButton implements View.OnClickListener {
     }
 
     private void insertNewPin(Context context) {
-        if (pinSql.KEY_EXISTS(enteredValues.getEnteredKey())) {
+        if (pinSql.RECORD_EXISTS(userInput.getEnteredKey())) {
             keyErrorNotification(context, DUPLICATE);
         }
         else {
-            pinSql.INSERT(enteredValues);
+            pinSql.INSERT(userInput);
             goBackToNoteSelection(context);
         }
     }
 
     private void updateExistingPin(Context context) {
-        String enteredKey = enteredValues.getEnteredKey();
-        if (!keyToBeEdited.equals(enteredKey) && pinSql.KEY_EXISTS(enteredKey)) {
+        String enteredKey = userInput.getEnteredKey();
+        if (!keyToBeEdited.equals(enteredKey) && pinSql.RECORD_EXISTS(enteredKey)) {
             keyErrorNotification(context, DUPLICATE);
         }
         else {
-            pinSql.UPDATE(enteredValues, keyToBeEdited);
+            pinSql.UPDATE(userInput, keyToBeEdited);
             goBackToNoteSelection(context);
         }
     }

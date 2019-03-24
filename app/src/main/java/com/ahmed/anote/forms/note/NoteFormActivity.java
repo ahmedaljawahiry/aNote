@@ -1,25 +1,24 @@
 package com.ahmed.anote.forms.note;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.WindowManager;
 
 import com.ahmed.anote.R;
+import com.ahmed.anote.common.DbRecordDeleter;
+import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
+import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
+import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.NoteSQL;
-import com.ahmed.anote.forms.note.deleteNote.DeleteAlertDialog;
-import com.ahmed.anote.forms.note.deleteNote.DeleteButton;
-import com.ahmed.anote.util.NoteAttributes;
-import com.ahmed.anote.util.TextEditor;
-import com.ahmed.anote.util.ToastPrinter;
-import com.ahmed.anote.util.Util;
+import com.ahmed.anote.common.TextEditor;
+import com.ahmed.anote.common.ToastPrinter;
+import com.ahmed.anote.common.Util;
 
-public class NoteFormActivity extends AppCompatActivity {
+public class NoteFormActivity extends DbRecordDeleter {
 
     private DbHelper dbHelper;
     private DiscardAlertDialog discardAlertDialog;
-    private EnteredValues enteredValues;
+    private UserInput userInput;
 
     private String noteTitle;
     private String noteBody;
@@ -31,11 +30,11 @@ public class NoteFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note_form);
         Util.setSecureFlags(this);
 
-        enteredValues = new EnteredValues(this);
+        userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
         dbHelper = new DbHelper(this);
         SaveButton saveButton = new SaveButton(this,
-                new EnteredValues(this),
+                new UserInput(this),
                 new NoteSQL(dbHelper.getWritableDatabase()),
                 new ToastPrinter());
 
@@ -47,29 +46,32 @@ public class NoteFormActivity extends AppCompatActivity {
             dbHelper = new DbHelper(getApplicationContext());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-            noteTitle = bundle.getString(NoteAttributes.TITLE.name());
-            noteBody = new NoteSQL(db).GET_NOTE_FROM_TITLE(noteTitle);
+            noteTitle = bundle.getString(Contract.Notes.COLUMN_TITLE);
+            noteBody = new NoteSQL(db).GET_NOTE_FROM_PK(noteTitle);
 
             saveButton.editOnly(noteTitle);
-            TextEditor.enter(this, R.id.entered_title, noteTitle);
-            TextEditor.enter(this, R.id.entered_note, noteBody);
+            TextEditor.enter(this, R.id.entered_title, noteTitle, true);
+            TextEditor.enter(this, R.id.entered_note, noteBody, true);
         }
 
         new DeleteButton(
                 this,
-                new DeleteAlertDialog(this, new NoteSQL(dbHelper.getWritableDatabase())),
+                new DeleteAlertDialog(
+                        this,
+                        new NoteSQL(dbHelper.getWritableDatabase()),
+                        "Delete Note"),
                 discardAlertDialog,
                 !isExistingNote);
     }
 
     @Override
     public void onBackPressed() {
-        enteredValues.find();
-        boolean newEmptyNote = !isExistingNote && !enteredValues.isEmpty();
+        userInput.find();
+        boolean newEmptyNote = !isExistingNote && !userInput.nothingEntered();
         boolean existingUnchangedNote =
                 isExistingNote && (
-                        !enteredValues.getEnteredTitle().equals(noteTitle) ||
-                        !enteredValues.getEnteredNote().equals(noteBody)
+                        !userInput.getEnteredTitle().equals(noteTitle) ||
+                        !userInput.getEnteredNote().equals(noteBody)
                 );
 
         if (newEmptyNote || existingUnchangedNote) {
@@ -80,7 +82,8 @@ public class NoteFormActivity extends AppCompatActivity {
         }
     }
 
-    public String getNoteTitle() {
+    @Override
+    public String getPK() {
         return noteTitle;
     }
 }

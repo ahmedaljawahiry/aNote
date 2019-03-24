@@ -1,4 +1,4 @@
-package com.ahmed.anote.login;
+package com.ahmed.anote.auth;
 
 import android.app.Activity;
 import android.view.View;
@@ -19,6 +19,6 @@ public class AuthenticateButton implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        biometricAuth.authenticateUser(v);
+        biometricAuth.authenticateUser();
     }
 }

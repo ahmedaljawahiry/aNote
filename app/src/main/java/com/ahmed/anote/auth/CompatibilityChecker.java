@@ -1,4 +1,4 @@
-package com.ahmed.anote.login;
+package com.ahmed.anote.auth;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -24,8 +24,7 @@ public class CompatibilityChecker {
 
         if (!keyguardManager.isKeyguardSecure()
                 || !packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
-                || !permissionGranted()
-                ) {
+                || !permissionGranted()) {
             return false;
         }
 

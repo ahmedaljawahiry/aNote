@@ -14,8 +14,8 @@ import com.ahmed.anote.displays.selectionPage.fabMenu.FabMenu;
 import com.ahmed.anote.displays.selectionPage.fabMenu.FabMenuItemFactory;
 import com.ahmed.anote.displays.selectionPage.notesGrid.NotesGrid;
 import com.ahmed.anote.displays.selectionPage.pinsGrid.PinsGrid;
-import com.ahmed.anote.util.ToastPrinter;
-import com.ahmed.anote.util.Util;
+import com.ahmed.anote.common.ToastPrinter;
+import com.ahmed.anote.common.Util;
 
 public class NoteSelectionActivity extends AppCompatActivity {
 

@@ -1,11 +1,11 @@
-package com.ahmed.anote.forms.note.deleteNote;
+package com.ahmed.anote.forms.note;
 
 import android.view.View;
 import android.widget.ImageView;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.forms.note.DiscardAlertDialog;
-import com.ahmed.anote.forms.note.NoteFormActivity;
+import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
+import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
 
 public class DeleteButton implements View.OnClickListener {
 
@@ -18,8 +18,7 @@ public class DeleteButton implements View.OnClickListener {
             NoteFormActivity activity,
             DeleteAlertDialog deleteDialog,
             DiscardAlertDialog discardDialog,
-            boolean newNote
-    ) {
+            boolean newNote) {
 
         this.deleteDialog = deleteDialog;
         this.discardDialog = discardDialog;

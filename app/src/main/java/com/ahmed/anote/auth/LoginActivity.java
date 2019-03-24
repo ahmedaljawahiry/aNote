@@ -1,13 +1,12 @@
-package com.ahmed.anote.login;
+package com.ahmed.anote.auth;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Toast;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.util.ToastPrinter;
-import com.ahmed.anote.util.Util;
+import com.ahmed.anote.common.ToastPrinter;
+import com.ahmed.anote.common.Util;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,8 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (compatibilityChecker.isCompatible()) {
             new AuthenticateButton(this, biometricAuth);
-            View rootView = this.getWindow().getDecorView().getRootView();
-            biometricAuth.authenticateUser(rootView);
+            biometricAuth.authenticateUser();
         }
         else {
             new ToastPrinter().print(this, UNSUPPORTED_PROMPT, Toast.LENGTH_SHORT);

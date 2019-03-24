@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.displays.selectionPage.fabMenu.FabMenu;
-import com.ahmed.anote.util.ToastPrinter;
+import com.ahmed.anote.common.ToastPrinter;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

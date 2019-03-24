@@ -1,11 +1,10 @@
-What happens if user editing note then minimizes? Note is lost...
+Figure out which classes are missing tests.
 
-Fix last test in NoteSelectionActivity.
+Test activities and BiometricAuth with androidTest.
+https://developer.android.com/training/testing/unit-testing/instrumented-unit-tests.html
+
+Add fingerprint auth to selected notes.
+
+Ensure DB is always closed upon exit. E.g. it's not closed after saveButton created in PinFormActivity.
 
 Encrypt pins.
-
-CLEAN UP:
-- Create SQL interface, then DeleteAlertDialog can be made generic.
-- Create EnteredValues interface.
-
-Write androidTests

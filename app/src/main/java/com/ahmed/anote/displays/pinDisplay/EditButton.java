@@ -1,4 +1,4 @@
-package com.ahmed.anote.displays.pinDisplay.editPin;
+package com.ahmed.anote.displays.pinDisplay;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.ahmed.anote.R;
+import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.displays.pinDisplay.PinDisplayActivity;
 import com.ahmed.anote.displays.pinDisplay.PinValues;
 import com.ahmed.anote.forms.pin.PinFormActivity;
-import com.ahmed.anote.util.PinAttributes;
 
 public class EditButton implements View.OnClickListener {
 
@@ -30,9 +30,9 @@ public class EditButton implements View.OnClickListener {
         Intent intent = new Intent(context, PinFormActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putString(PinAttributes.KEY.name(), values.getKey());
-        bundle.putString(PinAttributes.HINT.name(), values.getHint());
-        bundle.putString(PinAttributes.PIN.name(), values.getPin());
+        bundle.putString(Contract.Pins.COLUMN_KEY, values.getKey());
+        bundle.putString(Contract.Pins.COLUMN_HINT, values.getHint());
+        bundle.putString(Contract.Pins.COLUMN_PIN, values.getPin());
         intent.putExtras(bundle);
 
         context.startActivity(intent);

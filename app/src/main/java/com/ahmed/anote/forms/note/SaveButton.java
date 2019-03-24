@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.ahmed.anote.R;
 import com.ahmed.anote.db.sql.NoteSQL;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
-import com.ahmed.anote.util.ToastPrinter;
+import com.ahmed.anote.common.ToastPrinter;
 
 public class SaveButton implements View.OnClickListener {
 
@@ -19,7 +19,7 @@ public class SaveButton implements View.OnClickListener {
     public static final String DUPLICATE = "Enter a unique title!";
 
     private Button button;
-    private EnteredValues enteredValues;
+    private UserInput userInput;
     private Activity activity;
     private NoteSQL noteSQL;
     private ToastPrinter toastPrinter;
@@ -27,9 +27,9 @@ public class SaveButton implements View.OnClickListener {
     private boolean editingNote;
     private String titleOfNoteToBeEdited;
 
-    public SaveButton(Activity activity, EnteredValues enteredValues,
+    public SaveButton(Activity activity, UserInput userInput,
                       NoteSQL noteSQL, ToastPrinter toastPrinter) {
-        this.enteredValues = enteredValues;
+        this.userInput = userInput;
         this.noteSQL = noteSQL;
         this.activity = activity;
         this.toastPrinter = toastPrinter;
@@ -39,10 +39,10 @@ public class SaveButton implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        enteredValues.find();
+        userInput.find();
         Context context = view.getContext();
 
-        if (!enteredValues.areValid()) {
+        if (!userInput.areValid()) {
             toastPrinter.print(context, EMPTY_TITLE, Toast.LENGTH_SHORT);
             return;
         }
@@ -61,22 +61,22 @@ public class SaveButton implements View.OnClickListener {
     }
 
     private void insertNewNote(Context context) {
-        if (noteSQL.TITLE_EXISTS(enteredValues.getEnteredTitle())) {
+        if (noteSQL.RECORD_EXISTS(userInput.getEnteredTitle())) {
             toastPrinter.print(context, DUPLICATE, Toast.LENGTH_SHORT);
         }
         else {
-            noteSQL.INSERT(enteredValues);
+            noteSQL.INSERT(userInput);
             goBackToNoteSelection(context);
         }
     }
 
     private void updateExistingNote(Context context) {
-        String enteredTitle = enteredValues.getEnteredTitle();
-        if (!titleOfNoteToBeEdited.equals(enteredTitle) && noteSQL.TITLE_EXISTS(enteredTitle)) {
+        String enteredTitle = userInput.getEnteredTitle();
+        if (!titleOfNoteToBeEdited.equals(enteredTitle) && noteSQL.RECORD_EXISTS(enteredTitle)) {
             toastPrinter.print(context, DUPLICATE, Toast.LENGTH_SHORT);
         }
         else {
-            noteSQL.UPDATE(enteredValues, titleOfNoteToBeEdited);
+            noteSQL.UPDATE(userInput, titleOfNoteToBeEdited);
             goBackToNoteSelection(context);
         }
     }

@@ -1,16 +1,14 @@
-package com.ahmed.anote.displays.pinDisplay.deletePin;
+package com.ahmed.anote.displays.pinDisplay;
 
 import android.view.View;
 import android.widget.ImageView;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.displays.pinDisplay.PinDisplayActivity;
+import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
 
 import org.junit.Test;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;

@@ -1,20 +1,26 @@
 package com.ahmed.anote.forms.pin;
 
 import android.app.Activity;
-import android.widget.EditText;
 
 import com.ahmed.anote.R;
+import com.ahmed.anote.db.Contract;
+import com.ahmed.anote.forms.FormInputValues;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
-public class EnteredValues {
+public class UserInput extends FormInputValues {
 
     private Activity activity;
     private String enteredKey;
     private String enteredHint;
     private String enteredPin;
+    private Map<String, String> dbValueMap;
 
-    public EnteredValues(Activity activity) {
+    public UserInput(Activity activity) {
         this.activity = activity;
+        this.dbValueMap = new HashMap<>();
         find();
     }
 
@@ -22,6 +28,10 @@ public class EnteredValues {
         this.enteredKey = convertEditTextToString(activity.findViewById(R.id.entered_key));
         this.enteredHint = convertEditTextToString(activity.findViewById(R.id.entered_hint));
         this.enteredPin = convertEditTextToString(activity.findViewById(R.id.entered_pin));
+    }
+
+    public boolean nothingEntered() {
+        return (enteredKey.isEmpty() && enteredPin.isEmpty() && enteredHint.isEmpty());
     }
 
     public boolean areValid() {
@@ -33,13 +43,12 @@ public class EnteredValues {
         }
     }
 
-    private String convertEditTextToString(EditText editText) {
-        if (editText == null || editText.getText() == null) {
-            return "";
-        }
-        else {
-            return editText.getText().toString();
-        }
+    public Map<String, String> getDbValueMap() {
+        find();
+        dbValueMap.put(Contract.Pins.COLUMN_KEY, enteredKey);
+        dbValueMap.put(Contract.Pins.COLUMN_HINT, enteredHint);
+        dbValueMap.put(Contract.Pins.COLUMN_PIN, enteredPin);
+        return dbValueMap;
     }
 
     public String getEnteredKey() {

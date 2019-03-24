@@ -1,20 +1,13 @@
-package com.ahmed.anote.util;
+package com.ahmed.anote;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.text.Editable;
 import android.widget.EditText;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.db.DbHelper;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 

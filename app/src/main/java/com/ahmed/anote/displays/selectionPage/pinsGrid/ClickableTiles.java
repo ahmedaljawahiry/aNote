@@ -8,9 +8,9 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.ahmed.anote.R;
+import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.displays.pinDisplay.PinDisplayActivity;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
-import com.ahmed.anote.util.PinAttributes;
 
 public class ClickableTiles implements AdapterView.OnItemClickListener {
 
@@ -31,8 +31,8 @@ public class ClickableTiles implements AdapterView.OnItemClickListener {
         TextView key = view.findViewById(R.id.note_tile_main_text);
         TextView hint = view.findViewById(R.id.note_tile_sub_text);
 
-        bundle.putString(PinAttributes.KEY.name(), key.getText().toString());
-        bundle.putString(PinAttributes.HINT.name(), hint.getText().toString());
+        bundle.putString(Contract.Pins.COLUMN_KEY, key.getText().toString());
+        bundle.putString(Contract.Pins.COLUMN_HINT, hint.getText().toString());
         intent.putExtras(bundle);
 
         activity.startActivity(intent);

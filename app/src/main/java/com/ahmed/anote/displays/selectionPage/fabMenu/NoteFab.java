@@ -7,11 +7,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ahmed.anote.R;
 import com.ahmed.anote.forms.note.NoteFormActivity;
-import com.ahmed.anote.util.ToastPrinter;
 
 public class NoteFab implements FabMenuItem, View.OnClickListener {
 

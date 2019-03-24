@@ -1,20 +1,18 @@
 package com.ahmed.anote.displays.pinDisplay;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.ahmed.anote.R;
+import com.ahmed.anote.common.DbRecordDeleter;
+import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
+import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
-import com.ahmed.anote.displays.pinDisplay.deletePin.DeleteAlertDialog;
-import com.ahmed.anote.displays.pinDisplay.deletePin.DeleteButton;
-import com.ahmed.anote.displays.pinDisplay.editPin.EditButton;
-import com.ahmed.anote.util.PinAttributes;
-import com.ahmed.anote.util.Util;
+import com.ahmed.anote.common.TextEditor;
+import com.ahmed.anote.common.Util;
 
-public class PinDisplayActivity extends AppCompatActivity {
+public class PinDisplayActivity extends DbRecordDeleter {
 
     private PinValues values;
     private DbHelper dbHelper;
@@ -27,30 +25,28 @@ public class PinDisplayActivity extends AppCompatActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         values = new PinValues();
-        values.setKey(bundle.getString(PinAttributes.KEY.name()));
-        values.setHint(bundle.getString(PinAttributes.HINT.name()));
+        values.setKey(bundle.getString(Contract.Pins.COLUMN_KEY));
+        values.setHint(bundle.getString(Contract.Pins.COLUMN_HINT));
 
         dbHelper = new DbHelper(getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        values.setPin(new PinSQL(db).GET_PIN_FROM_KEY(values.getKey()));
+        values.setPin(new PinSQL(db).GET_NOTE_FROM_PK(values.getKey()));
 
-        createTextOnPage(R.id.key_display_text, values.getKey());
-        createTextOnPage(R.id.hint_display_text, values.getHint());
-        createTextOnPage(R.id.pin_display_text, values.getPin());
+        TextEditor.enter(this, R.id.key_display_text, values.getKey(), false);
+        TextEditor.enter(this, R.id.hint_display_text, values.getHint(), false);
+        TextEditor.enter(this, R.id.pin_display_text, values.getPin(), false);
 
         new DeleteButton(this,
-                new DeleteAlertDialog(this, new PinSQL(dbHelper.getWritableDatabase()))
+                new DeleteAlertDialog(
+                        this,
+                        new PinSQL(dbHelper.getWritableDatabase()),
+                        "Delete Pin")
         );
         new EditButton(this, values);
     }
 
-    private void createTextOnPage(int viewId, String displayText) {
-        TextView text = this.findViewById(viewId);
-        text.setText(displayText, TextView.BufferType.NORMAL);
-        text.setEnabled(false);
-    }
-
-    public PinValues getValues() {
-        return values;
+    @Override
+    public String getPK() {
+        return values.getKey();
     }
 }

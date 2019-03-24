@@ -1,15 +1,14 @@
 package com.ahmed.anote.db.sql;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
 import com.ahmed.anote.db.Contract;
-import com.ahmed.anote.forms.pin.EnteredValues;
+import com.ahmed.anote.forms.FormInputValues;
 
-public class PinSQL {
+public class PinSQL implements SqlQueries {
 
     private SQLiteDatabase db;
 
@@ -20,38 +19,35 @@ public class PinSQL {
         this.db = db;
     }
 
-    public static final String CREATE_TABLE =
-            "CREATE TABLE " + Contract.Pins.TABLE_NAME + " (" +
-             Contract.Pins._ID + " INTEGER PRIMARY KEY," +
-             Contract.Pins.COLUMN_PIN + " INTEGER," +
-             Contract.Pins.COLUMN_KEY + " TEXT UNIQUE, " +
-             Contract.Pins.COLUMN_HINT + " TEXT)";
-
-    public static final String DELETE_TABLE =
-            "DROP TABLE IF EXISTS " + Contract.Pins.TABLE_NAME;
-
-    public void INSERT(EnteredValues enteredValues) {
-        ContentValues values = new ContentValues();
-        values.put(Contract.Pins.COLUMN_KEY, enteredValues.getEnteredKey());
-        values.put(Contract.Pins.COLUMN_PIN, enteredValues.getEnteredPin());
-        values.put(Contract.Pins.COLUMN_HINT, enteredValues.getEnteredHint());
-
-        db.insert(Contract.Pins.TABLE_NAME, null, values);
+    public void CREATE_TABLE() {
+        String sql = "CREATE TABLE " + Contract.Pins.TABLE_NAME + " (" +
+                Contract.Pins._ID + " INTEGER PRIMARY KEY," +
+                Contract.Pins.COLUMN_PIN + " INTEGER," +
+                Contract.Pins.COLUMN_KEY + "TEXT UNIQUE, " + // no space here...?
+                Contract.Pins.COLUMN_HINT + " TEXT)";
+        db.execSQL(sql);
     }
 
-    public void UPDATE(EnteredValues enteredValues, String key) {
-        ContentValues values = new ContentValues();
-        values.put(Contract.Pins.COLUMN_KEY, enteredValues.getEnteredKey());
-        values.put(Contract.Pins.COLUMN_PIN, enteredValues.getEnteredPin());
-        values.put(Contract.Pins.COLUMN_HINT, enteredValues.getEnteredHint());
+    public void DELETE_TABLE() {
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.Pins.TABLE_NAME);
+    }
 
-        db.update(Contract.Pins.TABLE_NAME,
-                values,
+    public void INSERT(FormInputValues userInput) {
+        db.insert(
+                Contract.Pins.TABLE_NAME,
+                null,
+                convertDbMapToContent(userInput));
+    }
+
+    public void UPDATE(FormInputValues userInput, String key) {
+        db.update(
+                Contract.Pins.TABLE_NAME,
+                convertDbMapToContent(userInput),
                 Contract.Pins.COLUMN_KEY + "=?",
                 new String[] {key});
     }
 
-    public boolean KEY_EXISTS(String key) {
+    public boolean RECORD_EXISTS(String key) {
         Cursor cursor = db.query(
                 Contract.Pins.TABLE_NAME,
                 null,
@@ -66,7 +62,7 @@ public class PinSQL {
         return db.query(Contract.Pins.TABLE_NAME, null, null, null, null, null, null);
     }
 
-    public String GET_PIN_FROM_KEY(String key) {
+    public String GET_NOTE_FROM_PK(String key) {
         Cursor cursor = db.query(
                 Contract.Pins.TABLE_NAME,
                 new String[] {Contract.Pins.COLUMN_PIN},
@@ -90,10 +86,10 @@ public class PinSQL {
         }
     }
 
-    public void DELETE(String key, String pin) {
+    public void DELETE(String pk) {
         db.delete(
                 Contract.Pins.TABLE_NAME,
-                Contract.Pins.COLUMN_KEY + "=? AND " + Contract.Pins.COLUMN_PIN + "=?",
-                new String[] {key, pin});
+                Contract.Pins.COLUMN_KEY + "=?",
+                new String[] {pk});
     }
 }

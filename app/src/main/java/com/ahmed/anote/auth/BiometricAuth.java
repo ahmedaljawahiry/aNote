@@ -1,15 +1,13 @@
-package com.ahmed.anote.login;
+package com.ahmed.anote.auth;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.biometrics.BiometricPrompt;
 import android.os.CancellationSignal;
-import android.view.View;
 import android.widget.Toast;
 
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
-import com.ahmed.anote.util.ToastPrinter;
+import com.ahmed.anote.common.ToastPrinter;
 
 public class BiometricAuth {
 
@@ -24,7 +22,7 @@ public class BiometricAuth {
         this.activity = activity;
     }
 
-    public void authenticateUser(View view) {
+    public void authenticateUser() {
         BiometricPrompt biometricPrompt = new BiometricPrompt.Builder(activity)
                 .setTitle(TITLE)
                 .setSubtitle(SUBTITLE)

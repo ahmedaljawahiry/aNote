@@ -1,19 +1,24 @@
 package com.ahmed.anote.forms.note;
 
 import android.app.Activity;
-import android.widget.EditText;
 
 import com.ahmed.anote.R;
+import com.ahmed.anote.db.Contract;
+import com.ahmed.anote.forms.FormInputValues;
 
-public class EnteredValues {
+import java.util.HashMap;
+import java.util.Map;
+
+public class UserInput extends FormInputValues {
 
     private Activity activity;
     private String enteredTitle;
     private String enteredNote;
-    private boolean empty;
+    private Map<String, String> dbValueMap;
 
-    public EnteredValues(Activity activity) {
+    public UserInput(Activity activity) {
         this.activity = activity;
+        this.dbValueMap = new HashMap<>();
         find();
     }
 
@@ -31,17 +36,15 @@ public class EnteredValues {
         }
     }
 
-    public boolean isEmpty() {
-        return (enteredNote.isEmpty() && enteredTitle.isEmpty());
+    public Map<String, String> getDbValueMap() {
+        find();
+        dbValueMap.put(Contract.Notes.COLUMN_TITLE, enteredTitle);
+        dbValueMap.put(Contract.Notes.COLUMN_TEXT, enteredNote);
+        return dbValueMap;
     }
 
-    private String convertEditTextToString(EditText editText) {
-        if (editText == null || editText.getText() == null) {
-            return "";
-        }
-        else {
-            return editText.getText().toString();
-        }
+    public boolean nothingEntered() {
+        return (enteredNote.isEmpty() && enteredTitle.isEmpty());
     }
 
     public String getEnteredTitle() {

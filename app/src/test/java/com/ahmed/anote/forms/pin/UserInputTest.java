@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.widget.EditText;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.util.Mocks;
+import com.ahmed.anote.Mocks;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
-public class EnteredValuesTest {
+public class UserInputTest {
 
     @Test
     public void valuesSetToEmptyStringIfNothingEntered() {
@@ -25,7 +25,7 @@ public class EnteredValuesTest {
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_pin));
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_hint));
 
-        assertAllEmpty(new EnteredValues(activityMock));
+        assertAllEmpty(new UserInput(activityMock));
     }
 
     @Test
@@ -36,20 +36,20 @@ public class EnteredValuesTest {
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_pin));
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_hint));
 
-        assertAllEmpty(new EnteredValues(activityMock));
+        assertAllEmpty(new UserInput(activityMock));
     }
 
-    private void assertAllEmpty(EnteredValues enteredValues) {
-        assertThat(enteredValues.getEnteredKey()).isEmpty();
-        assertThat(enteredValues.getEnteredPin()).isEmpty();
-        assertThat(enteredValues.getEnteredHint()).isEmpty();
+    private void assertAllEmpty(UserInput userInput) {
+        assertThat(userInput.getEnteredKey()).isEmpty();
+        assertThat(userInput.getEnteredPin()).isEmpty();
+        assertThat(userInput.getEnteredHint()).isEmpty();
     }
 
     @Test
     public void valuesSetIfValuesWereEntered() {
-        EnteredValues enteredValues = new EnteredValues(Mocks.getActivityMockWithPinValues());
-        assertThat(enteredValues.getEnteredKey()).isEqualTo(Mocks.KEY_VALUE);
-        assertThat(enteredValues.getEnteredPin()).isEqualTo(Mocks.PIN_VALUE);
-        assertThat(enteredValues.getEnteredHint()).isEqualTo(Mocks.HINT_VALUE);
+        UserInput userInput = new UserInput(Mocks.getActivityMockWithPinValues());
+        assertThat(userInput.getEnteredKey()).isEqualTo(Mocks.KEY_VALUE);
+        assertThat(userInput.getEnteredPin()).isEqualTo(Mocks.PIN_VALUE);
+        assertThat(userInput.getEnteredHint()).isEqualTo(Mocks.HINT_VALUE);
     }
 }

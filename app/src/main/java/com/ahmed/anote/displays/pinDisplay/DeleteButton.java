@@ -1,10 +1,10 @@
-package com.ahmed.anote.displays.pinDisplay.deletePin;
+package com.ahmed.anote.displays.pinDisplay;
 
 import android.view.View;
 import android.widget.ImageView;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.displays.pinDisplay.PinDisplayActivity;
+import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
 
 public class DeleteButton implements View.OnClickListener {
 
