@@ -30,11 +30,6 @@ public class FabMenu implements View.OnClickListener {
         this.otherNoteFab = factory.getFab(FabMenuItem.OTHER_NOTE, activity);
 
         background = activity.findViewById(R.id.fab_menu_background);
-        background.setOnClickListener(v -> {
-            if (open) {
-                close();
-            }
-        });
     }
 
     @Override
@@ -54,6 +49,12 @@ public class FabMenu implements View.OnClickListener {
         notesGrid.setAlpha(0.25f);
         pinFab.popUp(view);
         otherNoteFab.popUp(view);
+
+        background.setOnClickListener(v -> {
+            if (open) {
+                close();
+            }
+        });
     }
 
     public void close() {
@@ -63,6 +64,10 @@ public class FabMenu implements View.OnClickListener {
         notesGrid.setAlpha(1f);
         pinFab.hide();
         otherNoteFab.hide();
+
+        background.setOnClickListener(null);
+        background.setClickable(false);
+
     }
 
     public boolean isOpen() {
