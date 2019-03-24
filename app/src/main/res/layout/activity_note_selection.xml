@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".displays.selectionPage.NoteSelectionActivity">
 
-
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pins_grid"
         android:layout_width="206dp"
@@ -44,7 +43,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/fab_menu_background">
 
         <LinearLayout
             android:id="@+id/note_fab_layout"

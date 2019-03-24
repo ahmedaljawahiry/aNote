@@ -1,7 +1,5 @@
 What happens if user editing note then minimizes? Note is lost...
 
-Close fab menu on click anywhere on screen - no nice way of doing this...
-
 Fix last test in NoteSelectionActivity.
 
 Encrypt pins.

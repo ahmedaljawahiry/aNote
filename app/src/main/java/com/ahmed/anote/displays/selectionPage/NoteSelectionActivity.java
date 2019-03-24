@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ahmed.anote.R;
@@ -91,10 +94,6 @@ public class NoteSelectionActivity extends AppCompatActivity implements Lifecycl
 
     public void setFabMenu(FabMenu fabMenu) {
         this.fabMenu = fabMenu;
-    }
-
-    public FabMenu getFabMenu() {
-        return fabMenu;
     }
 
     public void setToastPrinter(ToastPrinter toastPrinter) {

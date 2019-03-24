@@ -27,19 +27,14 @@ public class ClickableTiles implements AdapterView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (activity.getFabMenu().isOpen()) {
-            activity.getFabMenu().close();
-        }
-        else {
-            Intent intent = new Intent(activity, NoteFormActivity.class);
+        Intent intent = new Intent(activity, NoteFormActivity.class);
 
-            Bundle bundle = new Bundle();
-            TextView title = view.findViewById(R.id.note_tile_main_text);
+        Bundle bundle = new Bundle();
+        TextView title = view.findViewById(R.id.note_tile_main_text);
 
-            bundle.putString(NoteAttributes.TITLE.name(), title.getText().toString());
-            intent.putExtras(bundle);
+        bundle.putString(NoteAttributes.TITLE.name(), title.getText().toString());
+        intent.putExtras(bundle);
 
-            activity.startActivity(intent);
-        }
+        activity.startActivity(intent);
     }
 }

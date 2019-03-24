@@ -1,6 +1,7 @@
 package com.ahmed.anote.displays.selectionPage.notesGrid;
 
 import android.database.Cursor;
+import android.view.View;
 import android.widget.GridView;
 
 import com.ahmed.anote.R;

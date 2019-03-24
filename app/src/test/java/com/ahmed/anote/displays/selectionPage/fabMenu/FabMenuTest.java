@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 
 import com.ahmed.anote.R;
 
@@ -27,6 +28,7 @@ public class FabMenuTest {
     private static Activity activityMock;
     private static GridView pinsGridMock;
     private static GridView notesGridMock;
+    private static RelativeLayout backgroundMock;
     private static View viewMock;
     private static FloatingActionButton addButtonMock;
     private static PinFab pinFabMock;
@@ -40,16 +42,17 @@ public class FabMenuTest {
         addButtonMock = mock(FloatingActionButton.class);
         pinsGridMock = mock(GridView.class);
         notesGridMock = mock(GridView.class);
+        backgroundMock = mock(RelativeLayout.class);
         activityMock = mock(Activity.class);
         viewMock = mock(View.class);
         factoryMock = mock(FabMenuItemFactory.class);
 
         doReturn(addButtonMock).when(activityMock).findViewById(eq(R.id.add_fab));
-
         doReturn(mock(ViewPropertyAnimator.class)).when(addButtonMock).animate();
 
         doReturn(pinsGridMock).when(activityMock).findViewById(eq(R.id.pins_grid));
         doReturn(notesGridMock).when(activityMock).findViewById(eq(R.id.notes_grid));
+        doReturn(backgroundMock).when(activityMock).findViewById(eq(R.id.fab_menu_background));
 
         doReturn(pinFabMock).when(factoryMock).getFab(eq(FabMenuItem.PIN), eq(activityMock));
         doReturn(noteFabMock).when(factoryMock).getFab(eq(FabMenuItem.OTHER_NOTE), eq(activityMock));

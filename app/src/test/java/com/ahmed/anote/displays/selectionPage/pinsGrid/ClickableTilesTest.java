@@ -22,35 +22,20 @@ import static org.mockito.Mockito.verify;
 
 public class ClickableTilesTest {
 
-    private  FabMenu fabMenuMock = mock(FabMenu.class);
 
     @Test
     public void newActivityStartedOnItemClick() {
         NoteSelectionActivity activityMock = createActivityMock();
         View viewMock = createViewMock();
 
-        doReturn(false).when(fabMenuMock).isOpen();
         ClickableTiles clickableTiles = new ClickableTiles(activityMock);
         clickableTiles.onItemClick(mock(AdapterView.class), viewMock, 1, 1);
 
         verify(activityMock, times(1)).startActivity(any(Intent.class));
     }
 
-    @Test
-    public void fabMenuClosedOnItemClick() {
-        NoteSelectionActivity activityMock = createActivityMock();
-        View viewMock = createViewMock();
-
-        doReturn(true).when(fabMenuMock).isOpen();
-        ClickableTiles clickableTiles = new ClickableTiles(activityMock);
-        clickableTiles.onItemClick(mock(AdapterView.class), viewMock, 1, 1);
-
-        verify(fabMenuMock, times(1)).close();
-    }
-
     private NoteSelectionActivity createActivityMock() {
         NoteSelectionActivity activityMock = mock(NoteSelectionActivity.class);
-        doReturn(fabMenuMock).when(activityMock).getFabMenu();
 
         GridView gridViewMock = mock(GridView.class);
         doReturn(gridViewMock).when(activityMock).findViewById(eq(R.id.pins_grid));

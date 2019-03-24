@@ -25,21 +25,16 @@ public class ClickableTiles implements AdapterView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (activity.getFabMenu().isOpen()) {
-            activity.getFabMenu().close();
-        }
-        else {
-            Intent intent = new Intent(activity, PinDisplayActivity.class);
+        Intent intent = new Intent(activity, PinDisplayActivity.class);
 
-            Bundle bundle = new Bundle();
-            TextView key = view.findViewById(R.id.note_tile_main_text);
-            TextView hint = view.findViewById(R.id.note_tile_sub_text);
+        Bundle bundle = new Bundle();
+        TextView key = view.findViewById(R.id.note_tile_main_text);
+        TextView hint = view.findViewById(R.id.note_tile_sub_text);
 
-            bundle.putString(PinAttributes.KEY.name(), key.getText().toString());
-            bundle.putString(PinAttributes.HINT.name(), hint.getText().toString());
-            intent.putExtras(bundle);
+        bundle.putString(PinAttributes.KEY.name(), key.getText().toString());
+        bundle.putString(PinAttributes.HINT.name(), hint.getText().toString());
+        intent.putExtras(bundle);
 
-            activity.startActivity(intent);
-        }
+        activity.startActivity(intent);
     }
 }

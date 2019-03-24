@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 
 import com.ahmed.anote.R;
 
@@ -13,6 +14,7 @@ public class FabMenu implements View.OnClickListener {
     private FabMenuItem pinFab;
     private FabMenuItem otherNoteFab;
 
+    private RelativeLayout background;
     private GridView pinsGrid;
     private GridView notesGrid;
 
@@ -26,6 +28,13 @@ public class FabMenu implements View.OnClickListener {
         this.notesGrid = activity.findViewById(R.id.notes_grid);
         this.pinFab = factory.getFab(FabMenuItem.PIN, activity);
         this.otherNoteFab = factory.getFab(FabMenuItem.OTHER_NOTE, activity);
+
+        background = activity.findViewById(R.id.fab_menu_background);
+        background.setOnClickListener(v -> {
+            if (open) {
+                close();
+            }
+        });
     }
 
     @Override
