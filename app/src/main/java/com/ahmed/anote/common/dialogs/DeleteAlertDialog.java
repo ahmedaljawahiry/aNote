@@ -4,10 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import com.ahmed.anote.common.DbRecordDeleter;
+import com.ahmed.anote.common.abstractActivites.DbRecordDeleter;
 import com.ahmed.anote.db.sql.SqlQueries;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
-import com.ahmed.anote.forms.note.NoteFormActivity;
 
 public class DeleteAlertDialog {
     public final String ALERT_TITLE;

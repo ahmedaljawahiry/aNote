@@ -5,13 +5,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.common.DbRecordDeleter;
+import com.ahmed.anote.common.abstractActivites.DbRecordDeleter;
 import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
 import com.ahmed.anote.common.util.TextEditor;
-import com.ahmed.anote.common.util.Util;
 import com.ahmed.anote.forms.pin.PinFormActivity;
 
 public class PinDisplayActivity extends DbRecordDeleter {
@@ -23,7 +22,6 @@ public class PinDisplayActivity extends DbRecordDeleter {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_display);
-        Util.setSecureFlags(this);
 
         Bundle bundle = this.getIntent().getExtras();
         values = new PinValues();

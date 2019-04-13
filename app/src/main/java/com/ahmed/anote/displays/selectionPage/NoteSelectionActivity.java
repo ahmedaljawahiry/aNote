@@ -2,11 +2,11 @@ package com.ahmed.anote.displays.selectionPage;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.ahmed.anote.R;
+import com.ahmed.anote.common.abstractActivites.ANoteActivity;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.NoteSQL;
 import com.ahmed.anote.db.sql.PinSQL;
@@ -15,9 +15,8 @@ import com.ahmed.anote.displays.selectionPage.fabMenu.FabMenuItemFactory;
 import com.ahmed.anote.displays.selectionPage.notesGrid.NotesGrid;
 import com.ahmed.anote.displays.selectionPage.pinsGrid.PinsGrid;
 import com.ahmed.anote.common.util.ToastPrinter;
-import com.ahmed.anote.common.util.Util;
 
-public class NoteSelectionActivity extends AppCompatActivity {
+public class NoteSelectionActivity extends ANoteActivity {
 
     final public static String EXIT_TOAST_MESSAGE = "Click back again to exit";
 
@@ -31,7 +30,6 @@ public class NoteSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_selection);
-        Util.setSecureFlags(this);
 
         this.fabMenu = new FabMenu(this, new FabMenuItemFactory());
 

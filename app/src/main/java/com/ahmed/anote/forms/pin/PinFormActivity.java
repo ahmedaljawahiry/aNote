@@ -1,18 +1,17 @@
 package com.ahmed.anote.forms.pin;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.ahmed.anote.R;
+import com.ahmed.anote.common.abstractActivites.ANoteActivity;
 import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
 import com.ahmed.anote.common.util.TextEditor;
 import com.ahmed.anote.common.util.ToastPrinter;
-import com.ahmed.anote.common.util.Util;
 
-public class PinFormActivity extends AppCompatActivity {
+public class PinFormActivity extends ANoteActivity {
 
     private DbHelper dbHelper;
     private UserInput userInput;
@@ -26,7 +25,6 @@ public class PinFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_form);
-        Util.setSecureFlags(this);
 
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);

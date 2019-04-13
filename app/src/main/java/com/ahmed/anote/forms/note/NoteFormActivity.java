@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.common.DbRecordDeleter;
+import com.ahmed.anote.common.abstractActivites.DbRecordDeleter;
 import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
 import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
 import com.ahmed.anote.db.Contract;
@@ -12,7 +12,6 @@ import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.NoteSQL;
 import com.ahmed.anote.common.util.TextEditor;
 import com.ahmed.anote.common.util.ToastPrinter;
-import com.ahmed.anote.common.util.Util;
 
 public class NoteFormActivity extends DbRecordDeleter {
 
@@ -28,7 +27,6 @@ public class NoteFormActivity extends DbRecordDeleter {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_form);
-        Util.setSecureFlags(this);
 
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
