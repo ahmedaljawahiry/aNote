@@ -9,6 +9,7 @@
     <string name="key">Key:</string>
     <string name="hint">Hint:</string>
     <string name="pin">Pin:</string>
+    <string name="lock">Lock:</string>
     <string name="new_pin">New Pin</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>

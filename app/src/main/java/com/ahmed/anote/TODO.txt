@@ -3,6 +3,7 @@ https://developer.android.com/training/testing/unit-testing/instrumented-unit-te
 
 Add fingerprint auth to selected notes.
 
-Increase grid size in horizontal view?
+Disable landscape view?
+See https://stackoverflow.com/questions/6745797/how-to-set-entire-application-in-portrait-mode-only/9784269#9784269
 
 Encrypt pins?

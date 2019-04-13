@@ -63,6 +63,21 @@
         android:inputType="number"
         android:textSize="32sp" />
 
+    <TextView
+        android:id="@+id/secure_text"
+        android:layout_column="0"
+        android:layout_gravity="end"
+        android:layout_marginTop="40dp"
+        android:text="@string/lock"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/lock_switch"
+        android:ems="8"
+        android:layout_height="52dp"
+        android:layout_column="1" />
+
     <Button
         android:id="@+id/save_pin_button"
         android:layout_width="200dp"
@@ -72,4 +87,5 @@
         android:layout_gravity="center"
         android:text="@string/save"
         android:textSize="18sp" />
+
 </GridLayout>
