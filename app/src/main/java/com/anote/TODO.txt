@@ -1,0 +1,12 @@
+Action bar?
+
+Test activities and BiometricAuth with androidTest.
+https://developer.android.com/training/testing/unit-testing/instrumented-unit-tests.html
+
+Make pin grid full size if no notes, and vice versa?
+
+Think about layout on different screen sizes.
+https://developer.android.com/training/multiscreen/screensizes
+
+License:
+https://help.github.com/en/articles/licensing-a-repository

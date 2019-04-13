@@ -23,7 +23,8 @@ public class NoteSQL implements SqlQueries {
         String sql = "CREATE TABLE " + Contract.Notes.TABLE_NAME + " (" +
                 Contract.Notes._ID + " INTEGER PRIMARY KEY," +
                 Contract.Notes.COLUMN_TITLE + " TEXT UNIQUE," +
-                Contract.Notes.COLUMN_TEXT + " TEXT)";
+                Contract.Notes.COLUMN_TEXT + " TEXT," +
+                Contract.Notes.COLUMN_SECURITY_LEVEL + " INTEGER DEFAULT 0)";
         db.execSQL(sql);
     }
 

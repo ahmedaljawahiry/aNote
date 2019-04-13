@@ -24,7 +24,8 @@ public class PinSQL implements SqlQueries {
                 Contract.Pins._ID + " INTEGER PRIMARY KEY," +
                 Contract.Pins.COLUMN_PIN + " INTEGER," +
                 Contract.Pins.COLUMN_KEY + " TEXT UNIQUE, " +
-                Contract.Pins.COLUMN_HINT + " TEXT)";
+                Contract.Pins.COLUMN_HINT + " TEXT," +
+                Contract.Pins.COLUMN_SECURITY_LEVEL + " INTEGER DEFAULT 0)";
         db.execSQL(sql);
     }
 
