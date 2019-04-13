@@ -2,6 +2,7 @@ package com.ahmed.anote.forms;
 
 import android.app.Activity;
 import android.text.Editable;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.ahmed.anote.R;
@@ -18,13 +19,15 @@ public class Mocks {
     public static final String HINT_VALUE = "HINT";
     public static final String TITLE_VALUE = "TITLE";
     public static final String NOTE_VALUE = "NOTE";
+    public static final boolean SECURE_VALUE = true;
 
     public static Activity getActivityMockWithPinValues() {
         Activity activityMock = mock(Activity.class);
 
-        setReturnValue(activityMock, R.id.entered_key, KEY_VALUE);
-        setReturnValue(activityMock, R.id.entered_hint, HINT_VALUE);
-        setReturnValue(activityMock, R.id.entered_pin, PIN_VALUE);
+        setTextReturnValue(activityMock, R.id.entered_key, KEY_VALUE);
+        setTextReturnValue(activityMock, R.id.entered_hint, HINT_VALUE);
+        setTextReturnValue(activityMock, R.id.entered_pin, PIN_VALUE);
+        setCheckboxReturnValue(activityMock, R.id.pin_secure_checkbox, SECURE_VALUE);
 
         return activityMock;
     }
@@ -32,18 +35,25 @@ public class Mocks {
     public static Activity getActivityMockWithNoteValues() {
         Activity activityMock = mock(Activity.class);
 
-        setReturnValue(activityMock, R.id.entered_title, TITLE_VALUE);
-        setReturnValue(activityMock, R.id.entered_note, NOTE_VALUE);
+        setTextReturnValue(activityMock, R.id.entered_title, TITLE_VALUE);
+        setTextReturnValue(activityMock, R.id.entered_note, NOTE_VALUE);
 
         return activityMock;
     }
 
-    private static void setReturnValue(Activity activityMock, int id, String returnValue) {
+    private static void setTextReturnValue(Activity activityMock, int id, String returnValue) {
         EditText editTextMock = mock(EditText.class);
         Editable editableMock = mock(Editable.class);
 
         doReturn(editTextMock).when(activityMock).findViewById(eq(id));
         doReturn(editableMock).when(editTextMock).getText();
         doReturn(returnValue).when(editableMock).toString();
+    }
+
+    private static void setCheckboxReturnValue(Activity activityMock, int id, boolean returnValue) {
+        CheckBox checkBoxMock = mock(CheckBox.class);
+        doReturn(returnValue).when(checkBoxMock).isChecked();
+
+        doReturn(checkBoxMock).when(activityMock).findViewById(id);
     }
 }

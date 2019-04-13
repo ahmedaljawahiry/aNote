@@ -1,6 +1,7 @@
 package com.ahmed.anote.forms.pin;
 
 import android.os.Bundle;
+import android.widget.CheckBox;
 
 import com.ahmed.anote.R;
 import com.ahmed.anote.common.abstractActivites.ANoteActivity;
@@ -19,6 +20,7 @@ public class PinFormActivity extends ANoteActivity {
     private String existingKey;
     private String existingHint;
     private String existingPin;
+    private boolean existingCheckboxTicked;
     private boolean isExistingPin;
 
     @Override
@@ -42,11 +44,14 @@ public class PinFormActivity extends ANoteActivity {
             existingKey = bundle.getString(Contract.Pins.COLUMN_KEY);
             existingHint = bundle.getString(Contract.Pins.COLUMN_HINT);
             existingPin = bundle.getString(Contract.Pins.COLUMN_PIN);
+            existingCheckboxTicked = (bundle.getInt(Contract.Pins.COLUMN_SECURITY_LEVEL) != 0);
 
             saveButton.editOnly(existingKey);
             TextEditor.enter(this, R.id.entered_key, existingKey, true);
             TextEditor.enter(this, R.id.entered_hint, existingHint, true);
             TextEditor.enter(this, R.id.entered_pin, existingPin, true);
+            ((CheckBox) this.findViewById(R.id.pin_secure_checkbox))
+                    .setChecked(existingCheckboxTicked);
         }
     }
 

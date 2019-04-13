@@ -1,6 +1,7 @@
 package com.ahmed.anote.forms.pin;
 
 import android.app.Activity;
+import android.widget.CheckBox;
 
 import com.ahmed.anote.R;
 import com.ahmed.anote.db.Contract;
@@ -16,7 +17,8 @@ public class UserInput extends FormInputValues {
     private String enteredKey;
     private String enteredHint;
     private String enteredPin;
-    private Map<String, String> dbValueMap;
+    private boolean isSecure;
+    private Map<String, Object> dbValueMap;
 
     public UserInput(Activity activity) {
         this.activity = activity;
@@ -28,6 +30,7 @@ public class UserInput extends FormInputValues {
         this.enteredKey = convertEditTextToString(activity.findViewById(R.id.entered_key));
         this.enteredHint = convertEditTextToString(activity.findViewById(R.id.entered_hint));
         this.enteredPin = convertEditTextToString(activity.findViewById(R.id.entered_pin));
+        this.isSecure = convertCheckboxToBoolean(activity.findViewById(R.id.pin_secure_checkbox));
     }
 
     public boolean nothingEntered() {
@@ -43,11 +46,12 @@ public class UserInput extends FormInputValues {
         }
     }
 
-    public Map<String, String> getDbValueMap() {
+    public Map<String, Object> getDbValueMap() {
         find();
         dbValueMap.put(Contract.Pins.COLUMN_KEY, enteredKey);
         dbValueMap.put(Contract.Pins.COLUMN_HINT, enteredHint);
         dbValueMap.put(Contract.Pins.COLUMN_PIN, enteredPin);
+        dbValueMap.put(Contract.Pins.COLUMN_SECURITY_LEVEL, isSecure);
         return dbValueMap;
     }
 
@@ -61,6 +65,10 @@ public class UserInput extends FormInputValues {
 
     public String getEnteredPin() {
         return enteredPin;
+    }
+
+    public boolean isSecure() {
+        return isSecure;
     }
 
 }

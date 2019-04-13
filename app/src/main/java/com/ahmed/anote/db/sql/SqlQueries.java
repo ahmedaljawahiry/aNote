@@ -15,16 +15,22 @@ public interface SqlQueries {
     void UPDATE(FormInputValues userInput, String key);
     boolean RECORD_EXISTS(String key);
     Cursor GET_TABLE();
-    String GET_NOTE_FROM_PK(String pk);
+    Cursor GET_NOTE_FROM_PK(String pk);
     void DELETE(String pk);
 
     default ContentValues convertDbMapToContent(FormInputValues userInput) {
         ContentValues content = new ContentValues();
 
-        Map<String, String> dbValues = userInput.getDbValueMap();
+        Map<String, Object> dbValues = userInput.getDbValueMap();
 
-        for (Map.Entry<String, String> entry : dbValues.entrySet()) {
-            content.put(entry.getKey(), entry.getValue());
+        for (Map.Entry<String, Object> entry : dbValues.entrySet()) {
+            Object value = entry.getValue();
+            if (value instanceof String) {
+                content.put(entry.getKey(), (String) entry.getValue());
+            }
+            else if (value instanceof Boolean) {
+                content.put(entry.getKey(), (Boolean) entry.getValue());
+            }
         }
 
         return content;

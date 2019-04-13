@@ -72,11 +72,14 @@
         android:textSize="32sp"
         android:textStyle="bold" />
 
-    <Switch
-        android:id="@+id/lock_switch"
-        android:ems="8"
-        android:layout_height="52dp"
-        android:layout_column="1" />
+    <CheckBox
+        android:id="@+id/pin_secure_checkbox"
+        android:ems="2"
+        android:layout_gravity="center"
+        android:layout_height="60dp"
+        android:layout_column="1"
+        android:scaleX="2"
+        android:scaleY="2"/>
 
     <Button
         android:id="@+id/save_pin_button"

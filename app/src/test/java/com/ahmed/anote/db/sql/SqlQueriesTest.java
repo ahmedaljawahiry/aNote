@@ -21,9 +21,11 @@ import static org.mockito.Mockito.mock;
 
 public class SqlQueriesTest {
 
+    private static Cursor cursorMock = mock(Cursor.class);
+
     private static Stream<Arguments> SqlQueriesInstancesWithValidDb() {
         SQLiteDatabase dbMock = getDbMock(
-                mock(Cursor.class), 1, true, "NOTE"
+                cursorMock, 1, true, "NOTE"
         );
         return Stream.of(
                 arguments(new NoteSQL(dbMock)),
@@ -34,8 +36,8 @@ public class SqlQueriesTest {
     @ParameterizedTest
     @MethodSource("SqlQueriesInstancesWithValidDb")
     public void noteReturnedForGivenPk(SqlQueries SQL) {
-        String returnedNote = SQL.GET_NOTE_FROM_PK("TITLE");
-        assertThat(returnedNote).isEqualTo("NOTE");
+        Cursor returnedCursor = SQL.GET_NOTE_FROM_PK("TITLE");
+        assertThat(returnedCursor).isEqualTo(cursorMock);
     }
 
     private static Stream<Arguments> SqlQueriesInstancesWithInvalidDb() {

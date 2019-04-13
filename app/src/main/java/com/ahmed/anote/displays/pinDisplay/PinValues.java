@@ -5,7 +5,7 @@ public class PinValues {
     private String key;
     private String hint;
     private String pin;
-    private int securityLevel;
+    private boolean secure;
 
     public PinValues() {}
 
@@ -33,11 +33,15 @@ public class PinValues {
         this.pin = pin;
     }
 
-    public int getSecurityLevel() {
-        return securityLevel;
+    public boolean isSecure() {
+        return secure;
     }
 
-    public void setSecurityLevel(int securityLevel) {
-        this.securityLevel = securityLevel;
+    public void setIsSecure(boolean secure) {
+        this.secure = secure;
+    }
+
+    public void setIsSecure(int secure) {
+        this.secure = (secure == 1) ? true : false;
     }
 }

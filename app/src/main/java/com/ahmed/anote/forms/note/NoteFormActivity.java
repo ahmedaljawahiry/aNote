@@ -1,5 +1,6 @@
 package com.ahmed.anote.forms.note;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -44,7 +45,12 @@ public class NoteFormActivity extends DbRecordDeleter {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 
             noteTitle = bundle.getString(Contract.Notes.COLUMN_TITLE);
-            noteBody = new NoteSQL(db).GET_NOTE_FROM_PK(noteTitle);
+
+            try(Cursor noteCursor = new NoteSQL(db).GET_NOTE_FROM_PK(noteTitle)) {
+                noteBody = noteCursor.getString(
+                        noteCursor.getColumnIndex(Contract.Notes.COLUMN_TEXT)
+                );
+            }
 
             saveButton.editOnly(noteTitle);
             TextEditor.enter(this, R.id.entered_title, noteTitle, true);

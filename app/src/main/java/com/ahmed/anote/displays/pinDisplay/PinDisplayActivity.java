@@ -1,6 +1,7 @@
 package com.ahmed.anote.displays.pinDisplay;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -15,7 +16,7 @@ import com.ahmed.anote.forms.pin.PinFormActivity;
 
 public class PinDisplayActivity extends DbRecordDeleter {
 
-    private PinValues values;
+    private Bundle bundle;
     private DbHelper dbHelper;
 
     @Override
@@ -23,18 +24,14 @@ public class PinDisplayActivity extends DbRecordDeleter {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_display);
 
-        Bundle bundle = this.getIntent().getExtras();
-        values = new PinValues();
-        values.setKey(bundle.getString(Contract.Pins.COLUMN_KEY));
-        values.setHint(bundle.getString(Contract.Pins.COLUMN_HINT));
-
+        bundle = this.getIntent().getExtras();
         dbHelper = DbHelper.getInstance(this);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        values.setPin(new PinSQL(db).GET_NOTE_FROM_PK(values.getKey()));
+        fillBundle();
+        fillPageWithExistingValues();
 
-        TextEditor.enter(this, R.id.key_display_text, values.getKey(), false);
-        TextEditor.enter(this, R.id.hint_display_text, values.getHint(), false);
-        TextEditor.enter(this, R.id.pin_display_text, values.getPin(), false);
+        Intent editButtonIntent = new Intent(this, PinFormActivity.class);
+        editButtonIntent.putExtras(bundle);
+        new EditButton(this, editButtonIntent);
 
         new DeleteButton(
                 this,
@@ -43,16 +40,35 @@ public class PinDisplayActivity extends DbRecordDeleter {
                         new PinSQL(dbHelper.getWritableDatabase()),
                         "Delete Pin")
         );
-        new EditButton(
-                this,
-                values,
-                new Intent(
-                        this.getBaseContext(),
-                        PinFormActivity.class));
+    }
+
+    private void fillBundle() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        try(Cursor pinCursor = new PinSQL(db).GET_NOTE_FROM_PK(
+                bundle.getString(Contract.Pins.COLUMN_KEY))) {
+            bundle.putString(
+                    Contract.Pins.COLUMN_PIN,
+                    pinCursor.getString(
+                            pinCursor.getColumnIndex(Contract.Pins.COLUMN_PIN)));
+            bundle.putInt(
+                    Contract.Pins.COLUMN_SECURITY_LEVEL,
+                    pinCursor.getInt(
+                            pinCursor.getColumnIndex(Contract.Pins.COLUMN_SECURITY_LEVEL)));
+        }
+    }
+
+    private void fillPageWithExistingValues() {
+        TextEditor.enter(
+                this, R.id.key_display_text, bundle.getString(Contract.Pins.COLUMN_KEY), false);
+        TextEditor.enter(
+                this, R.id.hint_display_text, bundle.getString(Contract.Pins.COLUMN_HINT), false);
+        TextEditor.enter(
+                this, R.id.pin_display_text, bundle.getString(Contract.Pins.COLUMN_PIN), false);
     }
 
     @Override
     public String getPK() {
-        return values.getKey();
+        return bundle.getString(Contract.Pins.COLUMN_KEY);
     }
 }

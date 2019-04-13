@@ -8,6 +8,9 @@ import android.support.annotation.NonNull;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.forms.FormInputValues;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PinSQL implements SqlQueries {
 
     private SQLiteDatabase db;
@@ -65,27 +68,29 @@ public class PinSQL implements SqlQueries {
         return db.query(Contract.Pins.TABLE_NAME, null, null, null, null, null, null);
     }
 
-    public String GET_NOTE_FROM_PK(String key) {
-        try (Cursor cursor = db.query(
+    public Cursor GET_NOTE_FROM_PK(String key) {
+        Cursor cursor = db.query(
                 Contract.Pins.TABLE_NAME,
-                new String[]{Contract.Pins.COLUMN_PIN},
+                new String[]{Contract.Pins.COLUMN_PIN, Contract.Pins.COLUMN_SECURITY_LEVEL},
                 Contract.Pins.COLUMN_KEY + "=?",
                 new String[]{key},
-                null, null, null)) {
+                null, null, null);
 
-            int rowCount = cursor.getCount();
-            if (rowCount > 1) {
-                throw new SQLException(rowCount + " rows returned. Expected just 1.");
-            }
+        int rowCount = cursor.getCount();
+        if (rowCount > 1) {
+            cursor.close();
+            throw new SQLException(rowCount + " rows returned. Expected just 1.");
+        }
 
-            if (cursor.moveToNext()) {
-                String pin = cursor.getString(cursor.getColumnIndex(Contract.Pins.COLUMN_PIN));
-                return pin;
-            } else {
-                throw new SQLException("Pin corresponding to given key not found.");
-            }
+        if (cursor.moveToNext()) {
+            return cursor;
+        } else {
+            cursor.close();
+            throw new SQLException("Pin corresponding to given key not found.");
         }
     }
+
+
 
     public void DELETE(String pk) {
         db.delete(

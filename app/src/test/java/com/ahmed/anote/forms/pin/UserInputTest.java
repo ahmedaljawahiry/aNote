@@ -1,6 +1,7 @@
 package com.ahmed.anote.forms.pin;
 
 import android.app.Activity;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.ahmed.anote.R;
@@ -20,10 +21,14 @@ public class UserInputTest {
         Activity activityMock = mock(Activity.class);
         EditText editTextMock = mock(EditText.class);
 
+        CheckBox checkBoxMock = mock(CheckBox.class);
+        doReturn(false).when(checkBoxMock).isChecked();
+
         doReturn(null).when(editTextMock).getText();
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_key));
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_pin));
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_hint));
+        doReturn(checkBoxMock).when(activityMock).findViewById(eq(R.id.pin_secure_checkbox));
 
         assertAllEmpty(new UserInput(activityMock));
     }
@@ -35,6 +40,7 @@ public class UserInputTest {
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_key));
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_pin));
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_hint));
+        doReturn(null).when(activityMock).findViewById(eq(R.id.pin_secure_checkbox));
 
         assertAllEmpty(new UserInput(activityMock));
     }
@@ -51,5 +57,6 @@ public class UserInputTest {
         assertThat(userInput.getEnteredKey()).isEqualTo(Mocks.KEY_VALUE);
         assertThat(userInput.getEnteredPin()).isEqualTo(Mocks.PIN_VALUE);
         assertThat(userInput.getEnteredHint()).isEqualTo(Mocks.HINT_VALUE);
+        assertThat(userInput.isSecure()).isEqualTo(Mocks.SECURE_VALUE);
     }
 }

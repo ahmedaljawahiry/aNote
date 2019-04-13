@@ -14,7 +14,7 @@ public class UserInput extends FormInputValues {
     private Activity activity;
     private String enteredTitle;
     private String enteredNote;
-    private Map<String, String> dbValueMap;
+    private Map<String, Object> dbValueMap;
 
     public UserInput(Activity activity) {
         this.activity = activity;
@@ -36,7 +36,7 @@ public class UserInput extends FormInputValues {
         }
     }
 
-    public Map<String, String> getDbValueMap() {
+    public Map<String, Object> getDbValueMap() {
         find();
         dbValueMap.put(Contract.Notes.COLUMN_TITLE, enteredTitle);
         dbValueMap.put(Contract.Notes.COLUMN_TEXT, enteredNote);

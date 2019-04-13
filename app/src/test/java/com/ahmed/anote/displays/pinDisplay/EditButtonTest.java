@@ -19,16 +19,15 @@ import static org.mockito.Mockito.verify;
 public class EditButtonTest {
 
     @Test
-    public void activityStartedWithBundleOnClick() {
+    public void activityStartedOnClick() {
         Intent intentMock = mock(Intent.class);
 
         PinDisplayActivity activityMock = mock(PinDisplayActivity.class);
         doReturn(mock(ImageView.class)).when(activityMock).findViewById(eq(R.id.edit_pin_button));
 
-        EditButton editButton = new EditButton(activityMock, new PinValues(), intentMock);
+        EditButton editButton = new EditButton(activityMock, intentMock);
         editButton.onClick(mock(View.class));
 
-        verify(intentMock, times(1)).putExtras(any(Bundle.class));
-        verify(activityMock, times(1)).startActivity(intentMock);
+        verify(activityMock, times(1)).startActivity(eq(intentMock));
     }
 }
