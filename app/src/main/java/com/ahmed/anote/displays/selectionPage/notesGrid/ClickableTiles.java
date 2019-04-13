@@ -15,9 +15,11 @@ import com.ahmed.anote.forms.note.NoteFormActivity;
 public class ClickableTiles implements AdapterView.OnItemClickListener {
 
     private NoteSelectionActivity activity;
+    private Intent intent;
 
-    public ClickableTiles(NoteSelectionActivity activity) {
+    public ClickableTiles(NoteSelectionActivity activity, Intent intent) {
         this.activity = activity;
+        this.intent = intent;
 
         GridView gridview = activity.findViewById(R.id.notes_grid);
         gridview.setOnItemClickListener(this);
@@ -25,8 +27,6 @@ public class ClickableTiles implements AdapterView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(activity, NoteFormActivity.class);
-
         Bundle bundle = new Bundle();
         TextView title = view.findViewById(R.id.note_tile_main_text);
 

@@ -1,4 +1,4 @@
-package com.ahmed.anote.common;
+package com.ahmed.anote.common.util;
 
 import android.app.Activity;
 import android.widget.TextView;

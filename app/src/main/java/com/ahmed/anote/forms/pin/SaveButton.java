@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.ahmed.anote.R;
 import com.ahmed.anote.db.sql.PinSQL;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
-import com.ahmed.anote.common.ToastPrinter;
+import com.ahmed.anote.common.util.ToastPrinter;
 
 public class SaveButton implements View.OnClickListener {
 

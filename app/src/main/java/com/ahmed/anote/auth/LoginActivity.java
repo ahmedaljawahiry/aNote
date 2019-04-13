@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.common.ToastPrinter;
-import com.ahmed.anote.common.Util;
+import com.ahmed.anote.common.util.ToastPrinter;
+import com.ahmed.anote.common.util.Util;
 
 
 public class LoginActivity extends AppCompatActivity {

@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.ahmed.anote.R;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;

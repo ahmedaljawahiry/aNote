@@ -2,18 +2,15 @@ package com.ahmed.anote.displays.selectionPage.fabMenu;
 
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
-import android.view.View;
 
 import com.ahmed.anote.R;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
@@ -22,7 +19,7 @@ public class FabMenuItemFactoryTest {
     private static Activity activityMock = mock(Activity.class);
     private FabMenuItemFactory factory = new FabMenuItemFactory();
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         FloatingActionButton buttonMock = mock(FloatingActionButton.class);
 

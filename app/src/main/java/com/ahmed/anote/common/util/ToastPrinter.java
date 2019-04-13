@@ -1,4 +1,4 @@
-package com.ahmed.anote.common;
+package com.ahmed.anote.common.util;
 
 import android.content.Context;
 import android.widget.Toast;

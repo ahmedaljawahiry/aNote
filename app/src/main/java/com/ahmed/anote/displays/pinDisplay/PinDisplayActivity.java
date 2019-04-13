@@ -1,5 +1,6 @@
 package com.ahmed.anote.displays.pinDisplay;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -9,8 +10,9 @@ import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
-import com.ahmed.anote.common.TextEditor;
-import com.ahmed.anote.common.Util;
+import com.ahmed.anote.common.util.TextEditor;
+import com.ahmed.anote.common.util.Util;
+import com.ahmed.anote.forms.pin.PinFormActivity;
 
 public class PinDisplayActivity extends DbRecordDeleter {
 
@@ -28,7 +30,7 @@ public class PinDisplayActivity extends DbRecordDeleter {
         values.setKey(bundle.getString(Contract.Pins.COLUMN_KEY));
         values.setHint(bundle.getString(Contract.Pins.COLUMN_HINT));
 
-        dbHelper = new DbHelper(getApplicationContext());
+        dbHelper = DbHelper.getInstance(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         values.setPin(new PinSQL(db).GET_NOTE_FROM_PK(values.getKey()));
 
@@ -36,13 +38,19 @@ public class PinDisplayActivity extends DbRecordDeleter {
         TextEditor.enter(this, R.id.hint_display_text, values.getHint(), false);
         TextEditor.enter(this, R.id.pin_display_text, values.getPin(), false);
 
-        new DeleteButton(this,
+        new DeleteButton(
+                this,
                 new DeleteAlertDialog(
                         this,
                         new PinSQL(dbHelper.getWritableDatabase()),
                         "Delete Pin")
         );
-        new EditButton(this, values);
+        new EditButton(
+                this,
+                values,
+                new Intent(
+                        this.getBaseContext(),
+                        PinFormActivity.class));
     }
 
     @Override

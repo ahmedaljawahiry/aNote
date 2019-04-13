@@ -16,8 +16,12 @@ public class EditButton implements View.OnClickListener {
 
     private ImageView button;
     private PinValues values;
+    private PinDisplayActivity activity;
+    private Intent intent;
 
-    public EditButton(PinDisplayActivity activity, PinValues values) {
+    public EditButton(PinDisplayActivity activity, PinValues values, Intent intent) {
+        this.activity = activity;
+        this.intent = intent;
         this.values = values;
         this.button = activity.findViewById(R.id.edit_pin_button);
         button.setOnClickListener(this);
@@ -25,16 +29,12 @@ public class EditButton implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Context context = view.getContext();
-
-        Intent intent = new Intent(context, PinFormActivity.class);
-
         Bundle bundle = new Bundle();
         bundle.putString(Contract.Pins.COLUMN_KEY, values.getKey());
         bundle.putString(Contract.Pins.COLUMN_HINT, values.getHint());
         bundle.putString(Contract.Pins.COLUMN_PIN, values.getPin());
         intent.putExtras(bundle);
 
-        context.startActivity(intent);
+        activity.startActivity(intent);
     }
 }

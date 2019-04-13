@@ -1,4 +1,4 @@
-package com.ahmed.anote.displays.selectionPage.pinsGrid;
+package com.ahmed.anote.displays.selectionPage.notesGrid;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,11 +21,10 @@ import static org.mockito.Mockito.verify;
 
 public class ClickableTilesTest {
 
-
     @Test
     public void activityStartedWithBundleOnClick() {
         NoteSelectionActivity activityMock = mock(NoteSelectionActivity.class);
-        doReturn(mock(GridView.class)).when(activityMock).findViewById(eq(R.id.pins_grid));
+        doReturn(mock(GridView.class)).when(activityMock).findViewById(eq(R.id.notes_grid));
 
         Intent intentMock = mock(Intent.class);
 
@@ -38,13 +37,9 @@ public class ClickableTilesTest {
 
     private View createViewMock() {
         View viewMock = mock(View.class);
-        TextView keyTextViewMock = mock(TextView.class);
-        doReturn("KEY").when(keyTextViewMock).getText();
-        doReturn(keyTextViewMock).when(viewMock).findViewById(eq(R.id.note_tile_main_text));
-
-        TextView hintTextViewMock = mock(TextView.class);
-        doReturn("HINT").when(hintTextViewMock).getText();
-        doReturn(hintTextViewMock).when(viewMock).findViewById(eq(R.id.note_tile_sub_text));
+        TextView textViewMock = mock(TextView.class);
+        doReturn("TITLE").when(textViewMock).getText();
+        doReturn(textViewMock).when(viewMock).findViewById(eq(R.id.note_tile_main_text));
 
         return viewMock;
     }

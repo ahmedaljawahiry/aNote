@@ -9,14 +9,11 @@ import android.widget.RelativeLayout;
 
 import com.ahmed.anote.R;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -35,7 +32,7 @@ public class FabMenuTest {
     private static NoteFab noteFabMock;
 
 
-    @Before
+    @BeforeEach
     public void setUp() {
         pinFabMock = mock(PinFab.class);
         noteFabMock = mock(NoteFab.class);

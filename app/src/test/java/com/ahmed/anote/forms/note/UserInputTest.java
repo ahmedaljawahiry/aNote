@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.widget.EditText;
 
 import com.ahmed.anote.R;
-import com.ahmed.anote.Mocks;
+import com.ahmed.anote.forms.Mocks;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -14,8 +14,8 @@ import com.ahmed.anote.displays.selectionPage.fabMenu.FabMenu;
 import com.ahmed.anote.displays.selectionPage.fabMenu.FabMenuItemFactory;
 import com.ahmed.anote.displays.selectionPage.notesGrid.NotesGrid;
 import com.ahmed.anote.displays.selectionPage.pinsGrid.PinsGrid;
-import com.ahmed.anote.common.ToastPrinter;
-import com.ahmed.anote.common.Util;
+import com.ahmed.anote.common.util.ToastPrinter;
+import com.ahmed.anote.common.util.Util;
 
 public class NoteSelectionActivity extends AppCompatActivity {
 
@@ -35,7 +35,7 @@ public class NoteSelectionActivity extends AppCompatActivity {
 
         this.fabMenu = new FabMenu(this, new FabMenuItemFactory());
 
-        dbHelper = new DbHelper(getApplicationContext());
+        dbHelper = DbHelper.getInstance(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         new PinsGrid(this, new PinSQL(db).GET_TABLE());

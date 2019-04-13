@@ -9,11 +9,11 @@ import android.widget.Toast;
 
 import com.ahmed.anote.R;
 import com.ahmed.anote.db.sql.NoteSQL;
-import com.ahmed.anote.Mocks;
-import com.ahmed.anote.common.ToastPrinter;
+import com.ahmed.anote.forms.Mocks;
+import com.ahmed.anote.common.util.ToastPrinter;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -33,7 +33,7 @@ public class SaveButtonTest {
     private static Context contextMock = mock(Context.class);
     private static View viewMock = mock(View.class);
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         doReturn(buttonMock).when(activityMock).findViewById(eq(R.id.save_note_button));
 

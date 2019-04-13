@@ -1,10 +1,8 @@
-Figure out which classes are missing tests.
-
 Test activities and BiometricAuth with androidTest.
 https://developer.android.com/training/testing/unit-testing/instrumented-unit-tests.html
 
 Add fingerprint auth to selected notes.
 
-Ensure DB is always closed upon exit. E.g. it's not closed after saveButton created in PinFormActivity.
+Increase grid size in horizontal view?
 
-Encrypt pins.
+Encrypt pins?

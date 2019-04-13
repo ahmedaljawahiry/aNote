@@ -10,9 +10,9 @@ import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.NoteSQL;
-import com.ahmed.anote.common.TextEditor;
-import com.ahmed.anote.common.ToastPrinter;
-import com.ahmed.anote.common.Util;
+import com.ahmed.anote.common.util.TextEditor;
+import com.ahmed.anote.common.util.ToastPrinter;
+import com.ahmed.anote.common.util.Util;
 
 public class NoteFormActivity extends DbRecordDeleter {
 
@@ -32,7 +32,7 @@ public class NoteFormActivity extends DbRecordDeleter {
 
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
-        dbHelper = new DbHelper(this);
+        dbHelper = DbHelper.getInstance(this);
         SaveButton saveButton = new SaveButton(this,
                 new UserInput(this),
                 new NoteSQL(dbHelper.getWritableDatabase()),
@@ -43,7 +43,6 @@ public class NoteFormActivity extends DbRecordDeleter {
         if (bundle != null) {
             isExistingNote = true;
 
-            dbHelper = new DbHelper(getApplicationContext());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 
             noteTitle = bundle.getString(Contract.Notes.COLUMN_TITLE);

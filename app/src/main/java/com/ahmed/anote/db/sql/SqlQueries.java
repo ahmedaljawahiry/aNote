@@ -29,4 +29,6 @@ public interface SqlQueries {
 
         return content;
     }
+
+    String READ_ONLY_DB_ERROR_MSG = "The input DB is read only!";
 }

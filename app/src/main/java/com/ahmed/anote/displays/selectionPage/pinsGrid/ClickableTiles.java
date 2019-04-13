@@ -15,9 +15,11 @@ import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
 public class ClickableTiles implements AdapterView.OnItemClickListener {
 
     private NoteSelectionActivity activity;
+    private Intent intent;
 
-    public ClickableTiles(NoteSelectionActivity activity) {
+    public ClickableTiles(NoteSelectionActivity activity, Intent intent) {
         this.activity = activity;
+        this.intent = intent;
 
         GridView gridview = activity.findViewById(R.id.pins_grid);
         gridview.setOnItemClickListener(this);
@@ -25,8 +27,6 @@ public class ClickableTiles implements AdapterView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(activity, PinDisplayActivity.class);
-
         Bundle bundle = new Bundle();
         TextView key = view.findViewById(R.id.note_tile_main_text);
         TextView hint = view.findViewById(R.id.note_tile_sub_text);

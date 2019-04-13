@@ -1,4 +1,4 @@
-package com.ahmed.anote;
+package com.ahmed.anote.forms;
 
 import android.app.Activity;
 import android.text.Editable;

@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.pm.PackageManager;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static android.content.Context.KEYGUARD_SERVICE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +20,7 @@ public class CompatabilityCheckerTest {
     private static PackageManager packageManagerMock = mock(PackageManager.class);
     private static CompatibilityChecker compatibilityChecker;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         doReturn(keyguardManagerMock).when(activityMock).getSystemService(eq(KEYGUARD_SERVICE));
         doReturn(packageManagerMock).when(activityMock).getPackageManager();

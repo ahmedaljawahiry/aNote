@@ -7,8 +7,8 @@ import com.ahmed.anote.R;
 import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
 import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -20,7 +20,7 @@ public class DeleteButtonTest {
 
     private static NoteFormActivity activityMock = mock(NoteFormActivity.class);
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         doReturn(mock(ImageView.class))
                 .when(activityMock)

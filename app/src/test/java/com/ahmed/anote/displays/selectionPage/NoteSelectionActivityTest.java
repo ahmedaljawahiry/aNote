@@ -5,10 +5,10 @@ import android.widget.Toast;
 
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.displays.selectionPage.fabMenu.FabMenu;
-import com.ahmed.anote.common.ToastPrinter;
+import com.ahmed.anote.common.util.ToastPrinter;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
@@ -24,7 +24,7 @@ public class NoteSelectionActivityTest {
     private static ToastPrinter toastPrinterMock;
     private static DbHelper dbHelperMock;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         fabMenuMock = mock(FabMenu.class);
         toastPrinterMock = mock(ToastPrinter.class);

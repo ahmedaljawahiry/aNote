@@ -8,9 +8,9 @@ import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
-import com.ahmed.anote.common.TextEditor;
-import com.ahmed.anote.common.ToastPrinter;
-import com.ahmed.anote.common.Util;
+import com.ahmed.anote.common.util.TextEditor;
+import com.ahmed.anote.common.util.ToastPrinter;
+import com.ahmed.anote.common.util.Util;
 
 public class PinFormActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class PinFormActivity extends AppCompatActivity {
 
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
-        dbHelper = new DbHelper(this);
+        dbHelper = DbHelper.getInstance(this);
         SaveButton saveButton = new SaveButton(this,
                 userInput,
                 new PinSQL(dbHelper.getWritableDatabase()),
