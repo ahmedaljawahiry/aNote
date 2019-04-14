@@ -50,7 +50,7 @@ public class PinFormActivity extends ANoteActivity {
             TextEditor.enter(this, R.id.entered_key, existingKey, true);
             TextEditor.enter(this, R.id.entered_hint, existingHint, true);
             TextEditor.enter(this, R.id.entered_pin, existingPin, true);
-            ((CheckBox) this.findViewById(R.id.pin_secure_checkbox))
+            ((CheckBox) this.findViewById(R.id.pin_locked_checkbox))
                     .setChecked(existingCheckboxTicked);
         }
     }

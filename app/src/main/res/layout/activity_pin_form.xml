@@ -73,7 +73,7 @@
         android:textStyle="bold" />
 
     <CheckBox
-        android:id="@+id/pin_secure_checkbox"
+        android:id="@+id/pin_locked_checkbox"
         android:ems="2"
         android:layout_gravity="center"
         android:layout_height="60dp"

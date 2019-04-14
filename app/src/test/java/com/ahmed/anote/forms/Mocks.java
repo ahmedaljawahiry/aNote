@@ -27,7 +27,7 @@ public class Mocks {
         setTextReturnValue(activityMock, R.id.entered_key, KEY_VALUE);
         setTextReturnValue(activityMock, R.id.entered_hint, HINT_VALUE);
         setTextReturnValue(activityMock, R.id.entered_pin, PIN_VALUE);
-        setCheckboxReturnValue(activityMock, R.id.pin_secure_checkbox, SECURE_VALUE);
+        setCheckboxReturnValue(activityMock, R.id.pin_locked_checkbox, SECURE_VALUE);
 
         return activityMock;
     }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ahmed.anote.R;
@@ -29,6 +30,8 @@ public class PinsAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         String key = cursor.getString(cursor.getColumnIndex(Contract.Pins.COLUMN_KEY));
         String hint = cursor.getString(cursor.getColumnIndex(Contract.Pins.COLUMN_HINT));
+        boolean isLocked =
+                (cursor.getInt(cursor.getColumnIndex(Contract.Pins.COLUMN_SECURITY_LEVEL)) != 0);
 
         view.setLayoutParams(new GridView.LayoutParams(GridView.AUTO_FIT, TILE_SIZE));
 
@@ -37,5 +40,10 @@ public class PinsAdapter extends CursorAdapter {
 
         TextView moreInfo = view.findViewById(R.id.note_tile_sub_text);
         moreInfo.setText(hint);
+
+        ImageView lock = view.findViewById(R.id.lock_image);
+        if (!isLocked) {
+            lock.setVisibility(View.GONE);
+        }
     }
 }

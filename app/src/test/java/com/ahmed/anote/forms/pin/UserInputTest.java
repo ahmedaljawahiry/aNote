@@ -28,7 +28,7 @@ public class UserInputTest {
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_key));
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_pin));
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_hint));
-        doReturn(checkBoxMock).when(activityMock).findViewById(eq(R.id.pin_secure_checkbox));
+        doReturn(checkBoxMock).when(activityMock).findViewById(eq(R.id.pin_locked_checkbox));
 
         assertAllEmpty(new UserInput(activityMock));
     }
@@ -40,7 +40,7 @@ public class UserInputTest {
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_key));
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_pin));
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_hint));
-        doReturn(null).when(activityMock).findViewById(eq(R.id.pin_secure_checkbox));
+        doReturn(null).when(activityMock).findViewById(eq(R.id.pin_locked_checkbox));
 
         assertAllEmpty(new UserInput(activityMock));
     }
@@ -57,6 +57,6 @@ public class UserInputTest {
         assertThat(userInput.getEnteredKey()).isEqualTo(Mocks.KEY_VALUE);
         assertThat(userInput.getEnteredPin()).isEqualTo(Mocks.PIN_VALUE);
         assertThat(userInput.getEnteredHint()).isEqualTo(Mocks.HINT_VALUE);
-        assertThat(userInput.isSecure()).isEqualTo(Mocks.SECURE_VALUE);
+        assertThat(userInput.isLocked()).isEqualTo(Mocks.SECURE_VALUE);
     }
 }

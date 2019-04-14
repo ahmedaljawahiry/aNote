@@ -17,9 +17,11 @@ public class BiometricAuth {
     public static final String CANCELLATION_PROMPT = "Cancelled";
 
     private Activity activity;
+    private Intent intent;
 
-    public BiometricAuth(Activity activity) {
+    public BiometricAuth(Activity activity, Intent intent) {
         this.activity = activity;
+        this.intent = intent;
     }
 
     public void authenticateUser() {
@@ -55,8 +57,6 @@ public class BiometricAuth {
             @Override
             public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
-
-                Intent intent = new Intent(activity, NoteSelectionActivity.class);
                 activity.startActivity(intent);
             }
 
@@ -73,6 +73,10 @@ public class BiometricAuth {
                 () -> new ToastPrinter().print(activity, CANCELLATION_PROMPT, Toast.LENGTH_SHORT)
         );
         return cancellationSignal;
+    }
+
+    public void setIntent(Intent intent) {
+        this.intent = intent;
     }
 
 }
