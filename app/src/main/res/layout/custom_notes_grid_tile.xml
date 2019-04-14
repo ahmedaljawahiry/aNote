@@ -8,10 +8,9 @@
 
     <ImageView
         android:id="@+id/lock_image"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:gravity="right"
-        app:srcCompat="@drawable/ic_lock_outline_red_56dp" />
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/ic_lock_red_56dp" />
 
     <TextView
         android:id="@+id/note_tile_main_text"
