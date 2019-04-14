@@ -10,7 +10,7 @@
         android:id="@+id/lock_image"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:srcCompat="@drawable/ic_lock_red_56dp" />
+        app:srcCompat="@drawable/ic_lock_closed_red_56dp" />
 
     <TextView
         android:id="@+id/note_tile_main_text"

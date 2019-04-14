@@ -23,13 +23,13 @@ public class ClickableTiles implements AdapterView.OnItemClickListener {
 
     public ClickableTiles(
             NoteSelectionActivity activity,
-            Intent intent,
             Cursor cursor,
+            Intent intent,
             BiometricAuth biometricAuth
     ) {
         this.activity = activity;
-        this.intent = intent;
         this.cursor = cursor;
+        this.intent = intent;
         this.biometricAuth = biometricAuth;
 
         GridView gridview = activity.findViewById(R.id.pins_grid);

@@ -67,7 +67,7 @@ public class NoteSQL implements SqlQueries {
     public Cursor GET_NOTE_FROM_PK(String title) {
         Cursor cursor = db.query(
                 Contract.Notes.TABLE_NAME,
-                new String[] {Contract.Notes.COLUMN_TEXT},
+                new String[] {Contract.Notes.COLUMN_TEXT, Contract.Notes.COLUMN_SECURITY_LEVEL},
                 Contract.Notes.COLUMN_TITLE + "=?",
                 new String[] {title},
                 null, null, null);

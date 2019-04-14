@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ahmed.anote.R;
@@ -29,6 +30,8 @@ public class NotesAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         String title = cursor.getString(cursor.getColumnIndex(Contract.Notes.COLUMN_TITLE));
+        boolean isLocked =
+                (cursor.getInt(cursor.getColumnIndex(Contract.Notes.COLUMN_SECURITY_LEVEL)) != 0);
 
         view.setLayoutParams(new GridView.LayoutParams(GridView.AUTO_FIT, TILE_SIZE));
 
@@ -36,5 +39,10 @@ public class NotesAdapter extends CursorAdapter {
         main.setTextSize(40);
         main.setTextColor(ContextCompat.getColor(context, R.color.lightOrange));
         main.setText(title);
+
+        ImageView lock = view.findViewById(R.id.lock_image);
+        if (!isLocked) {
+            lock.setVisibility(View.GONE);
+        }
     }
 }

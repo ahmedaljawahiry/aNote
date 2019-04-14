@@ -45,7 +45,7 @@ public class ClickableTilesTest {
         BiometricAuth biometricAuthMock = mock(BiometricAuth.class);
 
         ClickableTiles clickableTiles =
-                new ClickableTiles(activityMock, intentMock, cursorMock, biometricAuthMock);
+                new ClickableTiles(activityMock, cursorMock, intentMock, biometricAuthMock);
         clickableTiles.onItemClick(mock(AdapterView.class), createViewMock(), 1, 1);
 
         verify(intentMock, times(1)).putExtras(any(Bundle.class));

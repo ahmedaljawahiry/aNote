@@ -17,11 +17,13 @@ import com.ahmed.anote.common.util.ToastPrinter;
 public class NoteFormActivity extends DbRecordDeleter {
 
     private DbHelper dbHelper;
+    private Bundle bundle;
     private DiscardAlertDialog discardAlertDialog;
     private UserInput userInput;
 
     private String noteTitle;
     private String noteBody;
+    private boolean locked;
     private boolean isExistingNote;
 
     @Override
@@ -32,13 +34,28 @@ public class NoteFormActivity extends DbRecordDeleter {
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
         dbHelper = DbHelper.getInstance(this);
-        SaveButton saveButton = new SaveButton(this,
-                new UserInput(this),
+        bundle = this.getIntent().getExtras();
+
+        SaveButton saveButton = new SaveButton(
+                this,
+                userInput,
                 new NoteSQL(dbHelper.getWritableDatabase()),
                 new ToastPrinter());
 
-        Bundle bundle = this.getIntent().getExtras();
+        new DeleteButton(
+                this,
+                new DeleteAlertDialog(
+                        this,
+                        new NoteSQL(dbHelper.getWritableDatabase()),
+                        "Delete Note"),
+                discardAlertDialog,
+                !isExistingNote);
 
+        fillPageWithExistingValues(saveButton);
+
+    }
+
+    private void fillPageWithExistingValues(SaveButton saveButton) {
         if (bundle != null) {
             isExistingNote = true;
 
@@ -50,21 +67,18 @@ public class NoteFormActivity extends DbRecordDeleter {
                 noteBody = noteCursor.getString(
                         noteCursor.getColumnIndex(Contract.Notes.COLUMN_TEXT)
                 );
+                locked = (noteCursor.getInt(
+                        noteCursor.getColumnIndex(Contract.Notes.COLUMN_SECURITY_LEVEL)) != 0
+                );
             }
 
-            saveButton.editOnly(noteTitle);
+
             TextEditor.enter(this, R.id.entered_title, noteTitle, true);
             TextEditor.enter(this, R.id.entered_note, noteBody, true);
-        }
 
-        new DeleteButton(
-                this,
-                new DeleteAlertDialog(
-                        this,
-                        new NoteSQL(dbHelper.getWritableDatabase()),
-                        "Delete Note"),
-                discardAlertDialog,
-                !isExistingNote);
+            saveButton.editOnly(noteTitle);
+            new LockButton(this, userInput, locked);
+        }
     }
 
     @Override

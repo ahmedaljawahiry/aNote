@@ -14,6 +14,7 @@ public class UserInput extends FormInputValues {
     private Activity activity;
     private String enteredTitle;
     private String enteredNote;
+    private boolean locked;
     private Map<String, Object> dbValueMap;
 
     public UserInput(Activity activity) {
@@ -40,6 +41,7 @@ public class UserInput extends FormInputValues {
         find();
         dbValueMap.put(Contract.Notes.COLUMN_TITLE, enteredTitle);
         dbValueMap.put(Contract.Notes.COLUMN_TEXT, enteredNote);
+        dbValueMap.put(Contract.Notes.COLUMN_SECURITY_LEVEL, locked);
         return dbValueMap;
     }
 
@@ -55,4 +57,11 @@ public class UserInput extends FormInputValues {
         return enteredNote;
     }
 
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
 }

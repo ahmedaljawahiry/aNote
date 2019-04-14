@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/entered_title"
         android:layout_width="406dp"
-        android:layout_height="88dp"
+        android:layout_height="69dp"
         android:layout_marginBottom="30dp"
         android:ems="10"
         android:fontFamily="monospace"
@@ -28,7 +28,7 @@
     <EditText
         android:id="@+id/entered_note"
         android:layout_width="353dp"
-        android:layout_height="319dp"
+        android:layout_height="368dp"
         android:layout_marginStart="26dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="26dp"
@@ -67,16 +67,25 @@
         android:id="@+id/delete_note_button"
         android:layout_width="75dp"
         android:layout_height="78dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
         android:clickable="true"
-        android:contentDescription="Delete pin"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/save_note_button"
         app:layout_constraintTop_toBottomOf="@+id/entered_note"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_delete_forever_red_56dp" />
+
+    <ImageView
+        android:id="@+id/lock_note_button"
+        android:layout_width="75dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entered_note"
+        app:srcCompat="@drawable/ic_lock_open_green_24dp" />
 </android.support.constraint.ConstraintLayout>

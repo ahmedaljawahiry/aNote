@@ -20,7 +20,6 @@ public class SaveButton implements View.OnClickListener {
 
     private Button button;
     private UserInput userInput;
-    private Activity activity;
     private NoteSQL noteSQL;
     private ToastPrinter toastPrinter;
 
@@ -31,7 +30,6 @@ public class SaveButton implements View.OnClickListener {
                       NoteSQL noteSQL, ToastPrinter toastPrinter) {
         this.userInput = userInput;
         this.noteSQL = noteSQL;
-        this.activity = activity;
         this.toastPrinter = toastPrinter;
         this.button = activity.findViewById(R.id.save_note_button);
         button.setOnClickListener(this);

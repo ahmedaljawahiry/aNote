@@ -19,7 +19,7 @@ public class PinsGrid {
         Intent intent = new Intent(activity, PinDisplayActivity.class);
         BiometricAuth biometricAuth = new BiometricAuth(activity, intent);
 
-        new ClickableTiles(activity, intent, cursor, biometricAuth);
+        new ClickableTiles(activity, cursor, intent, biometricAuth);
 
         PinsAdapter pinsAdapter = new PinsAdapter(activity, cursor, 0);
         gridview.setAdapter(pinsAdapter);

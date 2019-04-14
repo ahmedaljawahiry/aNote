@@ -2,8 +2,9 @@ Test activities and BiometricAuth with androidTest.
 https://developer.android.com/training/testing/unit-testing/instrumented-unit-tests.html
 
 Add fingerprint auth to selected notes (done for pins).
+Check for "locked" before discarding notes.
+Pins/NotesAdapter tests.
 
-Disable landscape view?
-See https://stackoverflow.com/questions/6745797/how-to-set-entire-application-in-portrait-mode-only/9784269#9784269
+Make grids and clickableTiles more generic/reusable.
 
-Encrypt pins?
+Encrypt pins/notes.
