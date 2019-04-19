@@ -68,7 +68,8 @@ public class PinFormActivity extends ANoteActivity implements LifecycleObserver 
                 isExistingPin && (
                         !userInput.getEnteredKey().equals(existingKey) ||
                                 !userInput.getEnteredHint().equals(existingHint) ||
-                                !userInput.getEnteredPin().equals(existingPin)
+                                !userInput.getEnteredPin().equals(existingPin) ||
+                                userInput.isLocked() != existingCheckboxTicked
                 );
 
         if (newEmptyPin || existingUnchangedPin) {

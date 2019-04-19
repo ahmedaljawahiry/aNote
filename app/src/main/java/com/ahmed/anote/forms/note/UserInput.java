@@ -46,7 +46,7 @@ public class UserInput extends FormInputValues {
     }
 
     public boolean nothingEntered() {
-        return (enteredNote.isEmpty() && enteredTitle.isEmpty());
+        return (enteredNote.isEmpty() && enteredTitle.isEmpty() && !locked);
     }
 
     public String getEnteredTitle() {

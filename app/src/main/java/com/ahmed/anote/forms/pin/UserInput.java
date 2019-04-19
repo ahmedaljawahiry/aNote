@@ -33,7 +33,7 @@ public class UserInput extends FormInputValues {
     }
 
     public boolean nothingEntered() {
-        return (enteredKey.isEmpty() && enteredPin.isEmpty() && enteredHint.isEmpty());
+        return (enteredKey.isEmpty() && enteredPin.isEmpty() && enteredHint.isEmpty() && !locked);
     }
 
     public boolean areValid() {

@@ -95,7 +95,8 @@ public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserv
         boolean existingUnchangedNote =
                 isExistingNote && (
                         !userInput.getEnteredTitle().equals(noteTitle) ||
-                        !userInput.getEnteredNote().equals(noteBody)
+                        !userInput.getEnteredNote().equals(noteBody) ||
+                        userInput.isLocked() != locked
                 );
 
         if (newEmptyNote || existingUnchangedNote) {
