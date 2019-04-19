@@ -1,5 +1,9 @@
 package com.ahmed.anote.forms.pin;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
+import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.os.Bundle;
 import android.widget.CheckBox;
 
@@ -12,7 +16,7 @@ import com.ahmed.anote.db.sql.PinSQL;
 import com.ahmed.anote.common.util.TextEditor;
 import com.ahmed.anote.common.util.ToastPrinter;
 
-public class PinFormActivity extends ANoteActivity {
+public class PinFormActivity extends ANoteActivity implements LifecycleObserver {
 
     private DbHelper dbHelper;
     private UserInput userInput;
@@ -27,6 +31,7 @@ public class PinFormActivity extends ANoteActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_form);
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
@@ -71,6 +76,13 @@ public class PinFormActivity extends ANoteActivity {
         }
         else {
             super.onBackPressed();
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onMoveToBackground() {
+        if (existingCheckboxTicked) {
+            this.finish();
         }
     }
 }

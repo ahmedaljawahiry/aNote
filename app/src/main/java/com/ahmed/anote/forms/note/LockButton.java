@@ -11,10 +11,8 @@ public class LockButton implements View.OnClickListener {
     private ImageView button;
     private UserInput userInput;
     private boolean locked;
-    private Activity activity;
 
     public LockButton(NoteFormActivity activity, UserInput userInput, boolean locked) {
-        this.activity = activity;
         this.userInput = userInput;
         this.locked = locked;
 
@@ -24,6 +22,7 @@ public class LockButton implements View.OnClickListener {
         if (locked) {
             button.setImageResource(R.drawable.ic_lock_closed_red_56dp);
         }
+        userInput.setLocked(locked);
     }
 
     @Override

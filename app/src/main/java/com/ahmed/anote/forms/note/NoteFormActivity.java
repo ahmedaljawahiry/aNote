@@ -1,5 +1,10 @@
 package com.ahmed.anote.forms.note;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
+import android.arch.lifecycle.ProcessLifecycleOwner;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,8 +18,9 @@ import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.NoteSQL;
 import com.ahmed.anote.common.util.TextEditor;
 import com.ahmed.anote.common.util.ToastPrinter;
+import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
 
-public class NoteFormActivity extends DbRecordDeleter {
+public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserver {
 
     private DbHelper dbHelper;
     private Bundle bundle;
@@ -30,6 +36,7 @@ public class NoteFormActivity extends DbRecordDeleter {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_form);
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
@@ -42,6 +49,10 @@ public class NoteFormActivity extends DbRecordDeleter {
                 new NoteSQL(dbHelper.getWritableDatabase()),
                 new ToastPrinter());
 
+        fillPageWithExistingValues(saveButton);
+
+        new LockButton(this, userInput, locked);
+
         new DeleteButton(
                 this,
                 new DeleteAlertDialog(
@@ -50,9 +61,6 @@ public class NoteFormActivity extends DbRecordDeleter {
                         "Delete Note"),
                 discardAlertDialog,
                 !isExistingNote);
-
-        fillPageWithExistingValues(saveButton);
-
     }
 
     private void fillPageWithExistingValues(SaveButton saveButton) {
@@ -77,7 +85,6 @@ public class NoteFormActivity extends DbRecordDeleter {
             TextEditor.enter(this, R.id.entered_note, noteBody, true);
 
             saveButton.editOnly(noteTitle);
-            new LockButton(this, userInput, locked);
         }
     }
 
@@ -96,6 +103,13 @@ public class NoteFormActivity extends DbRecordDeleter {
         }
         else {
             super.onBackPressed();
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onMoveToBackground() {
+        if (locked) {
+            this.finish();
         }
     }
 
