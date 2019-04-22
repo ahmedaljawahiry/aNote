@@ -1,7 +1,7 @@
 package com.ahmed.anote.db.sql;
 
 
-import com.ahmed.anote.db.DbHelper;
+import com.ahmed.anote.db.CipherDb;
 
 import net.sqlcipher.Cursor;
 import net.sqlcipher.SQLException;
@@ -27,12 +27,12 @@ public class SqlQueriesTest {
     private static Cursor cursorMock = mock(Cursor.class);
 
     private static Stream<Arguments> SqlQueriesInstancesWithValidDb() {
-        DbHelper dbHelperMock = getDbMock(
+        CipherDb cipherDbMock = getCipherDbMock(
                 cursorMock, 1, true, "NOTE"
         );
         return Stream.of(
-                arguments(new NoteSQL(dbHelperMock)),
-                arguments(new PinSQL(dbHelperMock))
+                arguments(new NoteSQL(cipherDbMock)),
+                arguments(new PinSQL(cipherDbMock))
         );
     }
 
@@ -44,10 +44,10 @@ public class SqlQueriesTest {
     }
 
     private static Stream<Arguments> SqlQueriesInstancesWithInvalidDb() {
-        DbHelper moreThanOneNotePerPk = getDbMock(
+        CipherDb moreThanOneNotePerPk = getCipherDbMock(
                 mock(Cursor.class), 3, true, "NOTE"
         );
-        DbHelper noNoteCorrespondingToPk = getDbMock(
+        CipherDb noNoteCorrespondingToPk = getCipherDbMock(
                 mock(Cursor.class), 1, false, "NOTE"
         );
         return Stream.of(
@@ -67,13 +67,13 @@ public class SqlQueriesTest {
                 );
     }
 
-    private static DbHelper getDbMock(
+    private static CipherDb getCipherDbMock(
             Cursor cursorMock, int count, boolean moveToNext, String noteValue
     ) {
-        DbHelper dbHelperMock = mock(DbHelper.class);
+        CipherDb cipherDbMock = mock(CipherDb.class);
         SQLiteDatabase dbMock = mock(SQLiteDatabase.class);
 
-        doReturn(dbMock).when(dbHelperMock).openOrCreateDb();
+        doReturn(dbMock).when(cipherDbMock).getDb();
         doReturn(false).when(dbMock).isReadOnly();
 
         doReturn(cursorMock).when(dbMock).query(
@@ -83,6 +83,6 @@ public class SqlQueriesTest {
         doReturn(count).when(cursorMock).getCount();
         doReturn(moveToNext).when(cursorMock).moveToNext();
         doReturn(noteValue).when(cursorMock).getString(anyInt());
-        return dbHelperMock;
+        return cipherDbMock;
     }
 }

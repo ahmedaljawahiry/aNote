@@ -4,8 +4,8 @@ import net.sqlcipher.Cursor;
 import net.sqlcipher.SQLException;
 import net.sqlcipher.database.SQLiteDatabase;
 
+import com.ahmed.anote.db.CipherDb;
 import com.ahmed.anote.db.Contract;
-import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.forms.FormInputValues;
 
 
@@ -13,9 +13,8 @@ public class NoteSQL implements SqlQueries {
 
     private SQLiteDatabase db;
 
-    public NoteSQL(DbHelper dbHelper) {
-        dbHelper.loadLibs();
-        this.db = dbHelper.openOrCreateDb();
+    public NoteSQL(CipherDb cipherDb) {
+        this.db = cipherDb.getDb();
         this.CREATE_TABLE();
     }
 

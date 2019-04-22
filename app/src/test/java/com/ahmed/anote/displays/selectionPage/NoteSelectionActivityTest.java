@@ -3,6 +3,7 @@ package com.ahmed.anote.displays.selectionPage;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.ahmed.anote.db.CipherDb;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.displays.selectionPage.fabMenu.FabMenu;
 import com.ahmed.anote.common.util.ToastPrinter;
@@ -22,18 +23,18 @@ public class NoteSelectionActivityTest {
     private static FabMenu fabMenuMock;
     private static NoteSelectionActivity noteSelectionActivity;
     private static ToastPrinter toastPrinterMock;
-    private static DbHelper dbHelperMock;
+    private static CipherDb cipherDbMock;
 
     @BeforeAll
     public static void setUp() {
         fabMenuMock = mock(FabMenu.class);
         toastPrinterMock = mock(ToastPrinter.class);
-        dbHelperMock = mock(DbHelper.class);
+        cipherDbMock = mock(CipherDb.class);
 
         noteSelectionActivity = new NoteSelectionActivity();
         noteSelectionActivity.setFabMenu(fabMenuMock);
         noteSelectionActivity.setToastPrinter(toastPrinterMock);
-        noteSelectionActivity.setDbHelper(dbHelperMock);
+        noteSelectionActivity.setCipherDb(cipherDbMock);
     }
 
     @Test

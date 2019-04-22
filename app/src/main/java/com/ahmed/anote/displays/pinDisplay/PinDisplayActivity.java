@@ -10,6 +10,7 @@ import android.os.Bundle;
 import com.ahmed.anote.R;
 import com.ahmed.anote.common.abstractActivites.DbRecordDeleter;
 import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
+import com.ahmed.anote.db.CipherDb;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
@@ -20,7 +21,7 @@ import net.sqlcipher.Cursor;
 
 public class PinDisplayActivity extends DbRecordDeleter implements LifecycleObserver {
 
-    private DbHelper dbHelper;
+    private CipherDb cipherDb;
     private Bundle bundle;
     private boolean lockedPin;
 
@@ -30,7 +31,7 @@ public class PinDisplayActivity extends DbRecordDeleter implements LifecycleObse
         setContentView(R.layout.activity_pin_display);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
-        dbHelper = DbHelper.getInstance(this);
+        cipherDb = CipherDb.getInstance(this);
         bundle = this.getIntent().getExtras();
         fillBundle();
         fillPageWithExistingValues();
@@ -43,13 +44,13 @@ public class PinDisplayActivity extends DbRecordDeleter implements LifecycleObse
                 this,
                 new DeleteAlertDialog(
                         this,
-                        new PinSQL(dbHelper),
+                        new PinSQL(cipherDb),
                         "Delete Pin")
         );
     }
 
     private void fillBundle() {
-        try(Cursor pinCursor = new PinSQL(dbHelper).GET_NOTE_FROM_PK(
+        try(Cursor pinCursor = new PinSQL(cipherDb).GET_NOTE_FROM_PK(
                 bundle.getString(Contract.Pins.COLUMN_KEY))) {
             bundle.putString(
                     Contract.Pins.COLUMN_PIN,

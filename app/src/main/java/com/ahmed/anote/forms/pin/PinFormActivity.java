@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import com.ahmed.anote.R;
 import com.ahmed.anote.common.abstractActivites.ANoteActivity;
 import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
+import com.ahmed.anote.db.CipherDb;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
@@ -38,7 +39,7 @@ public class PinFormActivity extends ANoteActivity implements LifecycleObserver 
                 this,
                 userInput,
                 new PinSQL(
-                        DbHelper.getInstance(this)
+                        CipherDb.getInstance(this)
                 ),
                 new ToastPrinter());
 

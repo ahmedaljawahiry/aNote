@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.ahmed.anote.R;
 import com.ahmed.anote.common.abstractActivites.ANoteActivity;
+import com.ahmed.anote.db.CipherDb;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.NoteSQL;
 import com.ahmed.anote.db.sql.PinSQL;
@@ -22,7 +23,7 @@ public class NoteSelectionActivity extends ANoteActivity {
     private boolean doubleBackToExitPressedOnce = false;
     private FabMenu fabMenu;
     private ToastPrinter toastPrinter;
-    private DbHelper dbHelper;
+    private CipherDb cipherDb;
     private boolean appClosed;
 
     @Override
@@ -32,10 +33,10 @@ public class NoteSelectionActivity extends ANoteActivity {
 
         this.fabMenu = new FabMenu(this, new FabMenuItemFactory());
 
-        dbHelper = DbHelper.getInstance(this);
+        cipherDb = CipherDb.getInstance(this);
 
-        new PinsGrid(this, new PinSQL(dbHelper).GET_TABLE());
-        new NotesGrid(this, new NoteSQL(dbHelper).GET_TABLE());
+        new PinsGrid(this, new PinSQL(cipherDb).GET_TABLE());
+        new NotesGrid(this, new NoteSQL(cipherDb).GET_TABLE());
     }
 
     @Override
@@ -58,7 +59,6 @@ public class NoteSelectionActivity extends ANoteActivity {
 
     public void closeApp() {
         this.finishAffinity();
-        dbHelper.close();
         appClosed = true;
     }
 
@@ -76,8 +76,8 @@ public class NoteSelectionActivity extends ANoteActivity {
         this.toastPrinter = toastPrinter;
     }
 
-    public void setDbHelper(DbHelper dbHelper) {
-        this.dbHelper = dbHelper;
+    public void setCipherDb(CipherDb cipherDb) {
+        this.cipherDb = cipherDb;
     }
 
     public boolean appClosed() {
