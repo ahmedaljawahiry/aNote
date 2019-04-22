@@ -11,14 +11,12 @@ import com.ahmed.anote.R;
 import com.ahmed.anote.common.abstractActivites.ANoteActivity;
 import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
 import com.ahmed.anote.db.Contract;
-import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
 import com.ahmed.anote.common.util.TextEditor;
 import com.ahmed.anote.common.util.ToastPrinter;
 
 public class PinFormActivity extends ANoteActivity implements LifecycleObserver {
 
-    private DbHelper dbHelper;
     private UserInput userInput;
     private DiscardAlertDialog discardAlertDialog;
     private String existingKey;
@@ -35,10 +33,9 @@ public class PinFormActivity extends ANoteActivity implements LifecycleObserver 
 
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
-        dbHelper = DbHelper.getInstance(this);
         SaveButton saveButton = new SaveButton(this,
                 userInput,
-                new PinSQL(dbHelper.getWritableDatabase()),
+                new PinSQL(this),
                 new ToastPrinter());
 
         Bundle bundle = this.getIntent().getExtras();

@@ -1,6 +1,5 @@
 package com.ahmed.anote.displays.selectionPage;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -34,10 +33,9 @@ public class NoteSelectionActivity extends ANoteActivity {
         this.fabMenu = new FabMenu(this, new FabMenuItemFactory());
 
         dbHelper = DbHelper.getInstance(this);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        new PinsGrid(this, new PinSQL(db).GET_TABLE());
-        new NotesGrid(this, new NoteSQL(db).GET_TABLE());
+        new PinsGrid(this, new PinSQL(this).GET_TABLE());
+        new NotesGrid(this, new NoteSQL(this).GET_TABLE());
     }
 
     @Override

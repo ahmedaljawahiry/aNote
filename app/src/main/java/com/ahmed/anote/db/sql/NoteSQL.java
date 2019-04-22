@@ -1,26 +1,29 @@
 package com.ahmed.anote.db.sql;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
+import net.sqlcipher.database.SQLiteDatabase;
 
 import com.ahmed.anote.db.Contract;
+import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.forms.FormInputValues;
+
+import java.io.File;
 
 public class NoteSQL implements SqlQueries {
 
     private SQLiteDatabase db;
 
-    public NoteSQL(@NonNull SQLiteDatabase db) {
-        if (db.isReadOnly()) {
-            throw new SQLException(READ_ONLY_DB_ERROR_MSG);
-        }
-        this.db = db;
+    public NoteSQL(Activity activity) {
+        SQLiteDatabase.loadLibs(activity);
+        File dbFile = activity.getDatabasePath(DbHelper.DATABASE_NAME);
+        this.db = SQLiteDatabase.openOrCreateDatabase(dbFile, "ahmed", null);
+        this.CREATE_TABLE();
     }
 
     public void CREATE_TABLE() {
-        String sql = "CREATE TABLE " + Contract.Notes.TABLE_NAME + " (" +
+        String sql = "CREATE TABLE IF NOT EXISTS " + Contract.Notes.TABLE_NAME + " (" +
                 Contract.Notes._ID + " INTEGER PRIMARY KEY," +
                 Contract.Notes.COLUMN_TITLE + " TEXT UNIQUE," +
                 Contract.Notes.COLUMN_TEXT + " TEXT," +
@@ -56,7 +59,7 @@ public class NoteSQL implements SqlQueries {
                 null, null, null)
         ) {
 
-            return (cursor.getCount() >= 1) ? true : false;
+            return (cursor.getCount() >= 1);
         }
     }
 

@@ -6,14 +6,12 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.ahmed.anote.R;
 import com.ahmed.anote.common.abstractActivites.DbRecordDeleter;
 import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
 import com.ahmed.anote.db.Contract;
-import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
 import com.ahmed.anote.common.util.TextEditor;
 import com.ahmed.anote.forms.pin.PinFormActivity;
@@ -21,7 +19,6 @@ import com.ahmed.anote.forms.pin.PinFormActivity;
 public class PinDisplayActivity extends DbRecordDeleter implements LifecycleObserver {
 
     private Bundle bundle;
-    private DbHelper dbHelper;
     private boolean lockedPin;
 
     @Override
@@ -31,7 +28,6 @@ public class PinDisplayActivity extends DbRecordDeleter implements LifecycleObse
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
         bundle = this.getIntent().getExtras();
-        dbHelper = DbHelper.getInstance(this);
         fillBundle();
         fillPageWithExistingValues();
 
@@ -43,15 +39,13 @@ public class PinDisplayActivity extends DbRecordDeleter implements LifecycleObse
                 this,
                 new DeleteAlertDialog(
                         this,
-                        new PinSQL(dbHelper.getWritableDatabase()),
+                        new PinSQL(this),
                         "Delete Pin")
         );
     }
 
     private void fillBundle() {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        try(Cursor pinCursor = new PinSQL(db).GET_NOTE_FROM_PK(
+        try(Cursor pinCursor = new PinSQL(this).GET_NOTE_FROM_PK(
                 bundle.getString(Contract.Pins.COLUMN_KEY))) {
             bundle.putString(
                     Contract.Pins.COLUMN_PIN,

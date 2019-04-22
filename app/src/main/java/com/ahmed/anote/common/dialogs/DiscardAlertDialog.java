@@ -9,10 +9,10 @@ import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
 
 public class DiscardAlertDialog {
 
-    public static final String ALERT_TITLE = "Discard Changes";
-    public static final String ALERT_MESSAGE = "Are you sure?";
-    public static final String ALERT_POSITIVE = "YES";
-    public static final String ALERT_NEGATIVE = "NO";
+    private static final String ALERT_TITLE = "Discard Changes";
+    private static final String ALERT_MESSAGE = "Are you sure?";
+    private static final String ALERT_POSITIVE = "YES";
+    private static final String ALERT_NEGATIVE = "NO";
 
     private AlertDialog alertDialog;
     private Activity activity;

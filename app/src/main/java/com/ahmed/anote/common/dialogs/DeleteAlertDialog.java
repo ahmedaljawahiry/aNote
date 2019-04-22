@@ -9,20 +9,19 @@ import com.ahmed.anote.db.sql.SqlQueries;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
 
 public class DeleteAlertDialog {
-    public final String ALERT_TITLE;
-    public static final String ALERT_MESSAGE = "Are you sure?";
-    public static final String ALERT_POSITIVE = "YES";
-    public static final String ALERT_NEGATIVE = "NO";
+
+    private static final String ALERT_MESSAGE = "Are you sure?";
+    private static final String ALERT_POSITIVE = "YES";
+    private static final String ALERT_NEGATIVE = "NO";
 
     private AlertDialog alertDialog;
     private DbRecordDeleter activity;
     private SqlQueries sql;
 
     public DeleteAlertDialog(DbRecordDeleter activity, SqlQueries sql, String title) {
-        this.ALERT_TITLE = title;
         this.sql = sql;
         this.activity = activity;
-        this.alertDialog = new AlertDialog.Builder(activity).setTitle(ALERT_TITLE)
+        this.alertDialog = new AlertDialog.Builder(activity).setTitle(title)
                 .setMessage(ALERT_MESSAGE)
                 .setPositiveButton(ALERT_POSITIVE,
                         (dialog, which) -> positiveAction(dialog))

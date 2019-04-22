@@ -1,11 +1,8 @@
 package com.ahmed.anote.db;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
-import com.ahmed.anote.db.sql.NoteSQL;
-import com.ahmed.anote.db.sql.PinSQL;
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -29,8 +26,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        new PinSQL(db).CREATE_TABLE();
-        new NoteSQL(db).CREATE_TABLE();
+
     }
 
     @Override

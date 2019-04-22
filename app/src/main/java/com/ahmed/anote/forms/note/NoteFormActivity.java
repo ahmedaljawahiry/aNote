@@ -4,9 +4,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ProcessLifecycleOwner;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.ahmed.anote.R;
@@ -14,15 +12,12 @@ import com.ahmed.anote.common.abstractActivites.DbRecordDeleter;
 import com.ahmed.anote.common.dialogs.DeleteAlertDialog;
 import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
 import com.ahmed.anote.db.Contract;
-import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.NoteSQL;
 import com.ahmed.anote.common.util.TextEditor;
 import com.ahmed.anote.common.util.ToastPrinter;
-import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
 
 public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserver {
 
-    private DbHelper dbHelper;
     private Bundle bundle;
     private DiscardAlertDialog discardAlertDialog;
     private UserInput userInput;
@@ -40,13 +35,12 @@ public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserv
 
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
-        dbHelper = DbHelper.getInstance(this);
         bundle = this.getIntent().getExtras();
 
         SaveButton saveButton = new SaveButton(
                 this,
                 userInput,
-                new NoteSQL(dbHelper.getWritableDatabase()),
+                new NoteSQL(this),
                 new ToastPrinter());
 
         fillPageWithExistingValues(saveButton);
@@ -57,7 +51,7 @@ public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserv
                 this,
                 new DeleteAlertDialog(
                         this,
-                        new NoteSQL(dbHelper.getWritableDatabase()),
+                        new NoteSQL(this),
                         "Delete Note"),
                 discardAlertDialog,
                 !isExistingNote);
@@ -67,11 +61,9 @@ public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserv
         if (bundle != null) {
             isExistingNote = true;
 
-            SQLiteDatabase db = dbHelper.getReadableDatabase();
-
             noteTitle = bundle.getString(Contract.Notes.COLUMN_TITLE);
 
-            try(Cursor noteCursor = new NoteSQL(db).GET_NOTE_FROM_PK(noteTitle)) {
+            try(Cursor noteCursor = new NoteSQL(this).GET_NOTE_FROM_PK(noteTitle)) {
                 noteBody = noteCursor.getString(
                         noteCursor.getColumnIndex(Contract.Notes.COLUMN_TEXT)
                 );
