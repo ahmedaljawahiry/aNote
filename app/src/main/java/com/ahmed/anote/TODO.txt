@@ -1,8 +1,0 @@
-Test activities and BiometricAuth with androidTest.
-https://developer.android.com/training/testing/unit-testing/instrumented-unit-tests.html
-
-Make grids and clickableTiles more generic/reusable.
-
-Store key using: https://developer.android.com/training/articles/keystore
-
-Make pin grid full size if no notes, and vice versa?
