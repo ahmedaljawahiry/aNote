@@ -16,10 +16,10 @@ public class PinSQL implements SqlQueries {
 
     public PinSQL(CipherDb cipherDb) {
         this.db = cipherDb.getDb();
-        this.CREATE_TABLE();
+        this.CREATE_TABLE_IF_NOT_EXISTS();
     }
 
-    public void CREATE_TABLE() {
+    public void CREATE_TABLE_IF_NOT_EXISTS() {
         String sql = "CREATE TABLE IF NOT EXISTS " + Contract.Pins.TABLE_NAME + " (" +
                 Contract.Pins._ID + " INTEGER PRIMARY KEY," +
                 Contract.Pins.COLUMN_PIN + " INTEGER," +

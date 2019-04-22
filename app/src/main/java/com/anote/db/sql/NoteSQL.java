@@ -15,10 +15,10 @@ public class NoteSQL implements SqlQueries {
 
     public NoteSQL(CipherDb cipherDb) {
         this.db = cipherDb.getDb();
-        this.CREATE_TABLE();
+        this.CREATE_TABLE_IF_NOT_EXISTS();
     }
 
-    public void CREATE_TABLE() {
+    public void CREATE_TABLE_IF_NOT_EXISTS() {
         String sql = "CREATE TABLE IF NOT EXISTS " + Contract.Notes.TABLE_NAME + " (" +
                 Contract.Notes._ID + " INTEGER PRIMARY KEY," +
                 Contract.Notes.COLUMN_TITLE + " TEXT UNIQUE," +

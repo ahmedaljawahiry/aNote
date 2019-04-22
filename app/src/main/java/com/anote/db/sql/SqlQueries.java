@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface SqlQueries {
 
-    void CREATE_TABLE();
+    void CREATE_TABLE_IF_NOT_EXISTS();
     void DELETE_TABLE();
     void INSERT(FormInputValues userInput);
     void UPDATE(FormInputValues userInput, String key);
