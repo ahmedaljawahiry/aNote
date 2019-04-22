@@ -1,9 +1,10 @@
 package com.ahmed.anote.db.sql;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 
 import com.ahmed.anote.forms.FormInputValues;
+
+import net.sqlcipher.Cursor;
 
 import java.util.Map;
 

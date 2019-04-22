@@ -1,18 +1,18 @@
 package com.ahmed.anote.displays.selectionPage.pinsGrid;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ahmed.anote.R;
 import com.ahmed.anote.auth.BiometricAuth;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
+
+import net.sqlcipher.Cursor;
 
 public class ClickableTiles implements AdapterView.OnItemClickListener {
 

@@ -1,24 +1,21 @@
 package com.ahmed.anote.db.sql;
 
-import android.app.Activity;
-import android.database.Cursor;
-import android.database.SQLException;
+import net.sqlcipher.Cursor;
+import net.sqlcipher.SQLException;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.forms.FormInputValues;
 
-import java.io.File;
 
 public class NoteSQL implements SqlQueries {
 
     private SQLiteDatabase db;
 
-    public NoteSQL(Activity activity) {
-        SQLiteDatabase.loadLibs(activity);
-        File dbFile = activity.getDatabasePath(DbHelper.DATABASE_NAME);
-        this.db = SQLiteDatabase.openOrCreateDatabase(dbFile, "ahmed", null);
+    public NoteSQL(DbHelper dbHelper) {
+        dbHelper.loadLibs();
+        this.db = dbHelper.openOrCreateDb();
         this.CREATE_TABLE();
     }
 

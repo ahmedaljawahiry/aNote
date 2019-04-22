@@ -34,8 +34,8 @@ public class NoteSelectionActivity extends ANoteActivity {
 
         dbHelper = DbHelper.getInstance(this);
 
-        new PinsGrid(this, new PinSQL(this).GET_TABLE());
-        new NotesGrid(this, new NoteSQL(this).GET_TABLE());
+        new PinsGrid(this, new PinSQL(dbHelper).GET_TABLE());
+        new NotesGrid(this, new NoteSQL(dbHelper).GET_TABLE());
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.ahmed.anote.displays.selectionPage.pinsGrid;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,12 +12,12 @@ import com.ahmed.anote.auth.BiometricAuth;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
 
-import org.junit.jupiter.api.Test;
+import net.sqlcipher.Cursor;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;

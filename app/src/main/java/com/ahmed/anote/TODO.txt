@@ -3,9 +3,8 @@ https://developer.android.com/training/testing/unit-testing/instrumented-unit-te
 
 Make grids and clickableTiles more generic/reusable.
 
-Encrypt pins/notes:
-https://github.com/sqlcipher/android-database-sqlcipher
-https://www.zetetic.net/sqlcipher/sqlcipher-for-android/
+Fix tests.
 Store key using: https://developer.android.com/training/articles/keystore
+Only call createOrOpenDatabase on login?
 
 Make pin grid full size if no notes, and vice versa?

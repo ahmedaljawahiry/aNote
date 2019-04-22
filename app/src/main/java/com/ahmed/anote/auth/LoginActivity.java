@@ -12,7 +12,7 @@ import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
 
 public class LoginActivity extends ANoteActivity {
 
-    public static final String UNSUPPORTED_PROMPT = "Unsupported phone.";
+    public static final String UNSUPPORTED_PROMPT = "Unsupported phone";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class LoginActivity extends ANoteActivity {
             biometricAuth.authenticateUser();
         }
         else {
-            new ToastPrinter().print(this, UNSUPPORTED_PROMPT, Toast.LENGTH_SHORT);
+            new ToastPrinter().print(this, UNSUPPORTED_PROMPT, Toast.LENGTH_LONG);
         }
     }
 }

@@ -11,6 +11,7 @@ import com.ahmed.anote.R;
 import com.ahmed.anote.common.abstractActivites.ANoteActivity;
 import com.ahmed.anote.common.dialogs.DiscardAlertDialog;
 import com.ahmed.anote.db.Contract;
+import com.ahmed.anote.db.DbHelper;
 import com.ahmed.anote.db.sql.PinSQL;
 import com.ahmed.anote.common.util.TextEditor;
 import com.ahmed.anote.common.util.ToastPrinter;
@@ -33,9 +34,12 @@ public class PinFormActivity extends ANoteActivity implements LifecycleObserver 
 
         userInput = new UserInput(this);
         discardAlertDialog = new DiscardAlertDialog(this);
-        SaveButton saveButton = new SaveButton(this,
+        SaveButton saveButton = new SaveButton(
+                this,
                 userInput,
-                new PinSQL(this),
+                new PinSQL(
+                        DbHelper.getInstance(this)
+                ),
                 new ToastPrinter());
 
         Bundle bundle = this.getIntent().getExtras();

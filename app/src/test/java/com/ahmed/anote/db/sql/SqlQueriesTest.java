@@ -1,8 +1,11 @@
 package com.ahmed.anote.db.sql;
 
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
+
+import com.ahmed.anote.db.DbHelper;
+
+import net.sqlcipher.Cursor;
+import net.sqlcipher.SQLException;
+import net.sqlcipher.database.SQLiteDatabase;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,12 +27,12 @@ public class SqlQueriesTest {
     private static Cursor cursorMock = mock(Cursor.class);
 
     private static Stream<Arguments> SqlQueriesInstancesWithValidDb() {
-        SQLiteDatabase dbMock = getDbMock(
+        DbHelper dbHelperMock = getDbMock(
                 cursorMock, 1, true, "NOTE"
         );
         return Stream.of(
-                arguments(new NoteSQL(dbMock)),
-                arguments(new PinSQL(dbMock))
+                arguments(new NoteSQL(dbHelperMock)),
+                arguments(new PinSQL(dbHelperMock))
         );
     }
 
@@ -41,10 +44,10 @@ public class SqlQueriesTest {
     }
 
     private static Stream<Arguments> SqlQueriesInstancesWithInvalidDb() {
-        SQLiteDatabase moreThanOneNotePerPk = getDbMock(
+        DbHelper moreThanOneNotePerPk = getDbMock(
                 mock(Cursor.class), 3, true, "NOTE"
         );
-        SQLiteDatabase noNoteCorrespondingToPk = getDbMock(
+        DbHelper noNoteCorrespondingToPk = getDbMock(
                 mock(Cursor.class), 1, false, "NOTE"
         );
         return Stream.of(
@@ -64,10 +67,13 @@ public class SqlQueriesTest {
                 );
     }
 
-    private static SQLiteDatabase getDbMock(
+    private static DbHelper getDbMock(
             Cursor cursorMock, int count, boolean moveToNext, String noteValue
     ) {
+        DbHelper dbHelperMock = mock(DbHelper.class);
         SQLiteDatabase dbMock = mock(SQLiteDatabase.class);
+
+        doReturn(dbMock).when(dbHelperMock).openOrCreateDb();
         doReturn(false).when(dbMock).isReadOnly();
 
         doReturn(cursorMock).when(dbMock).query(
@@ -77,6 +83,6 @@ public class SqlQueriesTest {
         doReturn(count).when(cursorMock).getCount();
         doReturn(moveToNext).when(cursorMock).moveToNext();
         doReturn(noteValue).when(cursorMock).getString(anyInt());
-        return dbMock;
+        return dbHelperMock;
     }
 }

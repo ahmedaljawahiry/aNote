@@ -1,6 +1,5 @@
 package com.ahmed.anote.forms.note;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 

@@ -1,7 +1,6 @@
 package com.ahmed.anote.displays.selectionPage.notesGrid;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +12,8 @@ import com.ahmed.anote.auth.BiometricAuth;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
 
-import org.junit.jupiter.api.Test;
+import net.sqlcipher.Cursor;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

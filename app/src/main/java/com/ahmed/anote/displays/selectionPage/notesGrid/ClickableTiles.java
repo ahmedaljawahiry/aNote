@@ -1,7 +1,6 @@
 package com.ahmed.anote.displays.selectionPage.notesGrid;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +11,8 @@ import com.ahmed.anote.R;
 import com.ahmed.anote.auth.BiometricAuth;
 import com.ahmed.anote.db.Contract;
 import com.ahmed.anote.displays.selectionPage.NoteSelectionActivity;
-import com.ahmed.anote.forms.note.NoteFormActivity;
+
+import net.sqlcipher.Cursor;
 
 public class ClickableTiles implements AdapterView.OnItemClickListener {
 

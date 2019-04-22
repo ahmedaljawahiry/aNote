@@ -4,9 +4,12 @@ import android.content.Context;
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteOpenHelper;
 
+import java.io.File;
+
 public class DbHelper extends SQLiteOpenHelper {
 
     private static DbHelper instance = null;
+    private Context context;
 
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
@@ -22,6 +25,16 @@ public class DbHelper extends SQLiteOpenHelper {
     private DbHelper(Context context) {
         // private to ensure single instance is used.
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
+    }
+
+    public SQLiteDatabase openOrCreateDb() {
+        File dbFile = context.getDatabasePath(DbHelper.DATABASE_NAME);
+        return SQLiteDatabase.openOrCreateDatabase(dbFile, "ahmed", null);
+    }
+
+    public void loadLibs() {
+        SQLiteDatabase.loadLibs(context);
     }
 
     @Override
