@@ -12,15 +12,15 @@
         android:layout_height="141dp"
         android:layout_marginTop="231dp"
         android:layout_marginBottom="231dp"
+        android:clickable="true"
+        android:contentDescription="Authenticate"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        android:clickable="true"
-        android:contentDescription="Authenticate"
-        android:focusable="true"
         app:srcCompat="@drawable/ic_fingerprint_black_56dp" />
 
     <TextView
