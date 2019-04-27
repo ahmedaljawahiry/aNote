@@ -18,4 +18,13 @@
     <string name="hint_placeholder">Hint...</string>
     <string name="fingerprint_intructions">Tap fingerprint to unlock...</string>
     <string name="note_title_placeholder">Title</string>
+    <string name="db_encryption_enter_pw">
+        Enter a password to encrypt the database.
+    </string>
+    <string name="db_encryption_info">
+        This password will be encrypted, and the encryption key will be
+        stored in the Android Keystore system.
+    </string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
 </resources>
