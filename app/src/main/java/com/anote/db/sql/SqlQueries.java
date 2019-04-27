@@ -2,7 +2,7 @@ package com.anote.db.sql;
 
 import android.content.ContentValues;
 
-import com.anote.forms.FormInputValues;
+import com.anote.common.userInput.FormInputValues;
 
 import net.sqlcipher.Cursor;
 

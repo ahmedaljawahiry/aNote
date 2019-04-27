@@ -12,6 +12,7 @@
     <string name="lock">Lock:</string>
     <string name="new_pin">New Pin</string>
     <string name="save">Save</string>
+    <string name="encrypt">ENCRYPT</string>
     <string name="cancel">Cancel</string>
     <string name="pin_placeholder">1234</string>
     <string name="key_placeholder">A</string>
@@ -22,9 +23,9 @@
         Enter a password to encrypt the database.
     </string>
     <string name="db_encryption_info">
-        This password will be encrypted, and the encryption key will be
-        stored in the Android Keystore system.
+        This password is only required for initial encryption. Future access to the app
+        requires fingerprint authorization only.
     </string>
     <string name="password_hint">Password</string>
-    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="confirm_password_hint">Confirm password</string>
 </resources>

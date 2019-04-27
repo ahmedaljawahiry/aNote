@@ -8,11 +8,11 @@ import com.anote.R;
 public class LockButton implements View.OnClickListener {
 
     private ImageView button;
-    private UserInput userInput;
+    private InputValues inputValues;
     private boolean locked;
 
-    public LockButton(NoteFormActivity activity, UserInput userInput, boolean locked) {
-        this.userInput = userInput;
+    public LockButton(NoteFormActivity activity, InputValues inputValues, boolean locked) {
+        this.inputValues = inputValues;
         this.locked = locked;
 
         this.button = activity.findViewById(R.id.lock_note_button);
@@ -21,7 +21,7 @@ public class LockButton implements View.OnClickListener {
         if (locked) {
             button.setImageResource(R.drawable.ic_lock_closed_red_56dp);
         }
-        userInput.setLocked(locked);
+        inputValues.setLocked(locked);
     }
 
     @Override
@@ -34,6 +34,6 @@ public class LockButton implements View.OnClickListener {
             button.setImageResource(R.drawable.ic_lock_closed_red_56dp);
             locked = true;
         }
-        userInput.setLocked(locked);
+        inputValues.setLocked(locked);
     }
 }

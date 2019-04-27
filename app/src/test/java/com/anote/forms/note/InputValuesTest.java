@@ -15,7 +15,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
-public class UserInputTest {
+public class InputValuesTest {
 
     @Test
     public void valuesSetToEmptyStringIfNothingEntered() {
@@ -26,9 +26,9 @@ public class UserInputTest {
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_title));
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_note));
 
-        UserInput userInput = new UserInput(activityMock);
-        assertThat(userInput.getEnteredTitle()).isEmpty();
-        assertThat(userInput.getEnteredNote()).isEmpty();
+        InputValues inputValues = new InputValues(activityMock);
+        assertThat(inputValues.getEnteredTitle()).isEmpty();
+        assertThat(inputValues.getEnteredNote()).isEmpty();
     }
 
     @Test
@@ -38,15 +38,15 @@ public class UserInputTest {
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_title));
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_note));
 
-        UserInput userInput = new UserInput(activityMock);
-        assertThat(userInput.getEnteredTitle()).isEmpty();
-        assertThat(userInput.getEnteredNote()).isEmpty();
+        InputValues inputValues = new InputValues(activityMock);
+        assertThat(inputValues.getEnteredTitle()).isEmpty();
+        assertThat(inputValues.getEnteredNote()).isEmpty();
     }
 
     @Test
     public void valuesSetIfValuesWereEntered() {
-        UserInput userInput = new UserInput(Mocks.getActivityMockWithNoteValues());
-        assertThat(userInput.getEnteredTitle()).isEqualTo(Mocks.TITLE_VALUE);
-        assertThat(userInput.getEnteredNote()).isEqualTo(Mocks.NOTE_VALUE);
+        InputValues inputValues = new InputValues(Mocks.getActivityMockWithNoteValues());
+        assertThat(inputValues.getEnteredTitle()).isEqualTo(Mocks.TITLE_VALUE);
+        assertThat(inputValues.getEnteredNote()).isEqualTo(Mocks.NOTE_VALUE);
     }
 }

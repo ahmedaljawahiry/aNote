@@ -6,7 +6,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import com.anote.db.CipherDb;
 import com.anote.db.Contract;
-import com.anote.forms.FormInputValues;
+import com.anote.common.userInput.FormInputValues;
 
 
 public class NoteSQL implements SqlQueries {

@@ -1,4 +1,4 @@
-package com.anote.forms;
+package com.anote.common.userInput;
 
 import android.widget.CheckBox;
 import android.widget.EditText;

@@ -26,7 +26,7 @@ import static org.mockito.Mockito.verify;
 public class SaveButtonTest {
 
     private static Activity activityMock = Mocks.getActivityMockWithNoteValues();
-    private static UserInput userInputMock = mock(UserInput.class);
+    private static InputValues inputValuesMock = mock(InputValues.class);
     private static Button buttonMock = mock(Button.class);
     private static NoteSQL noteSqlMock = mock(NoteSQL.class);
     private static ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
@@ -37,19 +37,19 @@ public class SaveButtonTest {
     public static void setUp() {
         doReturn(buttonMock).when(activityMock).findViewById(eq(R.id.save_note_button));
 
-        doReturn(true).when(userInputMock).areValid();
+        doReturn(true).when(inputValuesMock).areValid();
 
         contextMock = getContextMock(viewMock);
     }
 
     @Test
     public void enteredValuesFoundOnClick() {
-        UserInput userInputMock = mock(UserInput.class);
+        InputValues inputValuesMock = mock(InputValues.class);
         doReturn(false).when(noteSqlMock).RECORD_EXISTS(anyString());
-        new SaveButton(activityMock, userInputMock, noteSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, noteSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
-        verify(userInputMock, times(1)).find();
+        verify(inputValuesMock, times(1)).find();
     }
 
     @Test
@@ -57,7 +57,7 @@ public class SaveButtonTest {
         doReturn(false).when(noteSqlMock).RECORD_EXISTS(anyString());
         ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
 
-        new SaveButton(activityMock, userInputMock, noteSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, noteSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
         verify(toastPrinterMock, times(1))
@@ -70,7 +70,7 @@ public class SaveButtonTest {
         Context contextMock = getContextMock(viewMock);
 
         doReturn(false).when(noteSqlMock).RECORD_EXISTS(anyString());
-        SaveButton saveButton = new SaveButton(activityMock, userInputMock,
+        SaveButton saveButton = new SaveButton(activityMock, inputValuesMock,
                 noteSqlMock, toastPrinterMock);
 
         saveButton.onClick(viewMock);
@@ -85,10 +85,10 @@ public class SaveButtonTest {
     public void noteInsertedOnClick() {
         NoteSQL noteSqlMock = mock(NoteSQL.class);
         doReturn(false).when(noteSqlMock).RECORD_EXISTS(anyString());
-        new SaveButton(activityMock, userInputMock, noteSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, noteSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
-        verify(noteSqlMock, times(1)).INSERT(eq(userInputMock));
+        verify(noteSqlMock, times(1)).INSERT(eq(inputValuesMock));
     }
 
     @Test
@@ -96,10 +96,10 @@ public class SaveButtonTest {
         doReturn(false).when(noteSqlMock).RECORD_EXISTS(anyString());
         ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
 
-        UserInput userInputMock = mock(UserInput.class);
-        doReturn(false).when(userInputMock).areValid();
+        InputValues inputValuesMock = mock(InputValues.class);
+        doReturn(false).when(inputValuesMock).areValid();
 
-        new SaveButton(activityMock, userInputMock, noteSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, noteSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
         verify(toastPrinterMock, times(1))
@@ -111,7 +111,7 @@ public class SaveButtonTest {
         doReturn(true).when(noteSqlMock).RECORD_EXISTS(anyString());
         ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
 
-        new SaveButton(activityMock, userInputMock, noteSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, noteSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
         verify(toastPrinterMock, times(1))
@@ -121,12 +121,12 @@ public class SaveButtonTest {
     @Test
     public void noteUpdatedOnClick() {
         NoteSQL noteSqlMock = mock(NoteSQL.class);
-        SaveButton saveButton = new SaveButton(activityMock, userInputMock,
+        SaveButton saveButton = new SaveButton(activityMock, inputValuesMock,
                 noteSqlMock, toastPrinterMock);
 
         saveButton.editOnly("title");
         saveButton.onClick(viewMock);
-        verify(noteSqlMock, times(1)).UPDATE(eq(userInputMock), eq("title"));
+        verify(noteSqlMock, times(1)).UPDATE(eq(inputValuesMock), eq("title"));
     }
 
     @Test
@@ -137,19 +137,19 @@ public class SaveButtonTest {
         NoteSQL noteSqlMock = mock(NoteSQL.class);
         doReturn(true).when(noteSqlMock).RECORD_EXISTS(eq(existingTitle));
 
-        UserInput userInputMock = mock(UserInput.class);
-        doReturn(existingTitle).when(userInputMock).getEnteredTitle();
-        doReturn(true).when(userInputMock).areValid();
+        InputValues inputValuesMock = mock(InputValues.class);
+        doReturn(existingTitle).when(inputValuesMock).getEnteredTitle();
+        doReturn(true).when(inputValuesMock).areValid();
 
         ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
 
-        SaveButton saveButton = new SaveButton(activityMock, userInputMock,
+        SaveButton saveButton = new SaveButton(activityMock, inputValuesMock,
                 noteSqlMock, toastPrinterMock);
 
         saveButton.editOnly(titeOfNoteToBeEdited);
         saveButton.onClick(viewMock);
 
-        verify(noteSqlMock, times(0)).UPDATE(eq(userInputMock), eq(titeOfNoteToBeEdited));
+        verify(noteSqlMock, times(0)).UPDATE(eq(inputValuesMock), eq(titeOfNoteToBeEdited));
         verify(toastPrinterMock, times(1))
                 .print(eq(contextMock), eq(SaveButton.DUPLICATE), eq(Toast.LENGTH_SHORT));
     }

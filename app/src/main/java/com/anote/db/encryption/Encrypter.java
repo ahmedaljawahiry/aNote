@@ -1,50 +1,40 @@
 package com.anote.db.encryption;
 
-import android.security.keystore.KeyGenParameterSpec;
-import android.security.keystore.KeyProperties;
 
-import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.cert.CertificateException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
-
-import static com.anote.db.CipherDb.KEY_ALIAS;
-import static com.anote.db.encryption.Util.AES_MODE;
-import static com.anote.db.encryption.Util.ANDROID_KEY_STORE;
 
 public class Encrypter {
 
-    private KeyStore keyStore;
-    private byte[] IV;
-    private byte[] encryption;
+    private byte[] ivBytes;
+    private byte[] encryptedBytes;
+    private AndroidKeyStore keyStore;
 
-    public Encrypter() throws KeyStoreException {
-        keyStore = Util.initKeyStore();
+    public Encrypter(AndroidKeyStore keyStore) {
+        this.keyStore = keyStore;
+        generateIvBytes();
     }
 
-    public void encrypt(String textToEncrypt) throws EncrypterException {
-
+    public String encrypt(String textToEncrypt) throws EncrypterException {
         try {
-            Cipher cipher = Cipher.getInstance(AES_MODE);
-            IV = cipher.getIV();
-            cipher.init(
-                    Cipher.ENCRYPT_MODE,
-                    generateKey(),
-                    new GCMParameterSpec(128, IV)
-            );
-            encryption = cipher.doFinal(textToEncrypt.getBytes());
+            Cipher cipher = Cipher.getInstance(AndroidKeyStore.AES_MODE);
+            Key key = keyStore.generateKey(AndroidKeyStore.ALIAS);
+            GCMParameterSpec gcmSpec = new GCMParameterSpec(128, ivBytes);
+
+            cipher.init(Cipher.ENCRYPT_MODE, key, gcmSpec);
+            encryptedBytes = cipher.doFinal(textToEncrypt.getBytes());
+
+            return Base64.getEncoder().encodeToString(encryptedBytes);
         }
         catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             e.printStackTrace();
@@ -52,7 +42,7 @@ public class Encrypter {
                     "Error occurred while retrieving Cipher: " + e.getMessage()
             );
         }
-        catch (InvalidKeyException | InvalidAlgorithmParameterException e) {
+        catch (InvalidAlgorithmParameterException | InvalidKeyException e) {
             e.printStackTrace();
             throw new EncrypterException(
                     "Error occurred while initialising Cipher: " + e.getMessage()
@@ -66,41 +56,13 @@ public class Encrypter {
         }
     }
 
-    public byte[] getIV() {
-        return IV;
+    public String getIvString() {
+        return Base64.getEncoder().encodeToString(ivBytes);
     }
 
-    public byte[] getEncryption() {
-        return encryption;
+    private void generateIvBytes() {
+        SecureRandom secureRandom = new SecureRandom();
+        ivBytes = new byte[12];
+        secureRandom.nextBytes(ivBytes);
     }
-
-    private SecretKey generateKey() throws EncrypterException {
-        SecretKey key = null;
-        try {
-            if (!keyStore.containsAlias(KEY_ALIAS)) {
-                KeyGenerator keyGenerator = KeyGenerator.getInstance(
-                        KeyProperties.KEY_ALGORITHM_AES, ANDROID_KEY_STORE
-                );
-                keyGenerator.init(
-                        new KeyGenParameterSpec.Builder(
-                                KEY_ALIAS,
-                                KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT
-                        )
-                                .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-                                .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-                                .setRandomizedEncryptionRequired(false)
-                                .build()
-                );
-                key = keyGenerator.generateKey();
-            }
-        } catch (KeyStoreException | NoSuchProviderException
-                | NoSuchAlgorithmException | InvalidAlgorithmParameterException e) {
-
-            throw new EncrypterException(
-                    "Error occurred while generating encryption key: " + e.getMessage()
-            );
-        }
-        return key;
-    }
-
 }

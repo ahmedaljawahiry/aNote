@@ -19,16 +19,16 @@ public class SaveButton implements View.OnClickListener {
     public static final String DUPLICATE = "Enter a unique title!";
 
     private Button button;
-    private UserInput userInput;
+    private InputValues inputValues;
     private NoteSQL noteSQL;
     private ToastPrinter toastPrinter;
 
     private boolean editingNote;
     private String titleOfNoteToBeEdited;
 
-    public SaveButton(Activity activity, UserInput userInput,
+    public SaveButton(Activity activity, InputValues inputValues,
                       NoteSQL noteSQL, ToastPrinter toastPrinter) {
-        this.userInput = userInput;
+        this.inputValues = inputValues;
         this.noteSQL = noteSQL;
         this.toastPrinter = toastPrinter;
         this.button = activity.findViewById(R.id.save_note_button);
@@ -37,10 +37,10 @@ public class SaveButton implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        userInput.find();
+        inputValues.find();
         Context context = view.getContext();
 
-        if (!userInput.areValid()) {
+        if (!inputValues.areValid()) {
             toastPrinter.print(context, EMPTY_TITLE, Toast.LENGTH_SHORT);
             return;
         }
@@ -59,22 +59,22 @@ public class SaveButton implements View.OnClickListener {
     }
 
     private void insertNewNote(Context context) {
-        if (noteSQL.RECORD_EXISTS(userInput.getEnteredTitle())) {
+        if (noteSQL.RECORD_EXISTS(inputValues.getEnteredTitle())) {
             toastPrinter.print(context, DUPLICATE, Toast.LENGTH_SHORT);
         }
         else {
-            noteSQL.INSERT(userInput);
+            noteSQL.INSERT(inputValues);
             goBackToNoteSelection(context);
         }
     }
 
     private void updateExistingNote(Context context) {
-        String enteredTitle = userInput.getEnteredTitle();
+        String enteredTitle = inputValues.getEnteredTitle();
         if (!titleOfNoteToBeEdited.equals(enteredTitle) && noteSQL.RECORD_EXISTS(enteredTitle)) {
             toastPrinter.print(context, DUPLICATE, Toast.LENGTH_SHORT);
         }
         else {
-            noteSQL.UPDATE(userInput, titleOfNoteToBeEdited);
+            noteSQL.UPDATE(inputValues, titleOfNoteToBeEdited);
             goBackToNoteSelection(context);
         }
     }

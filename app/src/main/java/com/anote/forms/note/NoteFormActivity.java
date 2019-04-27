@@ -23,7 +23,7 @@ public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserv
     private CipherDb cipherDb;
     private Bundle bundle;
     private DiscardAlertDialog discardAlertDialog;
-    private UserInput userInput;
+    private InputValues inputValues;
 
     private String noteTitle;
     private String noteBody;
@@ -36,20 +36,20 @@ public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserv
         setContentView(R.layout.activity_note_form);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
-        cipherDb = CipherDb.getInstance(this);
-        userInput = new UserInput(this);
+        cipherDb = getCipherDb();
+        inputValues = new InputValues(this);
         discardAlertDialog = new DiscardAlertDialog(this);
         bundle = this.getIntent().getExtras();
 
         SaveButton saveButton = new SaveButton(
                 this,
-                userInput,
+                inputValues,
                 new NoteSQL(cipherDb),
                 new ToastPrinter());
 
         fillPageWithExistingValues(saveButton);
 
-        new LockButton(this, userInput, locked);
+        new LockButton(this, inputValues, locked);
 
         new DeleteButton(
                 this,
@@ -86,13 +86,13 @@ public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserv
 
     @Override
     public void onBackPressed() {
-        userInput.find();
-        boolean newEmptyNote = !isExistingNote && !userInput.nothingEntered();
+        inputValues.find();
+        boolean newEmptyNote = !isExistingNote && !inputValues.nothingEntered();
         boolean existingUnchangedNote =
                 isExistingNote && (
-                        !userInput.getEnteredTitle().equals(noteTitle) ||
-                        !userInput.getEnteredNote().equals(noteBody) ||
-                        userInput.isLocked() != locked
+                        !inputValues.getEnteredTitle().equals(noteTitle) ||
+                        !inputValues.getEnteredNote().equals(noteBody) ||
+                        inputValues.isLocked() != locked
                 );
 
         if (newEmptyNote || existingUnchangedNote) {

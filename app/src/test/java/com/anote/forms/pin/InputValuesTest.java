@@ -14,7 +14,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
-public class UserInputTest {
+public class InputValuesTest {
 
     @Test
     public void valuesSetToEmptyStringIfNothingEntered() {
@@ -30,7 +30,7 @@ public class UserInputTest {
         doReturn(editTextMock).when(activityMock).findViewById(eq(R.id.entered_hint));
         doReturn(checkBoxMock).when(activityMock).findViewById(eq(R.id.pin_locked_checkbox));
 
-        assertAllEmpty(new UserInput(activityMock));
+        assertAllEmpty(new InputValues(activityMock));
     }
 
     @Test
@@ -42,21 +42,21 @@ public class UserInputTest {
         doReturn(null).when(activityMock).findViewById(eq(R.id.entered_hint));
         doReturn(null).when(activityMock).findViewById(eq(R.id.pin_locked_checkbox));
 
-        assertAllEmpty(new UserInput(activityMock));
+        assertAllEmpty(new InputValues(activityMock));
     }
 
-    private void assertAllEmpty(UserInput userInput) {
-        assertThat(userInput.getEnteredKey()).isEmpty();
-        assertThat(userInput.getEnteredPin()).isEmpty();
-        assertThat(userInput.getEnteredHint()).isEmpty();
+    private void assertAllEmpty(InputValues inputValues) {
+        assertThat(inputValues.getEnteredKey()).isEmpty();
+        assertThat(inputValues.getEnteredPin()).isEmpty();
+        assertThat(inputValues.getEnteredHint()).isEmpty();
     }
 
     @Test
     public void valuesSetIfValuesWereEntered() {
-        UserInput userInput = new UserInput(Mocks.getActivityMockWithPinValues());
-        assertThat(userInput.getEnteredKey()).isEqualTo(Mocks.KEY_VALUE);
-        assertThat(userInput.getEnteredPin()).isEqualTo(Mocks.PIN_VALUE);
-        assertThat(userInput.getEnteredHint()).isEqualTo(Mocks.HINT_VALUE);
-        assertThat(userInput.isLocked()).isEqualTo(Mocks.SECURE_VALUE);
+        InputValues inputValues = new InputValues(Mocks.getActivityMockWithPinValues());
+        assertThat(inputValues.getEnteredKey()).isEqualTo(Mocks.KEY_VALUE);
+        assertThat(inputValues.getEnteredPin()).isEqualTo(Mocks.PIN_VALUE);
+        assertThat(inputValues.getEnteredHint()).isEqualTo(Mocks.HINT_VALUE);
+        assertThat(inputValues.isLocked()).isEqualTo(Mocks.SECURE_VALUE);
     }
 }

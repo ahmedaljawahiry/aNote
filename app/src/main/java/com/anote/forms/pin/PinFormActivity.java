@@ -10,7 +10,6 @@ import android.widget.CheckBox;
 import com.anote.R;
 import com.anote.common.abstractActivites.ANoteActivity;
 import com.anote.common.dialogs.DiscardAlertDialog;
-import com.anote.db.CipherDb;
 import com.anote.db.Contract;
 import com.anote.db.sql.PinSQL;
 import com.anote.common.util.TextEditor;
@@ -18,7 +17,7 @@ import com.anote.common.util.ToastPrinter;
 
 public class PinFormActivity extends ANoteActivity implements LifecycleObserver {
 
-    private UserInput userInput;
+    private InputValues inputValues;
     private DiscardAlertDialog discardAlertDialog;
     private String existingKey;
     private String existingHint;
@@ -32,13 +31,13 @@ public class PinFormActivity extends ANoteActivity implements LifecycleObserver 
         setContentView(R.layout.activity_pin_form);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
-        userInput = new UserInput(this);
+        inputValues = new InputValues(this);
         discardAlertDialog = new DiscardAlertDialog(this);
         SaveButton saveButton = new SaveButton(
                 this,
-                userInput,
+                inputValues,
                 new PinSQL(
-                        CipherDb.getInstance(this)
+                        getCipherDb()
                 ),
                 new ToastPrinter());
 
@@ -63,14 +62,14 @@ public class PinFormActivity extends ANoteActivity implements LifecycleObserver 
 
     @Override
     public void onBackPressed() {
-        userInput.find();
-        boolean newEmptyPin = !isExistingPin && !userInput.nothingEntered();
+        inputValues.find();
+        boolean newEmptyPin = !isExistingPin && !inputValues.nothingEntered();
         boolean existingUnchangedPin =
                 isExistingPin && (
-                        !userInput.getEnteredKey().equals(existingKey) ||
-                                !userInput.getEnteredHint().equals(existingHint) ||
-                                !userInput.getEnteredPin().equals(existingPin) ||
-                                userInput.isLocked() != existingCheckboxTicked
+                        !inputValues.getEnteredKey().equals(existingKey) ||
+                                !inputValues.getEnteredHint().equals(existingHint) ||
+                                !inputValues.getEnteredPin().equals(existingPin) ||
+                                inputValues.isLocked() != existingCheckboxTicked
                 );
 
         if (newEmptyPin || existingUnchangedPin) {

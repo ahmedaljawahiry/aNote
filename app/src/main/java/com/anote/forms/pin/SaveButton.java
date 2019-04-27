@@ -21,7 +21,7 @@ public class SaveButton implements View.OnClickListener {
     public static final String EMPTY_KEY = "Enter a key!";
 
     private Button button;
-    private UserInput userInput;
+    private InputValues inputValues;
     private Activity activity;
     private PinSQL pinSql;
     private ToastPrinter toastPrinter;
@@ -29,9 +29,9 @@ public class SaveButton implements View.OnClickListener {
     private boolean editingPin;
     private String keyToBeEdited;
 
-    public SaveButton(Activity activity, UserInput userInput,
+    public SaveButton(Activity activity, InputValues inputValues,
                       PinSQL pinSql, ToastPrinter toastPrinter) {
-        this.userInput = userInput;
+        this.inputValues = inputValues;
         this.pinSql = pinSql;
         this.activity = activity;
         this.toastPrinter = toastPrinter;
@@ -41,10 +41,10 @@ public class SaveButton implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        userInput.find();
+        inputValues.find();
         Context context = view.getContext();
 
-        if (!userInput.areValid()) {
+        if (!inputValues.areValid()) {
             keyErrorNotification(context, EMPTY_KEY);
             return;
         }
@@ -63,22 +63,22 @@ public class SaveButton implements View.OnClickListener {
     }
 
     private void insertNewPin(Context context) {
-        if (pinSql.RECORD_EXISTS(userInput.getEnteredKey())) {
+        if (pinSql.RECORD_EXISTS(inputValues.getEnteredKey())) {
             keyErrorNotification(context, DUPLICATE);
         }
         else {
-            pinSql.INSERT(userInput);
+            pinSql.INSERT(inputValues);
             goBackToNoteSelection(context);
         }
     }
 
     private void updateExistingPin(Context context) {
-        String enteredKey = userInput.getEnteredKey();
+        String enteredKey = inputValues.getEnteredKey();
         if (!keyToBeEdited.equals(enteredKey) && pinSql.RECORD_EXISTS(enteredKey)) {
             keyErrorNotification(context, DUPLICATE);
         }
         else {
-            pinSql.UPDATE(userInput, keyToBeEdited);
+            pinSql.UPDATE(inputValues, keyToBeEdited);
             goBackToNoteSelection(context);
         }
     }

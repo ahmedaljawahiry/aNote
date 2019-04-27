@@ -41,6 +41,15 @@ public class Mocks {
         return activityMock;
     }
 
+    public static Activity getActivityMockWithPasswordValues(String value1, String value2) {
+        Activity activityMock = mock(Activity.class);
+
+        setTextReturnValue(activityMock, R.id.entered_password, value1);
+        setTextReturnValue(activityMock, R.id.entered_password_confirmation, value2);
+
+        return activityMock;
+    }
+
     private static void setTextReturnValue(Activity activityMock, int id, String returnValue) {
         EditText editTextMock = mock(EditText.class);
         Editable editableMock = mock(Editable.class);

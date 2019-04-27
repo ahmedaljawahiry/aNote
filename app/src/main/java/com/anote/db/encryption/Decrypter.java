@@ -1,12 +1,14 @@
 package com.anote.db.encryption;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
-import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableEntryException;
+import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -14,27 +16,31 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.GCMParameterSpec;
 
-import static com.anote.db.CipherDb.KEY_ALIAS;
-import static com.anote.db.encryption.Util.AES_MODE;
+import static com.anote.db.CipherDb.DB_PASSWORD_IV_KEY;
+import static com.anote.db.CipherDb.PREF_FILE_NAME;
+import static com.anote.db.encryption.AndroidKeyStore.AES_MODE;
 
 public class Decrypter {
 
-    private KeyStore keyStore;
+    private AndroidKeyStore keyStore;
+    private Context context;
 
-    public Decrypter() throws KeyStoreException {
-        keyStore = Util.initKeyStore();
+    public Decrypter(AndroidKeyStore keyStore, Context context) {
+        this.keyStore = keyStore;
+        this.context = context;
     }
 
-    public String decrypt(byte[] encryptedData, Encrypter encrypter)  throws DecrypterException {
+    public String decrypt(String encryptedString) throws DecrypterException, KeyStoreException {
         try {
+            byte[] encryptedBytes = Base64.getDecoder().decode(encryptedString);
+            Key key = keyStore.getKey(AndroidKeyStore.ALIAS);
             Cipher cipher = Cipher.getInstance(AES_MODE);
-            cipher.init(
-                    cipher.DECRYPT_MODE,
-                    generateKey(),
-                    new GCMParameterSpec(128, encrypter.getIV())
-            );
-            byte[] decryptedData = cipher.doFinal(encryptedData);
-            return new String(decryptedData);
+            GCMParameterSpec gcmSpec = new GCMParameterSpec(128, retrieveIv());
+
+            cipher.init(cipher.DECRYPT_MODE, key, gcmSpec);
+            byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+
+            return new String(decryptedBytes);
         }
         catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             e.printStackTrace();
@@ -56,17 +62,11 @@ public class Decrypter {
         }
     }
 
-    private Key generateKey() throws DecrypterException {
-        Key key;
-        try {
-            key = keyStore.getKey(KEY_ALIAS, null);
-        }
-        catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableEntryException e) {
-            e.printStackTrace();
-            throw new DecrypterException(
-                    "Error occurred while retrieving key from store: " + e.getMessage()
-            );
-        }
-        return key;
+    private byte[] retrieveIv() {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                PREF_FILE_NAME, Context.MODE_PRIVATE
+        );
+        String ivString = sharedPref.getString(DB_PASSWORD_IV_KEY, null);
+        return Base64.getDecoder().decode(ivString);
     }
 }

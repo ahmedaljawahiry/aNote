@@ -4,12 +4,12 @@ import android.app.Activity;
 
 import com.anote.R;
 import com.anote.db.Contract;
-import com.anote.forms.FormInputValues;
+import com.anote.common.userInput.FormInputValues;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserInput extends FormInputValues {
+public class InputValues extends FormInputValues {
 
     private Activity activity;
     private String enteredTitle;
@@ -17,7 +17,7 @@ public class UserInput extends FormInputValues {
     private boolean locked;
     private Map<String, Object> dbValueMap;
 
-    public UserInput(Activity activity) {
+    public InputValues(Activity activity) {
         this.activity = activity;
         this.dbValueMap = new HashMap<>();
         find();
@@ -32,9 +32,7 @@ public class UserInput extends FormInputValues {
         if (enteredTitle.isEmpty() || enteredTitle == null) {
             return false;
         }
-        else {
-            return true;
-        }
+        return true;
     }
 
     public Map<String, Object> getDbValueMap() {

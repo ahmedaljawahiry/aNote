@@ -28,7 +28,7 @@ import static org.mockito.Mockito.verify;
 public class SaveButtonTest {
 
     private static Activity activityMock = Mocks.getActivityMockWithPinValues();
-    private static UserInput userInputMock = mock(UserInput.class);
+    private static InputValues inputValuesMock = mock(InputValues.class);
     private static Button buttonMock = mock(Button.class);
     private static PinSQL pinSqlMock = mock(PinSQL.class);
     private static ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
@@ -39,19 +39,19 @@ public class SaveButtonTest {
     public static void setUp() {
         doReturn(buttonMock).when(activityMock).findViewById(eq(R.id.save_pin_button));
 
-        doReturn(true).when(userInputMock).areValid();
+        doReturn(true).when(inputValuesMock).areValid();
 
         contextMock = getContextMock(viewMock);
     }
 
     @Test
     public void enteredValuesFoundOnClick() {
-        UserInput userInputMock = mock(UserInput.class);
+        InputValues inputValuesMock = mock(InputValues.class);
         doReturn(false).when(pinSqlMock).RECORD_EXISTS(anyString());
-        new SaveButton(activityMock, userInputMock, pinSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, pinSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
-        verify(userInputMock, times(1)).find();
+        verify(inputValuesMock, times(1)).find();
     }
 
     @Test
@@ -59,7 +59,7 @@ public class SaveButtonTest {
         doReturn(false).when(pinSqlMock).RECORD_EXISTS(anyString());
         ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
 
-        new SaveButton(activityMock, userInputMock, pinSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, pinSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
         verify(toastPrinterMock, times(1))
@@ -72,7 +72,7 @@ public class SaveButtonTest {
         Context contextMock = getContextMock(viewMock);
 
         doReturn(false).when(pinSqlMock).RECORD_EXISTS(anyString());
-        SaveButton saveButton = new SaveButton(activityMock, userInputMock,
+        SaveButton saveButton = new SaveButton(activityMock, inputValuesMock,
                 pinSqlMock, toastPrinterMock);
 
         saveButton.onClick(viewMock);
@@ -87,10 +87,10 @@ public class SaveButtonTest {
     public void pinInsertedOnClick() {
         PinSQL pinSqlMock = mock(PinSQL.class);
         doReturn(false).when(pinSqlMock).RECORD_EXISTS(anyString());
-        new SaveButton(activityMock, userInputMock, pinSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, pinSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
-        verify(pinSqlMock, times(1)).INSERT(eq(userInputMock));
+        verify(pinSqlMock, times(1)).INSERT(eq(inputValuesMock));
     }
 
     @Test
@@ -98,10 +98,10 @@ public class SaveButtonTest {
         doReturn(false).when(pinSqlMock).RECORD_EXISTS(anyString());
         ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
 
-        UserInput userInputMock = mock(UserInput.class);
-        doReturn(false).when(userInputMock).areValid();
+        InputValues inputValuesMock = mock(InputValues.class);
+        doReturn(false).when(inputValuesMock).areValid();
 
-        new SaveButton(activityMock, userInputMock, pinSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, pinSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
         verify(toastPrinterMock, times(1))
@@ -112,12 +112,12 @@ public class SaveButtonTest {
     public void keyTextColorChangeOnInvalidValues() {
         doReturn(false).when(pinSqlMock).RECORD_EXISTS(anyString());
 
-        UserInput userInputMock = mock(UserInput.class);
-        doReturn(false).when(userInputMock).areValid();
+        InputValues inputValuesMock = mock(InputValues.class);
+        doReturn(false).when(inputValuesMock).areValid();
 
         TextView keyTextViewMock = getKeyTextViewMock();
 
-        new SaveButton(activityMock, userInputMock, pinSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, pinSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
         verify(keyTextViewMock, times(1)).setTextColor(eq(Color.parseColor("#8b0000")));
@@ -128,7 +128,7 @@ public class SaveButtonTest {
         doReturn(true).when(pinSqlMock).RECORD_EXISTS(anyString());
         ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
 
-        new SaveButton(activityMock, userInputMock, pinSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, pinSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
         verify(toastPrinterMock, times(1))
@@ -141,7 +141,7 @@ public class SaveButtonTest {
 
         TextView keyTextViewMock = getKeyTextViewMock();
 
-        new SaveButton(activityMock, userInputMock, pinSqlMock, toastPrinterMock)
+        new SaveButton(activityMock, inputValuesMock, pinSqlMock, toastPrinterMock)
                 .onClick(viewMock);
 
         verify(keyTextViewMock, times(1)).setTextColor(eq(Color.parseColor("#8b0000")));
@@ -150,12 +150,12 @@ public class SaveButtonTest {
     @Test
     public void pinUpdatedOnClick() {
         PinSQL pinSqlMock = mock(PinSQL.class);
-        SaveButton saveButton = new SaveButton(activityMock, userInputMock,
+        SaveButton saveButton = new SaveButton(activityMock, inputValuesMock,
                 pinSqlMock, toastPrinterMock);
 
         saveButton.editOnly("key");
         saveButton.onClick(viewMock);
-        verify(pinSqlMock, times(1)).UPDATE(eq(userInputMock), eq("key"));
+        verify(pinSqlMock, times(1)).UPDATE(eq(inputValuesMock), eq("key"));
     }
 
     @Test
@@ -166,19 +166,19 @@ public class SaveButtonTest {
         PinSQL pinSqlMock = mock(PinSQL.class);
         doReturn(true).when(pinSqlMock).RECORD_EXISTS(eq(existingKey));
 
-        UserInput userInputMock = mock(UserInput.class);
-        doReturn(existingKey).when(userInputMock).getEnteredKey();
-        doReturn(true).when(userInputMock).areValid();
+        InputValues inputValuesMock = mock(InputValues.class);
+        doReturn(existingKey).when(inputValuesMock).getEnteredKey();
+        doReturn(true).when(inputValuesMock).areValid();
 
         ToastPrinter toastPrinterMock = mock(ToastPrinter.class);
 
-        SaveButton saveButton = new SaveButton(activityMock, userInputMock,
+        SaveButton saveButton = new SaveButton(activityMock, inputValuesMock,
                 pinSqlMock, toastPrinterMock);
 
         saveButton.editOnly(keyToBeEdited);
         saveButton.onClick(viewMock);
 
-        verify(pinSqlMock, times(0)).UPDATE(eq(userInputMock), eq(keyToBeEdited));
+        verify(pinSqlMock, times(0)).UPDATE(eq(inputValuesMock), eq(keyToBeEdited));
         verify(toastPrinterMock, times(1))
                 .print(eq(contextMock), eq(SaveButton.DUPLICATE), eq(Toast.LENGTH_SHORT));
     }

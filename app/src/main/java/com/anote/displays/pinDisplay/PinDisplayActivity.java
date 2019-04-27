@@ -30,7 +30,7 @@ public class PinDisplayActivity extends DbRecordDeleter implements LifecycleObse
         setContentView(R.layout.activity_pin_display);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
-        cipherDb = CipherDb.getInstance(this);
+        cipherDb = getCipherDb();
         bundle = this.getIntent().getExtras();
         fillBundle();
         fillPageWithExistingValues();
