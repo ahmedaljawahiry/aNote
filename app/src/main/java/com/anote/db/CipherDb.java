@@ -8,6 +8,7 @@ import java.io.File;
 
 public class CipherDb {
 
+    public static final String KEY_ALIAS = "aNote";
     private static CipherDb instance;
 
     private SQLiteDatabase db;
