@@ -28,7 +28,7 @@
     <EditText
         android:id="@+id/entered_note"
         android:layout_width="353dp"
-        android:layout_height="368dp"
+        android:layout_height="400dp"
         android:layout_marginStart="26dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="26dp"
@@ -50,7 +50,7 @@
     <Button
         android:id="@+id/save_note_button"
         android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
