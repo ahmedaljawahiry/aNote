@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.anote.R;
-import com.anote.common.abstractActivites.ANoteActivity;
+import com.anote.common.activities.ANoteActivity;
 import com.anote.common.util.ToastPrinter;
 import com.anote.displays.selectionPage.NoteSelectionActivity;
 

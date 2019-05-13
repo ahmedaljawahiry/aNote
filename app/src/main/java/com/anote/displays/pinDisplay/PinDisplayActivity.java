@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.anote.R;
-import com.anote.common.abstractActivites.DbRecordDeleter;
+import com.anote.common.activities.DbRecordDeleter;
 import com.anote.common.dialogs.DeleteAlertDialog;
 import com.anote.db.CipherDb;
 import com.anote.db.Contract;
@@ -29,6 +29,8 @@ public class PinDisplayActivity extends DbRecordDeleter implements LifecycleObse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_display);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+
+        this.getSupportActionBar().hide();
 
         cipherDb = getCipherDb();
         bundle = this.getIntent().getExtras();

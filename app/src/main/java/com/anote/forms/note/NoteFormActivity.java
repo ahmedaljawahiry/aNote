@@ -7,7 +7,7 @@ import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.os.Bundle;
 
 import com.anote.R;
-import com.anote.common.abstractActivites.DbRecordDeleter;
+import com.anote.common.activities.DbRecordDeleter;
 import com.anote.common.dialogs.DeleteAlertDialog;
 import com.anote.common.dialogs.DiscardAlertDialog;
 import com.anote.db.CipherDb;
@@ -35,6 +35,8 @@ public class NoteFormActivity extends DbRecordDeleter implements LifecycleObserv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_form);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+
+        this.getSupportActionBar().hide();
 
         cipherDb = getCipherDb();
         inputValues = new InputValues(this);

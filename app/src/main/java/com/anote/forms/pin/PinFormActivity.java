@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 
 import com.anote.R;
-import com.anote.common.abstractActivites.ANoteActivity;
+import com.anote.common.activities.ANoteActivity;
 import com.anote.common.dialogs.DiscardAlertDialog;
 import com.anote.db.Contract;
 import com.anote.db.sql.PinSQL;
@@ -30,6 +30,8 @@ public class PinFormActivity extends ANoteActivity implements LifecycleObserver 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_form);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+
+        this.getSupportActionBar().hide();
 
         inputValues = new InputValues(this);
         discardAlertDialog = new DiscardAlertDialog(this);

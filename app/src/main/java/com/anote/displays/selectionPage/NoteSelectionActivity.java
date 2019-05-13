@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.anote.R;
-import com.anote.common.abstractActivites.ANoteActivity;
+import com.anote.common.activities.ANoteActivity;
 import com.anote.db.CipherDb;
 import com.anote.db.sql.NoteSQL;
 import com.anote.db.sql.PinSQL;

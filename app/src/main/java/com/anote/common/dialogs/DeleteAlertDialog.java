@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import com.anote.common.abstractActivites.DbRecordDeleter;
+import com.anote.common.activities.DbRecordDeleter;
 import com.anote.db.sql.SqlQueries;
 import com.anote.displays.selectionPage.NoteSelectionActivity;
 
