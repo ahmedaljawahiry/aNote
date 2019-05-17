@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/key_display_text"
         android:layout_width="322dp"
-        android:layout_height="94dp"
+        android:layout_height="120dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="26dp"
         android:layout_marginEnd="30dp"
@@ -18,6 +18,7 @@
         android:inputType="textPersonName"
         android:text="@string/key_placeholder"
         android:textAlignment="center"
+        android:gravity="center"
         android:textAllCaps="false"
         android:textColor="@color/colorAccent"
         android:textSize="90sp"
@@ -49,11 +50,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/key_display_text"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.189" />
 
     <TextView
         android:id="@+id/pin_display_text"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="129dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="26dp"
