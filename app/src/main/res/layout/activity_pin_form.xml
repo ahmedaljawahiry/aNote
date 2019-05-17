@@ -63,7 +63,7 @@
         android:layout_column="1"
         android:ems="6"
         android:inputType="number"
-        android:maxLength="4"
+        android:maxLength="6"
         android:textSize="32sp" />
 
     <TextView

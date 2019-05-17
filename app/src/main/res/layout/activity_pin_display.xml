@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".displays.pinDisplay.PinDisplayActivity">
 
-    <EditText
+    <TextView
         android:id="@+id/key_display_text"
         android:layout_width="322dp"
         android:layout_height="94dp"
@@ -14,8 +14,6 @@
         android:layout_marginTop="26dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="120dp"
-        android:background="@null"
-        android:clickable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/key_placeholder"
@@ -31,15 +29,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
+    <TextView
         android:id="@+id/hint_display_text"
         android:layout_width="323dp"
         android:layout_height="46dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="26dp"
-        android:background="@null"
-        android:clickable="false"
         android:ems="10"
         android:fontFamily="sans-serif"
         android:inputType="textPersonName"
@@ -55,16 +51,14 @@
         app:layout_constraintTop_toBottomOf="@+id/key_display_text"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
+    <TextView
         android:id="@+id/pin_display_text"
-        android:layout_width="352dp"
+        android:layout_width="350dp"
         android:layout_height="129dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="26dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="120dp"
-        android:background="@null"
-        android:clickable="false"
         android:ems="10"
         android:inputType="text"
         android:scrollHorizontally="true"
@@ -72,7 +66,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorAccent"
-        android:textSize="100sp"
+        android:textSize="100dp"
         android:textStyle="bold"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -22,7 +22,7 @@ public class PinSQL implements SqlQueries {
     public void CREATE_TABLE_IF_NOT_EXISTS() {
         String sql = "CREATE TABLE IF NOT EXISTS " + Contract.Pins.TABLE_NAME + " (" +
                 Contract.Pins._ID + " INTEGER PRIMARY KEY," +
-                Contract.Pins.COLUMN_PIN + " INTEGER," +
+                Contract.Pins.COLUMN_PIN + " TEXT," +
                 Contract.Pins.COLUMN_KEY + " TEXT UNIQUE, " +
                 Contract.Pins.COLUMN_HINT + " TEXT," +
                 Contract.Pins.COLUMN_SECURITY_LEVEL + " INTEGER DEFAULT 0)";
