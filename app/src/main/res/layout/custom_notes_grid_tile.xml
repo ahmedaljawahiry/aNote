@@ -21,7 +21,7 @@
         android:paddingTop="0dp"
         android:paddingRight="8dp"
         android:textColor="@color/colorAccent"
-        android:textSize="60sp"
+        android:textSize="45sp"
         android:textStyle="bold"
         tools:text="Ref" />
 

@@ -8,7 +8,7 @@
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pins_grid"
-        android:layout_width="206dp"
+        android:layout_width="230dp"
         android:layout_height="match_parent"
         android:columnWidth="90dp"
         android:gravity="left"
@@ -23,7 +23,7 @@
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/notes_grid"
-        android:layout_width="206dp"
+        android:layout_width="182dp"
         android:layout_height="match_parent"
         android:columnWidth="206dp"
         android:gravity="right"
