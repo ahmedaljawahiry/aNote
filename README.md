@@ -43,3 +43,7 @@ the database.
 - Two separate grids are used for pins and "other notes". If one of the grids is empty, the other doesn't resize to full-screen.
 - App has only been tested on a Pixel 2. I have no current plans to adapt the UI for different screen sizes.
 - Would be ideal to have auto-resizable TextViews, so that text fits nicely on the main page.
+
+### Play Store
+
+This app is not available on the Play Store right now. I simply don't have enough time to maintain it at a standard I'd be happy with.
