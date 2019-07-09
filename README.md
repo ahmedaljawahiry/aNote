@@ -1,10 +1,9 @@
 ## aNote
 
 
-![Initial Password Setup](/previews/initial_password_setup.gif)
-![Main Screen](/previews/main_screen.gif)
-![Adding Pin](/previews/adding_pin.gif)
-![Adding Note](/previews/adding_note.gif)
+| Initial Password Setup | Main Screen | Adding Pin | Adding Note
+|------------|-------------|------------|-------------|
+| ![Initial Password Setup](/previews/initial_password_setup.gif) | ![Main Screen](/previews/main_screen.gif) | ![Adding Pin](/previews/adding_pin.gif) | ![Adding Note](/previews/adding_note.gif)
 
 
 ### Intro
