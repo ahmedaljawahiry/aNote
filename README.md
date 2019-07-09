@@ -1,5 +1,14 @@
 ## aNote
 
+
+![Initial Password Setup](/previews/initial_password_setup.gif)
+![Main Screen](/previews/main_screen.gif)
+![Adding Pin](/previews/adding_pin.gif)
+![Adding Note](/previews/adding_note.gif)
+
+
+### Intro
+
 Android app (my first!) for securely storing pins and notes. After initial setup - where a password is used to encrypt the database - 
 all auth is carried out using the users' fingerprint. This app was built for me. My requirements were: 
 
@@ -8,7 +17,7 @@ all auth is carried out using the users' fingerprint. This app was built for me.
 - Be able to store other sensitive notes (e.g. passport details).
 - Lock some pins/notes, so that fingerprint auth is required again to unlock them. This means I don't need to close the app every time it's sent to the background.
 - Keep all notes in an encrypted database.
-- No adds.
+- No ads.
 
 
 ### Requirements
