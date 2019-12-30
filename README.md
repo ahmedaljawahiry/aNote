@@ -44,14 +44,15 @@ the database.
 
 #### Tests
 
-[JUnit5](https://junit.org/junit5/) tests are written for non-activity classes. Given the nature of Android code, writing tests without a large amount of mocks was difficult. If I take this any further, I'll probably use [Roboelectric](http://robolectric.org) to write tests for activity classes.
+[JUnit5](https://junit.org/junit5/) tests are written for non-activity classes. If I take this any further, I'll probably use [Roboelectric](http://robolectric.org) to write tests for activity classes.
 
 #### Known Issues
 - The action bar currently has no functionality.
 - Two separate grids are used for pins and "other notes". If one of the grids is empty, the other doesn't resize to full-screen.
 - App has only been tested on a Pixel 2. I have no current plans to adapt the UI for different screen sizes.
 - Would be ideal to have auto-resizable TextViews, so that text fits nicely on the main page.
+- Lock icon sometimes dissapears for notes after scrolling through them.
 
 ### Play Store
 
-This app is not available on the Play Store right now. I simply don't have enough time to maintain it at a standard I'd be happy with.
+This app is not available on the Play Store. I don't have enough time to maintain it at a standard I'd be happy with.
